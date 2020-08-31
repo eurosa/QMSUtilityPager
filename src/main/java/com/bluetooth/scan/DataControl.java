@@ -3,6 +3,8 @@ package com.bluetooth.scan;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -10,6 +12,8 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -17,10 +21,27 @@ import android.bluetooth.BluetoothDevice;
 import android.os.AsyncTask;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.UUID;
 
 
 public class DataControl extends Activity {
+
+    TextView myLabel;
+    EditText myTextbox;
+    BluetoothAdapter mBluetoothAdapter;
+    BluetoothSocket mmSocket;
+    BluetoothDevice mmDevice;
+    OutputStream mmOutputStream;
+    InputStream mmInputStream;
+    Thread workerThread;
+    byte[] readBuffer;
+    int readBufferPosition;
+    int counter;
+    volatile boolean stopWorker;
+
+
 
    // Button btnOn, btnOff, btnDis;
     Button On, Off, Discnt, Abt;
@@ -31,6 +52,8 @@ public class DataControl extends Activity {
     private boolean isBtConnected = false;
     //SPP UUID. Look for it
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private EditText sendEditText;
+    private Button sendBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,8 +71,22 @@ public class DataControl extends Activity {
         Off = (Button)findViewById(R.id.off_btn);
         Discnt = (Button)findViewById(R.id.dis_btn);
         Abt = (Button)findViewById(R.id.abt_btn);
+        myLabel=findViewById(R.id.my_text_view);
+        sendBtn=findViewById(R.id.send_btn);
+        sendEditText=(EditText)findViewById(R.id.sendEditText);
 
         new ConnectBT().execute(); //Call the class to connect
+
+        //commands to be sent to bluetooth
+        sendBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                sendData();      //method to turn on
+            }
+        });
+
 
         //commands to be sent to bluetooth
         On.setOnClickListener(new View.OnClickListener()
@@ -78,8 +115,119 @@ public class DataControl extends Activity {
             }
         });
 
+      //  beginListenForData();
+        try {
+            receiveData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void receiveData() throws IOException{
+
+        final Handler handler = new Handler();
+        if (btSocket!=null)
+        {
+            try
+            {
+                InputStream socketInputStream =  btSocket.getInputStream();
+
+                byte[] buffer = new byte[256];
+                int bytes;
+
+                // Keep looping to listen for received messages
+                while (true) {
+                    try {
+                        bytes = socketInputStream.read(buffer);            //read bytes from input buffer
+                        final String readMessage = new String(buffer, 0, bytes);
+                        // Send the obtained bytes to the UI Activity via handler
+                        Log.i("logging", readMessage + "");
+
+
+                        handler.post(new Runnable()
+                        {
+                            public void run()
+                            {
+                                myLabel.setText(readMessage);
+                            }
+                        });
+
+                    } catch (IOException e) {
+                        break;
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                msg("Error");
+            }
+
+
+        }
+
+
 
     }
+
+
+    void beginListenForData()
+    {
+        final Handler handler = new Handler();
+        final byte delimiter = 10; //This is the ASCII code for a newline character
+
+        stopWorker = false;
+        readBufferPosition = 0;
+        readBuffer = new byte[1024];
+        workerThread = new Thread(new Runnable()
+        {
+            public void run()
+            {
+                while(!Thread.currentThread().isInterrupted() && !stopWorker)
+                {
+                    try
+                    {
+                        int bytesAvailable = mmInputStream.available();
+                        if(bytesAvailable > 0)
+                        {
+                            byte[] packetBytes = new byte[bytesAvailable];
+                            mmInputStream.read(packetBytes);
+                            for(int i=0;i<bytesAvailable;i++)
+                            {
+                                byte b = packetBytes[i];
+                                if(b == delimiter)
+                                {
+                                    byte[] encodedBytes = new byte[readBufferPosition];
+                                    System.arraycopy(readBuffer, 0, encodedBytes, 0, encodedBytes.length);
+                                    final String data = new String(encodedBytes, "US-ASCII");
+                                    readBufferPosition = 0;
+
+                                    handler.post(new Runnable()
+                                    {
+                                        public void run()
+                                        {
+                                            myLabel.setText(data);
+                                        }
+                                    });
+                                }
+                                else
+                                {
+                                    readBuffer[readBufferPosition++] = b;
+                                }
+                            }
+                        }
+                    }
+                    catch (IOException ex)
+                    {
+                        stopWorker = true;
+                    }
+                }
+            }
+        });
+
+        workerThread.start();
+    }
+
 
     private void Disconnect()
     {
@@ -96,13 +244,28 @@ public class DataControl extends Activity {
 
     }
 
-    private void turnOffLed()
+
+    private void sendData()
     {
         if (btSocket!=null)
         {
             try
             {
-                btSocket.getOutputStream().write("0".toString().getBytes());
+
+
+
+
+                final Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                       // myLabel.setText(sendEditText.getText().toString());
+                        handler.postDelayed(this,100);
+                    }
+                },100);
+
+                btSocket.getOutputStream().write(sendEditText.getText().toString().getBytes());
             }
             catch (IOException e)
             {
@@ -111,13 +274,30 @@ public class DataControl extends Activity {
         }
     }
 
+    private void turnOffLed()
+    {
+        if (btSocket!=null)
+        {
+            try
+            {
+                btSocket.getOutputStream().write("Hello".toString().getBytes());
+            }
+            catch (IOException e)
+            {
+                msg("Error");
+            }
+        }
+    }
+
+
+
     private void turnOnLed()
     {
         if (btSocket!=null)
         {
             try
             {
-                btSocket.getOutputStream().write("1".toString().getBytes());
+                btSocket.getOutputStream().write("Ranojan Kumar".toString().getBytes());
             }
             catch (IOException e)
             {

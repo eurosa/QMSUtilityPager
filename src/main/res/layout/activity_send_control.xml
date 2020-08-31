@@ -20,6 +20,17 @@
         android:textSize="23dp" />
 
 
+    <TextView
+        android:id="@+id/my_text_view"
+        android:layout_width="363dp"
+        android:layout_height="45dp"
+        android:layout_below="@id/textView2"
+        android:layout_gravity="center"
+        android:layout_marginTop="74dp"
+        android:text="Show Received Data Here"
+        android:textColor="#f44336"
+        android:textSize="20dp" />
+
     <Button
         android:id="@+id/on_btn"
         android:layout_width="170dp"
@@ -64,17 +75,44 @@
             tools:typeface="monospace" />
             -->
 
+
+    <EditText
+        android:id="@+id/sendEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/off_btn"
+        android:layout_marginTop="17dp"
+        android:padding="5dip"
+        android:singleLine="true"
+        android:textColor="#999999"
+        android:textSize="14dip" />
+
+
     <Button
+        android:id="@+id/send_btn"
+        android:layout_width="395dp"
+
+        android:layout_height="61dp"
+        android:layout_below="@id/sendEditText"
+        android:layout_marginTop="17dp"
+        android:fadingEdge="none"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="SEND"
+        android:textColor="#212121"
+        android:textSize="20sp"
+        tools:typeface="monospace" />
+
+    <Button
+        android:id="@+id/dis_btn"
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginTop="500dp"
-        android:fontFamily="sans-serif-smallcaps"
         android:fadingEdge="none"
-        android:textColor="#212121"
-        android:id="@+id/dis_btn"
-        android:textSize="20sp"
-
+        android:fontFamily="sans-serif-smallcaps"
         android:text="DISCONNECT"
+        android:textColor="#212121"
+
+        android:textSize="20sp"
         tools:typeface="monospace" />
 
     <Button
