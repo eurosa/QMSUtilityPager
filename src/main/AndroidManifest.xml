@@ -8,7 +8,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity android:name=".ScanActivity"></activity>
@@ -25,8 +25,8 @@
             android:name=".DeviceList"
             android:label="@string/app_name"></activity>
         <activity
-            android:name=".ledControl"
-            android:label="LED Control"></activity>
+            android:name=".DataControl"
+            android:label="Data Control"></activity>
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"></activity>

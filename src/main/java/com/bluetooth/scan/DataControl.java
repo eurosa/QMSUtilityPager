@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 
-public class ledControl extends Activity {
+public class DataControl extends Activity {
 
    // Button btnOn, btnOff, btnDis;
     Button On, Off, Discnt, Abt;
@@ -40,7 +40,7 @@ public class ledControl extends Activity {
         Intent newint = getIntent();
         address = newint.getStringExtra(DeviceList.EXTRA_ADDRESS); //receive the address of the bluetooth device
 
-        //view of the ledControl
+        //view of the DataControl
         setContentView(R.layout.activity_send_control);
 
         //call the widgets
@@ -172,7 +172,7 @@ public class ledControl extends Activity {
         @Override
         protected void onPreExecute()
         {
-            progress = ProgressDialog.show(ledControl.this, "Connecting...", "Please wait!!!");  //show a progress dialog
+            progress = ProgressDialog.show(DataControl.this, "Connecting...", "Please wait!!!");  //show a progress dialog
         }
 
         @Override
