@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -42,6 +44,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.camerakit.CameraKitView;
 import com.google.android.gms.instantapps.InstantApps;
@@ -63,7 +67,7 @@ import java.util.UUID;
 import static android.content.ContentValues.TAG;
 
 
-public class DeviceList extends Activity
+public class DeviceList extends AppCompatActivity
 {
   //  private CameraKitView cameraKitView;
     //==============================To Connect Bluetooth Device=============================
@@ -75,6 +79,7 @@ public class DeviceList extends Activity
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     String address = null;
     TextView textView;
+    boolean listViewFlag=true;
 
     //==============================To connect bluetooth devices============================
     //-----------------------------Camera----------------------------------------------------
@@ -112,12 +117,19 @@ public class DeviceList extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
 
-       // cameraKitView = findViewById(R.id.camera);
+        //=========================Adding Toolbar in android layout======================================
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //=========================Toolbar End============================================================
+
+        //cameraKitView = findViewById(R.id.camera);
         //-------------------------------------To Receive device address from background==================
         textView=findViewById(R.id.txt_normal);
         txt_celcius=findViewById(R.id.txt_celcius);
         txt_fahrenheit=findViewById(R.id.txt_fahrenheit);
-        bmpView = (ImageView)findViewById(R.id.bitmap_view);
+        bmpView = findViewById(R.id.bitmap_view);
 
 
         Intent newint = getIntent();
@@ -127,25 +139,26 @@ public class DeviceList extends Activity
         //====================================Camera======================================================
 
         boolean isInstantApp = InstantApps.getPackageManagerCompat(this).isInstantApp();
-        Log.d(LOG_TAG, "are we instant? " + isInstantApp);
+        Log.d(LOG_TAG, "are we instant?" + isInstantApp);
         findViewById(R.id.preview_surface).setOnClickListener(clickListener);
-      //  findViewById(R.id.capture_button).setOnClickListener(clickListener);
+        //findViewById(R.id.capture_button).setOnClickListener(clickListener);
         findViewById(R.id.switch_button).setOnClickListener(clickListener);
 
         //=======================================Camera=============================================
 
 
         //Calling widgets
-        btnPaired = (Button)findViewById(R.id.button);
-        devicelist = (ListView)findViewById(R.id.listView);
+        btnPaired = findViewById(R.id.button);
+        devicelist = findViewById(R.id.listView);
         scanDevices=findViewById(R.id.scanDevice);
+        devicelist.setVisibility(View.GONE);
 
         //if the device has bluetooth
         myBluetooth = BluetoothAdapter.getDefaultAdapter();
 
         if(myBluetooth == null)
         {
-            //Show a mensag. that the device has no bluetooth adapter
+            //Show a Mensag. That the device has no bluetooth adapter
             Toast.makeText(getApplicationContext(), "Bluetooth Device Not Available", Toast.LENGTH_LONG).show();
 
             //finish apk
@@ -162,9 +175,25 @@ public class DeviceList extends Activity
             @Override
             public void onClick(View v)
             {
+
                 pairedDevicesList();
+                if(listViewFlag){
+                    devicelist.setBackgroundColor(Color.WHITE);
+                    devicelist.setVisibility(View.VISIBLE);
+                    listViewFlag=false;
+                }else{
+                    devicelist.setVisibility(View.GONE);
+                    devicelist.setBackgroundColor(Color.WHITE);
+                    listViewFlag=true;
+                }
+
             }
-        });
+
+        }
+
+        );
+
+
 
         scanDevices.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,6 +299,8 @@ public class DeviceList extends Activity
         devicelist.setAdapter(adapter);
         devicelist.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
 
+
+
     }
 
     private AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener()
@@ -315,7 +346,7 @@ public class DeviceList extends Activity
     }
 
 
-//Cmamera-----------------------------------------------------------
+//----------------------------------------------Cmamera-----------------------------------------------------------
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
