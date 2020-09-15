@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -100,6 +101,9 @@ public class DeviceList extends Activity
     private Bitmap bitmap;
     private TextView txt_fahrenheit;
     private TextView txt_celcius;
+    private String str_celcius;
+    private String str_fahrenheit;
+    private ImageView bmpView;
 
     //screenshot
     @Override
@@ -113,6 +117,9 @@ public class DeviceList extends Activity
         textView=findViewById(R.id.txt_normal);
         txt_celcius=findViewById(R.id.txt_celcius);
         txt_fahrenheit=findViewById(R.id.txt_fahrenheit);
+        bmpView = (ImageView)findViewById(R.id.bitmap_view);
+
+
         Intent newint = getIntent();
         address = newint.getStringExtra(DeviceList.EXTRA_ADDRESS); //receive the address of the bluetooth device
         //new ConnectBT().execute(); //Call the class to connect
@@ -122,7 +129,7 @@ public class DeviceList extends Activity
         boolean isInstantApp = InstantApps.getPackageManagerCompat(this).isInstantApp();
         Log.d(LOG_TAG, "are we instant? " + isInstantApp);
         findViewById(R.id.preview_surface).setOnClickListener(clickListener);
-        findViewById(R.id.capture_button).setOnClickListener(clickListener);
+      //  findViewById(R.id.capture_button).setOnClickListener(clickListener);
         findViewById(R.id.switch_button).setOnClickListener(clickListener);
 
         //=======================================Camera=============================================
@@ -180,6 +187,9 @@ public class DeviceList extends Activity
         final TextureView hidden_textureview =  findViewById(R.id.hidden_textureview);
 
         ImageButton capture_screenshot = findViewById(R.id.capture_screenshot);
+
+        //Screen_shott.xml view------------------------------------------------------------
+        /*
         capture_screenshot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -222,9 +232,9 @@ public class DeviceList extends Activity
                     }
                 }
             }
-        });
+        });*/
 
-
+//----------------------------------screen_shot xml view-----------------------------------------
         //Camera screenshot
 
 
@@ -319,14 +329,16 @@ public class DeviceList extends Activity
                 } catch (RuntimeException e) {
                     Log.e(LOG_TAG, "preview_surface", e);
                 }
-            } else if (v.getId() == R.id.capture_button) {
+            }
+            /*else if (v.getId() == R.id.capture_button) {
                 try {
                   //  takeScreenshot();
                     camera.takePicture(null, null, pictureCallback);
                 } catch (RuntimeException e) {
                     Log.e(LOG_TAG, "capture_button", e);
                 }
-            } else if (v.getId() == R.id.switch_button) {
+            } */
+            else if (v.getId() == R.id.switch_button) {
                 switchCamera();
             }
         }
@@ -469,13 +481,16 @@ public class DeviceList extends Activity
 
                 Log.i(LOG_TAG, "bmp dimensions " + bmp.getWidth() + "x" + bmp.getHeight());
 
-                final ImageView bmpView = (ImageView)findViewById(R.id.bitmap_view);
+             //  final ImageView bmpView = (ImageView)findViewById(R.id.bitmap_view);
+               // roateImage(bmpView);
                 bmpView.post(new Runnable() {
                     @Override
                     public void run() {
                         bmpView.setImageBitmap(bmp);
+                     //   bmpView.setRotation(-90);
                         bmpView.setVisibility(View.VISIBLE);
                         camera.startPreview();
+
                     }
                 });
             } catch (Exception e) {
@@ -484,6 +499,14 @@ public class DeviceList extends Activity
         }
 
     };
+
+    private void roateImage(ImageView bmpView) {
+
+        Matrix matrix = new Matrix();
+        bmpView.setScaleType(ImageView.ScaleType.MATRIX); //required
+        matrix.postRotate((float) 20, bmpView.getDrawable().getBounds().width()/2,    bmpView.getDrawable().getBounds().height()/2);
+        bmpView.setImageMatrix(matrix);
+    }
 
     private SurfaceHolder.Callback shCallback = new SurfaceHolder.Callback() {
 
@@ -694,7 +717,7 @@ public class DeviceList extends Activity
             v1.setDrawingCacheEnabled(false);
 
             File imageFile = new File(mPath);
-Log.d("takeshot",""+imageFile);
+            Log.d("takeshot",""+imageFile);
             FileOutputStream outputStream = new FileOutputStream(imageFile);
             int quality = 100;
             bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
@@ -702,6 +725,7 @@ Log.d("takeshot",""+imageFile);
             outputStream.close();
 
             openScreenshot(imageFile);
+            bmpView.setImageResource(0);
         } catch (Throwable e) {
             // Several error may come out with file handling or DOM
             e.printStackTrace();
@@ -790,6 +814,7 @@ Log.d("takeshot",""+imageFile);
                 public void run(){
                     try {
                         receiveData();
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -849,8 +874,39 @@ Log.d("takeshot",""+imageFile);
 
                                 String str = readMessage;
                                 ArrayList<String> elephantList = new ArrayList<>(Arrays.asList(str.split(",")));
-                                txt_celcius.setText(elephantList.get(0).replace("*", "").replace(" ", "\u00B0").trim());
-                                txt_fahrenheit.setText(elephantList.get(1).replace("#", "").replace(" ", "\u00B0").trim());
+                                str_celcius=elephantList.get(0).replace("*", "").replace(" ", "\u00B0").trim();
+                                str_fahrenheit=elephantList.get(1).replace("#", "").replace(" ", "\u00B0").trim();
+
+
+                                txt_celcius.setText(str_celcius);
+                                txt_fahrenheit.setText(str_fahrenheit);
+
+                                if(str_celcius != null && !str_celcius.isEmpty() && str_fahrenheit != null && !str_fahrenheit.isEmpty()){
+
+                                    camera.takePicture(null, null, pictureCallback);
+
+
+                                        // Take screen shot
+                                        //bitmap = ScreenShott.getInstance().takeScreenShotOfView(hidden_txtview);
+                                        //bitmap = ScreenShott.getInstance().takeScreenShotOfJustView(hidden_txtview);
+                                        //bitmap = ScreenShott.getInstance().takeScreenShotOfTextureView(hidden_textureview);
+
+
+                                        // bitmap = ScreenShott.getInstance().takeScreenShotOfView(view);
+                                        // Display in imageview
+
+                                        takeScreenshot();
+                                   // bmpView.setImageResource(android.R.color.transparent);
+                                    bmpView.setImageResource(0);
+                                    Log.d("bskodh",""+bmpView);
+                                        // bmpView.rem
+                                       // imageView.setImageBitmap(bitmap);
+
+
+                                }
+
+
+
                                 //myLabel.append("");
                             }   //This is your code
                         };
