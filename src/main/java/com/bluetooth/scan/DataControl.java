@@ -4,6 +4,7 @@ package com.bluetooth.scan;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -77,6 +78,8 @@ public class DataControl extends Activity {
 
         new ConnectBT().execute(); //Call the class to connect
 
+
+
         //commands to be sent to bluetooth
         sendBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -86,6 +89,8 @@ public class DataControl extends Activity {
                 sendData();      //method to turn on
             }
         });
+
+       // Toast.makeText(getApplicationContext(),""+isBtConnected,Toast.LENGTH_LONG);
 
 
         //commands to be sent to bluetooth
@@ -102,7 +107,10 @@ public class DataControl extends Activity {
             @Override
             public void onClick(View v)
             {
+               // beginListenForData();
                 turnOffLed();   //method to turn off
+
+
             }
         });
 
@@ -116,35 +124,52 @@ public class DataControl extends Activity {
         });
 
       //  beginListenForData();
-        try {
-            receiveData();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+
+
+
+          //  receiveData();
+        //} catch (IOException e) {
+          //  e.printStackTrace();
+        //}
     }
 
 
     public void receiveData() throws IOException{
 
-        final Handler handler = new Handler();
+//       final Handler handler = new Handler();
+
+        // Get a handler that can be used to post to the main thread
+        Handler mainHandler = new Handler(Looper.getMainLooper());
+
         if (btSocket!=null)
         {
             try
             {
                 InputStream socketInputStream =  btSocket.getInputStream();
 
-                byte[] buffer = new byte[256];
+                byte[] buffer = new byte[1024];
                 int bytes;
 
                 // Keep looping to listen for received messages
                 while (true) {
                     try {
-                        bytes = socketInputStream.read(buffer);            //read bytes from input buffer
+                        bytes = mmInputStream.read(buffer);            //read bytes from input buffer
                         final String readMessage = new String(buffer, 0, bytes);
                         // Send the obtained bytes to the UI Activity via handler
                         Log.i("logging", readMessage + "");
 
 
+Runnable myRunnable = new Runnable() {
+    @Override
+    public void run() {
+
+        myLabel.setText(readMessage);
+        //myLabel.append("");
+    } // This is your code
+};
+mainHandler.post(myRunnable);
+/*
                         handler.post(new Runnable()
                         {
                             public void run()
@@ -152,6 +177,8 @@ public class DataControl extends Activity {
                                 myLabel.setText(readMessage);
                             }
                         });
+                        */
+
 
                     } catch (IOException e) {
                         break;
@@ -173,9 +200,18 @@ public class DataControl extends Activity {
 
     void beginListenForData()
     {
-        final Handler handler = new Handler();
+      //  final Handler handler = new Handler();
+        // Get a handler that can be used to post to the main thread
+        final Handler mainHandler = new Handler(Looper.getMainLooper());
         final byte delimiter = 10; //This is the ASCII code for a newline character
-
+        Log.d("btSocket",""+btSocket);
+        if(btSocket!=null) {
+            try {
+                mmInputStream = btSocket.getInputStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         stopWorker = false;
         readBufferPosition = 0;
         readBuffer = new byte[1024];
@@ -187,32 +223,31 @@ public class DataControl extends Activity {
                 {
                     try
                     {
-                        int bytesAvailable = mmInputStream.available();
-                        if(bytesAvailable > 0)
-                        {
-                            byte[] packetBytes = new byte[bytesAvailable];
-                            mmInputStream.read(packetBytes);
-                            for(int i=0;i<bytesAvailable;i++)
-                            {
-                                byte b = packetBytes[i];
-                                if(b == delimiter)
-                                {
-                                    byte[] encodedBytes = new byte[readBufferPosition];
-                                    System.arraycopy(readBuffer, 0, encodedBytes, 0, encodedBytes.length);
-                                    final String data = new String(encodedBytes, "US-ASCII");
-                                    readBufferPosition = 0;
+                        if(mmInputStream!=null) {
+                            int bytesAvailable = mmInputStream.available();
+                            if (bytesAvailable > 0) {
+                                byte[] packetBytes = new byte[bytesAvailable];
+                                mmInputStream.read(packetBytes);
+                                for (int i = 0; i < bytesAvailable; i++) {
+                                    byte b = packetBytes[i];
+                                    if (b == delimiter) {
+                                        byte[] encodedBytes = new byte[readBufferPosition];
+                                        System.arraycopy(readBuffer, 0, encodedBytes, 0, encodedBytes.length);
+                                        final String data = new String(encodedBytes, "US-ASCII");
+                                        readBufferPosition = 0;
+                                        Log.d("btSocket data", "" + data);
+                                        Runnable myRunnable = new Runnable() {
+                                            @Override
+                                            public void run() {
 
-                                    handler.post(new Runnable()
-                                    {
-                                        public void run()
-                                        {
-                                            myLabel.setText(data);
-                                        }
-                                    });
-                                }
-                                else
-                                {
-                                    readBuffer[readBufferPosition++] = b;
+                                                myLabel.setText(data);
+                                                //myLabel.append("");
+                                            } // This is your code
+                                        };
+                                        mainHandler.post(myRunnable);
+                                    } else {
+                                        readBuffer[readBufferPosition++] = b;
+                                    }
                                 }
                             }
                         }
@@ -280,7 +315,7 @@ public class DataControl extends Activity {
         {
             try
             {
-                btSocket.getOutputStream().write("Hello".toString().getBytes());
+                mmOutputStream.write("Hello".toString().getBytes());
             }
             catch (IOException e)
             {
@@ -297,7 +332,7 @@ public class DataControl extends Activity {
         {
             try
             {
-                btSocket.getOutputStream().write("Ranojan Kumar".toString().getBytes());
+                mmOutputStream.write("Ranojan Kumar".toString().getBytes());
             }
             catch (IOException e)
             {
@@ -367,6 +402,9 @@ public class DataControl extends Activity {
                  btSocket = dispositivo.createInsecureRfcommSocketToServiceRecord(myUUID);//create a RFCOMM (SPP) connection
                  BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
                  btSocket.connect();//start connection
+                    mmOutputStream = btSocket.getOutputStream();
+                    mmInputStream = btSocket.getInputStream();
+
                 }
             }
             catch (IOException e)
@@ -389,8 +427,44 @@ public class DataControl extends Activity {
             {
                 msg("Connected.");
                 isBtConnected = true;
+
+
+
+/*
+                try {
+                    receiveData();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
             }
             progress.dismiss();
+
+              //beginListenForData();
+
+            new Thread(new Runnable() {
+                public void run(){
+                    try {
+                        receiveData();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //beginListenForData();
+                }
+            }).start();
+            /*try {
+                receiveData();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            /*if(isBtConnected){
+
+                try {
+                    receiveData();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }*/
         }
     }
 }

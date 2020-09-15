@@ -23,9 +23,11 @@
  */
 package com.bluetooth.scan;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -41,6 +43,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.location.LocationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
@@ -51,13 +54,16 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+
 /**
  * Main Activity of this application.
  *
  * @author Donato Rimenti
  */
 public class ScanActivity extends AppCompatActivity implements ListInteractionListener<BluetoothDevice> {
-
+    private final int REQUEST_LOCATION_PERMISSION = 1;
     /**
      * Tag string used for logging.
      */
@@ -103,6 +109,8 @@ public class ScanActivity extends AppCompatActivity implements ListInteractionLi
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        requestLocationPermission();
         // Ads.
       //  MobileAds.initialize(this);
         //this.adContainer = (LinearLayout) findViewById(R.id.ad_container);
@@ -123,6 +131,8 @@ public class ScanActivity extends AppCompatActivity implements ListInteractionLi
         this.recyclerView.setProgressView(progressBar);
 
         this.recyclerView.setAdapter(recyclerViewAdapter);
+
+
 
         // [#11] Ensures that the Bluetooth is available on this device before proceeding.
         boolean hasBluetooth = getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
@@ -169,9 +179,28 @@ public class ScanActivity extends AppCompatActivity implements ListInteractionLi
         });
     }
 
-    /**
-     * {@inheritDoc}
-     */
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @AfterPermissionGranted(REQUEST_LOCATION_PERMISSION)
+    public void requestLocationPermission() {
+        String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION};
+        if(EasyPermissions.hasPermissions(this, perms)) {
+            Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            EasyPermissions.requestPermissions(this, "Please grant the location permission", REQUEST_LOCATION_PERMISSION, perms);
+        }
+    }
+        /**
+         * {@inheritDoc}
+         */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

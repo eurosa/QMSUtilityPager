@@ -19,4 +19,13 @@
     <string name="empty_list_message">No nearby devices found. Tap on the bottom-right button to start a new device discovery.</string>
     <string name="bluetooth_not_available_message">It seems that this device doesn\'t have a Bluetooth controller available. \nBlue Pair works only with Bluetooth, so please try again on a different device. \nThe app will be now terminated.</string>
     <string name="bluetooth_not_available_title">Bluetooth not available</string>
+
+
+    <string name="this_is_a_hidden_textview">This is a Hidden TextView!</string>
+
+    <!--======================================Camera================================-->
+    <string name="request_permission">This app needs camera permission.</string>
+    <string name="take_picture">take picture</string>
+    <string name="switch_camera">switch camera</string>
+
 </resources>

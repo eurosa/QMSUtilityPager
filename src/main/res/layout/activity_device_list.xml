@@ -9,17 +9,21 @@
     android:background="#212121">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Paired Devices"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text="0"
+        android:background="@drawable/gradient_box"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:fontFamily="sans-serif-smallcaps"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="#f44336"
-        android:textIsSelectable="false" />
-<!--
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:textIsSelectable="false"
+        android:gravity="center" />
+
+    <!--
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,6 +52,23 @@
         android:layout_alignParentEnd="true"
         android:background="#f44336" />
 -->
+    <include
+        layout="@layout/screen_shott"
+        android:layout_width="wrap_content"
+        android:layout_height="348dp"
+        android:layout_marginTop="100dp" />
+
+    <include
+        layout="@layout/activity_camera_main"
+        android:layout_width="715dp"
+        android:layout_height="323dp" />
+
+    <include
+        layout="@layout/temperture_show"
+        android:layout_width="695dp"
+        android:layout_height="wrap_content" />
+
+
 
     <LinearLayout
         android:id="@+id/LinearLayout02"
@@ -69,16 +90,23 @@
         </Button>
     </LinearLayout>
 
-
-
+    <include
+        layout="@layout/temp_value_show"
+        android:layout_width="395dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="450dp" />
 
     <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/listView"
+        android:layout_width="wrap_content"
+        android:layout_height="121dp"
+        android:layout_above="@+id/button"
         android:layout_below="@+id/textView"
-        android:layout_alignRight="@+id/imageView"
         android:layout_alignEnd="@+id/imageView"
-        android:layout_above="@+id/button" />
+        android:layout_alignRight="@+id/imageView"
+        android:layout_marginTop="464dp"
+        android:layout_marginBottom="6dp" />
+
+
 
 </RelativeLayout>
