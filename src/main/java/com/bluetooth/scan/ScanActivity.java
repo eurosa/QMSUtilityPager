@@ -27,7 +27,6 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -276,7 +275,7 @@ public class ScanActivity extends AppCompatActivity implements ListInteractionLi
     public void startLoading() {
         this.recyclerView.startLoading();
 
-        // Changes the button icon.
+        //Changes the button icon.
         this.fab.setImageResource(R.drawable.ic_bluetooth_searching_white_24dp);
     }
 

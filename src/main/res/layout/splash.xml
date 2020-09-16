@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical"
-    android:background="#f44336">
+    android:background="#3933FF">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -18,8 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Bluetooth Scan"
-        android:textColor="#212121"
+        android:text="Temperature Scan"
+        android:textColor="#FFFFFF"
         android:textSize="35dp"
         android:fontFamily="sans-serif-smallcaps"
         android:layout_marginTop="15dp"

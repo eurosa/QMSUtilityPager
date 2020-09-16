@@ -53,9 +53,12 @@ import com.muddzdev.quickshot.QuickShot;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.BreakIterator;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -109,6 +112,25 @@ public class DeviceList extends AppCompatActivity
     private String str_celcius;
     private String str_fahrenheit;
     private ImageView bmpView;
+    //=================================For temperature limit count==================================
+    private double normalLow=32;
+    private double normalHigh=37.3;
+    private double moderateLow=37.4;
+    private double moderateHigh=38;
+    private double maxLow=38.1;
+    private double maxHigh=40;
+    private String double_str_celcius;
+    private String double_str_fahrenheit;
+    private int normalCount=0;
+    private int moderateCount=0;
+    private int highCount=0;
+    private TextView normalView;
+    private TextView moderateView;
+    private TextView highView;
+    private TextView totalView;
+
+    //=========================================end temperature limit count==========================
+
 
     //screenshot
     @Override
@@ -131,6 +153,13 @@ public class DeviceList extends AppCompatActivity
         txt_fahrenheit=findViewById(R.id.txt_fahrenheit);
         bmpView = findViewById(R.id.bitmap_view);
 
+        //============================Temperature Counting View=====================================================//
+        normalView=findViewById(R.id.normal_view);
+        moderateView=findViewById(R.id.moderate_view);
+        highView=findViewById(R.id.high_view);
+        totalView=findViewById(R.id.total_view);
+        //============================Temperature Countning View====================================================//
+
 
         Intent newint = getIntent();
         address = newint.getStringExtra(DeviceList.EXTRA_ADDRESS); //receive the address of the bluetooth device
@@ -142,7 +171,7 @@ public class DeviceList extends AppCompatActivity
         Log.d(LOG_TAG, "are we instant?" + isInstantApp);
         findViewById(R.id.preview_surface).setOnClickListener(clickListener);
         //findViewById(R.id.capture_button).setOnClickListener(clickListener);
-        findViewById(R.id.switch_button).setOnClickListener(clickListener);
+        //findViewById(R.id.switch_button).setOnClickListener(clickListener);
 
         //=======================================Camera=============================================
 
@@ -356,7 +385,8 @@ public class DeviceList extends AppCompatActivity
                 return;
             } else if (v.getId() == R.id.preview_surface) {
                 try {
-                    camera.takePicture(null, null, pictureCallback);
+                    switchCamera();
+                //    camera.takePicture(null, null, pictureCallback);
                 } catch (RuntimeException e) {
                     Log.e(LOG_TAG, "preview_surface", e);
                 }
@@ -369,9 +399,10 @@ public class DeviceList extends AppCompatActivity
                     Log.e(LOG_TAG, "capture_button", e);
                 }
             } */
+            /*
             else if (v.getId() == R.id.switch_button) {
                 switchCamera();
-            }
+            }*/
         }
     };
 
@@ -520,7 +551,13 @@ public class DeviceList extends AppCompatActivity
                         bmpView.setImageBitmap(bmp);
                      //   bmpView.setRotation(-90);
                         bmpView.setVisibility(View.VISIBLE);
-                        camera.startPreview();
+                        try {
+                            camera.startPreview();
+                        }catch (Exception e){
+
+
+                        }
+
 
                     }
                 });
@@ -904,28 +941,70 @@ public class DeviceList extends AppCompatActivity
                                 //For Degree \u00B0
 
                                 String str = readMessage;
-                                ArrayList<String> elephantList = new ArrayList<>(Arrays.asList(str.split(",")));
-                                str_celcius=elephantList.get(0).replace("*", "").replace(" ", "\u00B0").trim();
-                                str_fahrenheit=elephantList.get(1).replace("#", "").replace(" ", "\u00B0").trim();
+                                try {
 
 
-                                txt_celcius.setText(str_celcius);
-                                txt_fahrenheit.setText(str_fahrenheit);
+                                    ArrayList<String> elephantList = new ArrayList<>(Arrays.asList(str.split(",")));
+                                    str_celcius = elephantList.get(0).replace("*", "").replace(" ", "\u00B0").trim();
+                                    str_fahrenheit = elephantList.get(1).replace("#", "").replace(" ", "\u00B0").trim();
+                                    double_str_celcius = elephantList.get(0).replace("*", "").replace("C", "").replace(" ", "").trim();
+                                    double_str_fahrenheit = elephantList.get(1).replace("#", "").replace("F", "").replace(" ", "").trim();
+
+                                    if (normalLow <= Double.parseDouble(double_str_celcius) && normalHigh >= Double.parseDouble(double_str_celcius)) {
+
+                                        txt_celcius.setBackgroundColor(getResources().getColor(R.color.limeGreen));
+                                        txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.limeGreen));
+                                        txt_celcius.setText(str_celcius);
+                                        txt_fahrenheit.setText(str_fahrenheit);
+                                        normalCount=normalCount+1;
+                                        normalView.setText(""+normalCount);
+                                        Log.d("normalCount", "surfaceCreated callback:"+normalCount);
+
+                                    } else if (moderateLow <= Double.parseDouble(double_str_celcius) && moderateHigh >= Double.parseDouble(double_str_celcius)) {
+
+                                        txt_celcius.setBackgroundColor(getResources().getColor(R.color.blueColor));
+                                        txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.blueColor));
+                                        txt_celcius.setText(str_celcius);
+                                        txt_fahrenheit.setText(str_fahrenheit);
+                                        moderateCount = moderateCount+1;
+                                        moderateView.setText(""+moderateCount);
+
+                                    } else if (maxLow <= Double.parseDouble(double_str_celcius) && maxHigh >= Double.parseDouble(double_str_celcius)) {
+
+                                        txt_celcius.setBackgroundColor(getResources().getColor(R.color.redColor));
+                                        txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.redColor));
+                                        txt_celcius.setText(str_celcius);
+                                        txt_fahrenheit.setText(str_fahrenheit);
+                                        highCount = highCount+1;
+                                        highView.setText(""+highCount);
+                                    }
+
+                                    totalView.setText(""+(normalCount + moderateCount + highCount));
+
+                                    saveDataToFile(str_celcius+" "+"/"+" "+str_fahrenheit);
+
+                                }catch (Exception e){
+
+                                   e.printStackTrace();
+
+                                }
 
                                 if(str_celcius != null && !str_celcius.isEmpty() && str_fahrenheit != null && !str_fahrenheit.isEmpty()){
+                                try {
+
 
                                     camera.takePicture(null, null, pictureCallback);
 
+                                  }catch (Exception e){
 
+                                }
                                         // Take screen shot
                                         //bitmap = ScreenShott.getInstance().takeScreenShotOfView(hidden_txtview);
                                         //bitmap = ScreenShott.getInstance().takeScreenShotOfJustView(hidden_txtview);
                                         //bitmap = ScreenShott.getInstance().takeScreenShotOfTextureView(hidden_textureview);
-
-
                                         // bitmap = ScreenShott.getInstance().takeScreenShotOfView(view);
                                         // Display in imageview
-
+                                    try{
                                         takeScreenshot();
                                    // bmpView.setImageResource(android.R.color.transparent);
                                     bmpView.setImageResource(0);
@@ -933,7 +1012,10 @@ public class DeviceList extends AppCompatActivity
                                         // bmpView.rem
                                        // imageView.setImageBitmap(bitmap);
 
+                                    }catch (Exception e){
 
+
+}
                                 }
 
 
@@ -995,6 +1077,35 @@ public class DeviceList extends AppCompatActivity
         canvas.drawRGB(255, 128, 128);
     }
 
+private void saveDataToFile(String sBody){
 
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd");
+    Date now = new Date();
+    String fileName = formatter.format(now) +"_Temperature Scan"+ ".txt";//like 2020_09_16.txt
+
+
+    try
+    {
+        File root = new File(Environment.getExternalStorageDirectory()+File.separator+"Report_Folder", "Report Files");
+        //File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+        if (!root.exists())
+        {
+            root.mkdirs();
+        }
+        File gpxfile = new File(root, fileName);
+
+
+        FileWriter writer = new FileWriter(gpxfile,true);
+        writer.append(now+"  "+sBody+"\n\n");
+        writer.flush();
+        writer.close();
+        Toast.makeText(this, "Data has been written to Report File", Toast.LENGTH_SHORT).show();
+    }
+    catch(IOException e)
+    {
+        e.printStackTrace();
+
+    }
+}
 
 }
