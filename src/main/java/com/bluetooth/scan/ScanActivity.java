@@ -107,7 +107,8 @@ public class ScanActivity extends AppCompatActivity implements ListInteractionLi
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         requestLocationPermission();
         // Ads.
@@ -203,14 +204,14 @@ public class ScanActivity extends AppCompatActivity implements ListInteractionLi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-     //   getMenuInflater().inflate(R.menu.menu_main, menu);
+    //getMenuInflater().inflate(R.menu.menu_scan_activity, menu);
         return true;
     }
 
     /**
      * {@inheritDoc}
      */
-    /*
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -219,14 +220,27 @@ public class ScanActivity extends AppCompatActivity implements ListInteractionLi
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_about) {
-            showAbout();
-            return true;
-        }
+      //  if (id == R.id.home) {
+       //     this.finish();
+       //     return true;
+      //  }
 
         return super.onOptionsItemSelected(item);
     }
-*/
+/*---------------this override method has been used to back home it works with
+*         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+*
+*
+*
+* */
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+//----------------------------------------------------------------------------------
     /**
      * Creates the about popup.
      */

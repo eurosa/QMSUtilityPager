@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,6 +49,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.camerakit.CameraKitView;
 import com.google.android.gms.instantapps.InstantApps;
 import com.muddzdev.quickshot.QuickShot;
@@ -66,13 +69,17 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static android.content.ContentValues.TAG;
 
 
 public class DeviceList extends AppCompatActivity
 {
-  //  private CameraKitView cameraKitView;
+    private static final String MY_PREFS_NAME = "MyTxtFile";;
+    //  private CameraKitView cameraKitView;
     //==============================To Connect Bluetooth Device=============================
     private ProgressDialog progress;
     private boolean isBtConnected = false;
@@ -129,7 +136,7 @@ public class DeviceList extends AppCompatActivity
     private TextView highView;
     private TextView totalView;
 
-    //=========================================end temperature limit count==========================
+    //=========================================End temperature limit count==========================
 
 
     //screenshot
@@ -295,6 +302,19 @@ public class DeviceList extends AppCompatActivity
 //----------------------------------screen_shot xml view-----------------------------------------
         //Camera screenshot
 
+        //=================================FileExposed============================
+        /*
+        *
+        *
+        * android.os.FileUriExposedException: file:///storage/emulated/0/test.txt exposed beyond app through Intent.getData()
+        * solved using this
+        * */
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
+        //=======================================================================
+
+
 
     }
 
@@ -368,6 +388,7 @@ public class DeviceList extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            shareFileWithApps();
             return true;
         }
 
@@ -544,13 +565,14 @@ public class DeviceList extends AppCompatActivity
                 Log.i(LOG_TAG, "bmp dimensions " + bmp.getWidth() + "x" + bmp.getHeight());
 
              //  final ImageView bmpView = (ImageView)findViewById(R.id.bitmap_view);
-               // roateImage(bmpView);
+
                 bmpView.post(new Runnable() {
                     @Override
                     public void run() {
                         bmpView.setImageBitmap(bmp);
                      //   bmpView.setRotation(-90);
                         bmpView.setVisibility(View.VISIBLE);
+
                         try {
                             camera.startPreview();
                         }catch (Exception e){
@@ -568,13 +590,7 @@ public class DeviceList extends AppCompatActivity
 
     };
 
-    private void roateImage(ImageView bmpView) {
 
-        Matrix matrix = new Matrix();
-        bmpView.setScaleType(ImageView.ScaleType.MATRIX); //required
-        matrix.postRotate((float) 20, bmpView.getDrawable().getBounds().width()/2,    bmpView.getDrawable().getBounds().height()/2);
-        bmpView.setImageMatrix(matrix);
-    }
 
     private SurfaceHolder.Callback shCallback = new SurfaceHolder.Callback() {
 
@@ -777,23 +793,33 @@ public class DeviceList extends AppCompatActivity
         try {
             // image naming and path  to include sd card  appending name you choose for file
             String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
+            String fileName=now + ".jpg";
+
+            //-------------------------------------
+
+            //-------------------------------------
 
             // create bitmap screen capture
             View v1 = getWindow().getDecorView().getRootView();
+         //   View v2 = getWindow().takeSurface();
             v1.setDrawingCacheEnabled(true);
             Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
             v1.setDrawingCacheEnabled(false);
 
-            File imageFile = new File(mPath);
-            Log.d("takeshot",""+imageFile);
+        //    File imageFile = new File(mPath);
+        //    Log.d("takeshot",""+imageFile);
+
+/*
             FileOutputStream outputStream = new FileOutputStream(imageFile);
             int quality = 100;
             bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
             outputStream.flush();
             outputStream.close();
+*/
+            boolean save=createDirectoryAndSaveFile(bitmap,fileName);
 
-            openScreenshot(imageFile);
-            bmpView.setImageResource(0);
+
+
         } catch (Throwable e) {
             // Several error may come out with file handling or DOM
             e.printStackTrace();
@@ -807,6 +833,34 @@ public class DeviceList extends AppCompatActivity
         startActivity(intent);
     }
 
+
+
+    private boolean createDirectoryAndSaveFile(Bitmap imageToSave, String fileName) {
+      //  bmpView.setImageBitmap(imageToSave);
+
+            File root = new File(Environment.getExternalStorageDirectory() + File.separator + "Temperature_Scan_Folder", "Image Folder");
+            //File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, fileName);
+            //-----------------------------------
+        if (gpxfile.exists()) {
+            gpxfile.delete();
+        }
+
+
+        try {
+            FileOutputStream out = new FileOutputStream(gpxfile);
+            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
     //=================================To Connect Bluetooth Device====================================
@@ -942,8 +996,6 @@ public class DeviceList extends AppCompatActivity
 
                                 String str = readMessage;
                                 try {
-
-
                                     ArrayList<String> elephantList = new ArrayList<>(Arrays.asList(str.split(",")));
                                     str_celcius = elephantList.get(0).replace("*", "").replace(" ", "\u00B0").trim();
                                     str_fahrenheit = elephantList.get(1).replace("#", "").replace(" ", "\u00B0").trim();
@@ -995,6 +1047,8 @@ public class DeviceList extends AppCompatActivity
 
                                     camera.takePicture(null, null, pictureCallback);
 
+
+
                                   }catch (Exception e){
 
                                 }
@@ -1006,8 +1060,35 @@ public class DeviceList extends AppCompatActivity
                                         // Display in imageview
                                     try{
                                         takeScreenshot();
+                                        //saveScreenshot();
                                    // bmpView.setImageResource(android.R.color.transparent);
-                                    bmpView.setImageResource(0);
+                                   // bmpView.setImageResource(0);
+
+
+
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                txt_celcius.setText("\u00B0C");
+                                                txt_fahrenheit.setText("\u00B0F");
+                                               // bmpView.setImageResource(0);
+                                                //bmpView.setImageBitmap(null);
+                                             //  bmpView.destroyDrawingCache();
+                                                bmpView.post(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+
+                                                        //   bmpView.setRotation(-90);
+
+                                                        bmpView.setImageResource(0);
+
+                                                        bmpView.setVisibility(View.VISIBLE);
+                                                    }
+                                                });
+                                            }
+                                        }, 5000);
+
+
                                     Log.d("bskodh",""+bmpView);
                                         // bmpView.rem
                                        // imageView.setImageBitmap(bitmap);
@@ -1086,20 +1167,21 @@ private void saveDataToFile(String sBody){
 
     try
     {
-        File root = new File(Environment.getExternalStorageDirectory()+File.separator+"Report_Folder", "Report Files");
+        File root = new File(Environment.getExternalStorageDirectory()+File.separator+"Temperature_Scan_Folder", "Temperature Scan Files");
         //File root = new File(Environment.getExternalStorageDirectory(), "Notes");
         if (!root.exists())
         {
             root.mkdirs();
         }
         File gpxfile = new File(root, fileName);
-
+        saveTxtLink( gpxfile.getPath());
 
         FileWriter writer = new FileWriter(gpxfile,true);
         writer.append(now+"  "+sBody+"\n\n");
         writer.flush();
         writer.close();
-        Toast.makeText(this, "Data has been written to Report File", Toast.LENGTH_SHORT).show();
+    //    Toast.makeText(this, "Data has been written to Report File"+ gpxfile.getPath(), Toast.LENGTH_LONG).show();
+
     }
     catch(IOException e)
     {
@@ -1107,5 +1189,52 @@ private void saveDataToFile(String sBody){
 
     }
 }
+
+
+    public void saveTxtLink(String txtLink){
+
+        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putString("txt_link", txtLink);
+        editor.apply();
+    }
+
+    public  String getTxtLink(){
+
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        String txtLink = prefs.getString("txt_link", "No name defined");//"No name defined" is the default value.
+        return txtLink;
+    }
+
+    public void shareFileWithApps(){
+
+        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+        File fileWithinMyDir = new File(getTxtLink());
+
+        if(fileWithinMyDir.exists()) {
+
+            intentShareFile.setType("text/plain");
+
+            //intentShareFile.setType("application/pdf");
+            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+getTxtLink()));
+
+            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                    "Sharing File...");
+            intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+
+            startActivity(Intent.createChooser(intentShareFile, "Share File"));
+        }
+
+    }
+
+    /*
+
+    public void clearViewData(){
+        txt_celcius.setText("\u00B0C");
+        txt_celcius.setText("\u00B0F");
+        bmpView.setImageResource(0);
+        //bmpView.setImageBitmap(null);
+        bmpView.destroyDrawingCache();
+
+    }*/
 
 }

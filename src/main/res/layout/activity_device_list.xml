@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-
+    android:id="@+id/relaff"
     tools:context=".DeviceList"
     android:background="#00003f">
 
@@ -15,8 +15,9 @@
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorAccent"
         android:elevation="4dp"
+        app:titleTextColor="#FFFFFF"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 <!--
@@ -104,6 +105,15 @@
             android:text="Scan Devices">
         </Button>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageShow"
+        android:layout_width="404dp"
+        android:layout_height="399dp"
+        android:layout_marginTop="100dp"
+        android:rotation="270"
+        android:scaleType="centerInside"
+        android:visibility="visible" />
 
     <include
         layout="@layout/temp_value_show"
