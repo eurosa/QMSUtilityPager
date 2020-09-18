@@ -135,6 +135,7 @@ public class DeviceList extends AppCompatActivity
     private TextView moderateView;
     private TextView highView;
     private TextView totalView;
+    private ImageView iv_your_image;
 
     //=========================================End temperature limit count==========================
 
@@ -159,7 +160,7 @@ public class DeviceList extends AppCompatActivity
         txt_celcius=findViewById(R.id.txt_celcius);
         txt_fahrenheit=findViewById(R.id.txt_fahrenheit);
         bmpView = findViewById(R.id.bitmap_view);
-
+     //   iv_your_image=findViewById(R.id.iv_your_image);
         //============================Temperature Counting View=====================================================//
         normalView=findViewById(R.id.normal_view);
         moderateView=findViewById(R.id.moderate_view);
@@ -570,8 +571,15 @@ public class DeviceList extends AppCompatActivity
                     @Override
                     public void run() {
                         bmpView.setImageBitmap(bmp);
+                      //  iv_your_image.setImageBitmap(bmp);
+                      /*  Glide.with(DeviceList.this)
+                                .load(bmp)
+                                .dontTransform()
+                                .into(iv_your_image);*/
                      //   bmpView.setRotation(-90);
                         bmpView.setVisibility(View.VISIBLE);
+
+                        takeScreenshot();
 
                         try {
                             camera.startPreview();
@@ -1059,7 +1067,6 @@ public class DeviceList extends AppCompatActivity
                                         // bitmap = ScreenShott.getInstance().takeScreenShotOfView(view);
                                         // Display in imageview
                                     try{
-                                        takeScreenshot();
                                         //saveScreenshot();
                                    // bmpView.setImageResource(android.R.color.transparent);
                                    // bmpView.setImageResource(0);
@@ -1079,7 +1086,9 @@ public class DeviceList extends AppCompatActivity
                                                     public void run() {
 
                                                         //   bmpView.setRotation(-90);
-
+                                                     //   iv_your_image.setImageBitmap(null);
+                                                      /*  Glide.with(DeviceList.this)
+                                                                .clear(iv_your_image);*/
                                                         bmpView.setImageResource(0);
 
                                                         bmpView.setVisibility(View.VISIBLE);

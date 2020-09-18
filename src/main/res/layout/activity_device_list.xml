@@ -106,14 +106,12 @@
         </Button>
     </LinearLayout>
 
+<!--
     <ImageView
-        android:id="@+id/imageShow"
-        android:layout_width="404dp"
-        android:layout_height="399dp"
-        android:layout_marginTop="100dp"
-        android:rotation="270"
-        android:scaleType="centerInside"
-        android:visibility="visible" />
+        android:id="@+id/iv_your_image"
+        android:layout_width="162dp"
+        android:layout_height="100dp"
+        android:padding="2dp" />-->
 
     <include
         layout="@layout/temp_value_show"
