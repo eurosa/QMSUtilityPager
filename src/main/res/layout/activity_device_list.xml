@@ -74,9 +74,9 @@
 
     <include
         layout="@layout/activity_camera_main"
-        android:layout_marginTop="60dp"
-        android:layout_width="715dp"
-        android:layout_height="323dp" />
+        android:layout_width="395dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="45dp" />
 
     <include
         layout="@layout/test_layout"
@@ -128,7 +128,7 @@
         android:layout_below="@+id/textView"
         android:layout_alignEnd="@+id/imageView"
         android:layout_alignRight="@+id/imageView"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="575dp"
         android:layout_marginBottom="6dp" />
 
 

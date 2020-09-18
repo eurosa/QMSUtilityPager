@@ -48,6 +48,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.camerakit.CameraKitView;
@@ -61,6 +63,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.BreakIterator;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,9 +98,11 @@ public class DeviceList extends AppCompatActivity
     //-----------------------------Camera----------------------------------------------------
     private static final String LOG_TAG = "JBCamera";
     private static final int REQUEST_CAMERA_PERMISSION = 21;
+    private static final int REQUEST_STORAGE_PERMISSION = 22;
     private int cameraId = 1;
     private Camera camera = null;
     private boolean waitForPermission = false;
+    private boolean waitForStoragePermission = false;
     //-----------------------------------Camera-----------------------------------------------
 
 
@@ -138,7 +143,11 @@ public class DeviceList extends AppCompatActivity
     private ImageView iv_your_image;
 
     //=========================================End temperature limit count==========================
+    String[] permissions = new String[]{
 
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+    };
 
     //screenshot
     @Override
@@ -146,7 +155,9 @@ public class DeviceList extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
+//----------------------------Grant storage permission--------------------------------------------------
 
+        //----------------------------------------------------------------------------------------------
         //=========================Adding Toolbar in android layout======================================
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -442,12 +453,25 @@ public class DeviceList extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
+      //  checkPermissions();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED&&checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 waitForPermission = true;
                 requestCameraPermission();
+
             }
+/*
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED&&checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                waitForStoragePermission = true;
+                requestStoragePermission();
+
+            }
+
+ */
+
         }
+
      //   cameraKitView.onStart();
     }
     @Override
@@ -457,13 +481,13 @@ public class DeviceList extends AppCompatActivity
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void requestCameraPermission() {
-        if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+        if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)&&shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)&&shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
             AlertDialog confirmationDialog = new AlertDialog.Builder(this)
                     .setMessage(R.string.request_permission)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            requestPermissions(new String[]{Manifest.permission.CAMERA},
+                            requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
                                     REQUEST_CAMERA_PERMISSION);
                         }
                     })
@@ -477,7 +501,33 @@ public class DeviceList extends AppCompatActivity
                     .create();
             confirmationDialog.show();
         } else {
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+            requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CAMERA_PERMISSION);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void requestStoragePermission() {
+        if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)&&shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            AlertDialog confirmationDialog = new AlertDialog.Builder(this)
+                    .setMessage(R.string.request_permission)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
+                                    REQUEST_STORAGE_PERMISSION);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.cancel,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            })
+                    .create();
+            confirmationDialog.show();
+        } else {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
         }
     }
 
@@ -485,14 +535,28 @@ public class DeviceList extends AppCompatActivity
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull final int[] grantResults) {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
+            if (grantResults.length != 3 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                AlertDialog errorDialog = new AlertDialog.Builder(this)
+                        .setMessage(R.string.request_permission).create();
+                errorDialog.show();
+               finish();
+            } else {
+                waitForPermission = false;
+                startCamera(cameraId);
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        if (requestCode == REQUEST_STORAGE_PERMISSION) {
             if (grantResults.length != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 AlertDialog errorDialog = new AlertDialog.Builder(this)
                         .setMessage(R.string.request_permission).create();
                 errorDialog.show();
                 finish();
             } else {
-                waitForPermission = false;
-                startCamera(cameraId);
+                waitForStoragePermission = false;
+               // startCamera(cameraId);
             }
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -502,7 +566,15 @@ public class DeviceList extends AppCompatActivity
         switch (requestCode) {
             case 100: {
 
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // do something
+                }
+
+
                 RuntimePermissionUtil.onRequestPermissionsResult(grantResults, new RPResultListener() {
+
+
                     @Override
                     public void onPermissionGranted() {
                         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -517,6 +589,9 @@ public class DeviceList extends AppCompatActivity
                     }
                 });
                 break;
+
+
+
             }
         }
     //    cameraKitView.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -850,6 +925,7 @@ public class DeviceList extends AppCompatActivity
             //File root = new File(Environment.getExternalStorageDirectory(), "Notes");
             if (!root.exists()) {
                 root.mkdirs();
+                //The rest of the series of this so called meterpre
             }
             File gpxfile = new File(root, fileName);
             //-----------------------------------
@@ -863,6 +939,9 @@ public class DeviceList extends AppCompatActivity
             imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
             out.close();
+            //==============================To Show Image in Gallery==============================================================
+            sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+            //=====================================================================================================================
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -919,8 +998,11 @@ public class DeviceList extends AppCompatActivity
 
             if (!ConnectSuccess)
             {
+                Intent intent = getIntent();
                 msg("Connection Failed. Is it a SPP Bluetooth? Try again.");
                 finish();
+                startActivity(intent);
+
             }
             else
             {
@@ -1003,6 +1085,25 @@ public class DeviceList extends AppCompatActivity
                                 //For Degree \u00B0
 
                                 String str = readMessage;
+
+                                String readString=readMessage.replace("*","").replace("#","").trim();
+                                Log.d("readMessage"+"outside",""+readString+""+readString.equals("LOW".trim()));
+
+                                if(readString.equals("LOW".trim())){
+                                    Log.d("readMessage",""+readMessage);
+
+                                    txt_celcius.setBackgroundColor(getResources().getColor(R.color.redColor));
+                                    txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.redColor));
+                                    txt_celcius.setText(readString);
+                                    txt_fahrenheit.setText(readString);
+                                }else  if(readString.equals("HIGH".trim())){
+
+                                    txt_celcius.setBackgroundColor(getResources().getColor(R.color.redColor));
+                                    txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.redColor));
+                                    txt_celcius.setText(readString);
+                                    txt_fahrenheit.setText(readString);
+                                }
+
                                 try {
                                     ArrayList<String> elephantList = new ArrayList<>(Arrays.asList(str.split(",")));
                                     str_celcius = elephantList.get(0).replace("*", "").replace(" ", "\u00B0").trim();
@@ -1037,6 +1138,7 @@ public class DeviceList extends AppCompatActivity
                                         txt_fahrenheit.setText(str_fahrenheit);
                                         highCount = highCount+1;
                                         highView.setText(""+highCount);
+
                                     }
 
                                     totalView.setText(""+(normalCount + moderateCount + highCount));
@@ -1078,6 +1180,8 @@ public class DeviceList extends AppCompatActivity
                                             public void run() {
                                                 txt_celcius.setText("\u00B0C");
                                                 txt_fahrenheit.setText("\u00B0F");
+                                                txt_celcius.setBackgroundColor(getResources().getColor(R.color.limeGreen));
+                                                txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.limeGreen));
                                                // bmpView.setImageResource(0);
                                                 //bmpView.setImageBitmap(null);
                                              //  bmpView.destroyDrawingCache();
@@ -1092,6 +1196,7 @@ public class DeviceList extends AppCompatActivity
                                                         bmpView.setImageResource(0);
 
                                                         bmpView.setVisibility(View.VISIBLE);
+
                                                     }
                                                 });
                                             }
@@ -1168,9 +1273,10 @@ public class DeviceList extends AppCompatActivity
     }
 
 private void saveDataToFile(String sBody){
-
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd");
     Date now = new Date();
+    //;
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd");
+
     String fileName = formatter.format(now) +"_Temperature Scan"+ ".txt";//like 2020_09_16.txt
 
 
@@ -1178,6 +1284,7 @@ private void saveDataToFile(String sBody){
     {
         File root = new File(Environment.getExternalStorageDirectory()+File.separator+"Temperature_Scan_Folder", "Temperature Scan Files");
         //File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+      Log.d("folderPath",""+root);
         if (!root.exists())
         {
             root.mkdirs();
@@ -1186,7 +1293,12 @@ private void saveDataToFile(String sBody){
         saveTxtLink( gpxfile.getPath());
 
         FileWriter writer = new FileWriter(gpxfile,true);
-        writer.append(now+"  "+sBody+"\n\n");
+      //  FR Locale : 03/11/2017 16:04:58
+        //DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(date)
+        //03/11/2017 16:04:58 GMT+01:00
+        //DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.LONG).format(now)
+
+        writer.append(DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(now)+"  "+sBody+"\n\n");
         writer.flush();
         writer.close();
     //    Toast.makeText(this, "Data has been written to Report File"+ gpxfile.getPath(), Toast.LENGTH_LONG).show();
@@ -1245,5 +1357,23 @@ private void saveDataToFile(String sBody){
         bmpView.destroyDrawingCache();
 
     }*/
+
+    //------------------------To Check storage Permission----------------------------
+    private boolean checkPermissions() {
+        int result;
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        for (String p : permissions) {
+            result = ContextCompat.checkSelfPermission(this, p);
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(p);
+            }
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 100);
+            return false;
+        }
+        return true;
+    }
+    //------------------------To check storage Permission----------------------------
 
 }
