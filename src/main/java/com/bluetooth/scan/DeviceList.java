@@ -1348,14 +1348,12 @@ private void saveDataToFile(String sBody){
     }
 
     /*
-
     public void clearViewData(){
         txt_celcius.setText("\u00B0C");
         txt_celcius.setText("\u00B0F");
         bmpView.setImageResource(0);
         //bmpView.setImageBitmap(null);
         bmpView.destroyDrawingCache();
-
     }*/
 
     //------------------------To Check storage Permission----------------------------
