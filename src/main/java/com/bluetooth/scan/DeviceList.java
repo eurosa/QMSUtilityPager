@@ -171,7 +171,7 @@ public class DeviceList extends AppCompatActivity
         txt_celcius=findViewById(R.id.txt_celcius);
         txt_fahrenheit=findViewById(R.id.txt_fahrenheit);
         bmpView = findViewById(R.id.bitmap_view);
-     //   iv_your_image=findViewById(R.id.iv_your_image);
+        //iv_your_image=findViewById(R.id.iv_your_image);
         //============================Temperature Counting View=====================================================//
         normalView=findViewById(R.id.normal_view);
         moderateView=findViewById(R.id.moderate_view);
@@ -547,7 +547,7 @@ public class DeviceList extends AppCompatActivity
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-
+//------------------------------------
         if (requestCode == REQUEST_STORAGE_PERMISSION) {
             if (grantResults.length != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 AlertDialog errorDialog = new AlertDialog.Builder(this)
@@ -562,7 +562,7 @@ public class DeviceList extends AppCompatActivity
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-
+//---------------------------------------
         switch (requestCode) {
             case 100: {
 
@@ -595,7 +595,7 @@ public class DeviceList extends AppCompatActivity
             }
         }
     //    cameraKitView.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
+//---------------------------------------------------------------------------------------
     }
 /*
     @Override
@@ -1170,8 +1170,8 @@ public class DeviceList extends AppCompatActivity
                                         // Display in imageview
                                     try{
                                         //saveScreenshot();
-                                   // bmpView.setImageResource(android.R.color.transparent);
-                                   // bmpView.setImageResource(0);
+                                        //bmpView.setImageResource(android.R.color.transparent);
+                                        //bmpView.setImageResource(0);
 
 
 
@@ -1372,6 +1372,6 @@ private void saveDataToFile(String sBody){
         }
         return true;
     }
-    //------------------------To check storage Permission----------------------------
+    //------------------------To check storage Permission--------------------------------------------------------------------------------------------
 
 }
