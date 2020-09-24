@@ -136,7 +136,15 @@ public class DeviceRecyclerViewAdapter
     @Override
     public void onDeviceDiscovered(BluetoothDevice device) {
         listener.endLoading(true);
-        devices.add(device);
+        devices.contains(device);
+        //======================To add only unique device not repeating same device in listView========================
+        if(  devices.contains(device)){
+
+        }else {
+            devices.add(device);
+        }
+
+        //======================End of add only unique device not repeating same device in listView====================
         notifyDataSetChanged();
     }
 

@@ -3,8 +3,10 @@ package com.bluetooth.scan;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +17,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -33,28 +36,34 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.TextureView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import com.camerakit.CameraKitView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.exifinterface.media.ExifInterface;
 
 import com.bumptech.glide.Glide;
-import com.camerakit.CameraKitView;
 import com.google.android.gms.instantapps.InstantApps;
 import com.muddzdev.quickshot.QuickShot;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -141,6 +150,7 @@ public class DeviceList extends AppCompatActivity
     private TextView highView;
     private TextView totalView;
     private ImageView iv_your_image;
+    private String str_cel,str_fah;
 
     //=========================================End temperature limit count==========================
     String[] permissions = new String[]{
@@ -148,6 +158,7 @@ public class DeviceList extends AppCompatActivity
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
     };
+
 
     //screenshot
     @Override
@@ -197,9 +208,9 @@ public class DeviceList extends AppCompatActivity
 
         //Calling widgets
         btnPaired = findViewById(R.id.button);
-        devicelist = findViewById(R.id.listView);
+     //   devicelist = findViewById(R.id.listView);
         scanDevices=findViewById(R.id.scanDevice);
-        devicelist.setVisibility(View.GONE);
+     //   devicelist.setVisibility(View.GONE);
 
         //if the device has bluetooth
         myBluetooth = BluetoothAdapter.getDefaultAdapter();
@@ -224,7 +235,9 @@ public class DeviceList extends AppCompatActivity
             public void onClick(View v)
             {
 
+
                 pairedDevicesList();
+                /*
                 if(listViewFlag){
                     devicelist.setBackgroundColor(Color.WHITE);
                     devicelist.setVisibility(View.VISIBLE);
@@ -234,7 +247,7 @@ public class DeviceList extends AppCompatActivity
                     devicelist.setBackgroundColor(Color.WHITE);
                     listViewFlag=true;
                 }
-
+*/
             }
 
         }
@@ -339,7 +352,92 @@ public class DeviceList extends AppCompatActivity
         Intent intent = new Intent(this, ScanActivity.class);
         startActivity(intent);
     }
+
     private void pairedDevicesList()
+    {
+        pairedDevices = myBluetooth.getBondedDevices();
+        ArrayList list = new ArrayList();
+
+        if (pairedDevices.size()>0)
+        {
+            for(BluetoothDevice bt : pairedDevices)
+            {
+                list.add(bt.getName() + "\n" + bt.getAddress()); //Get the device's name and the address
+            }
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "No Paired Bluetooth Devices Found.", Toast.LENGTH_LONG).show();
+        }
+
+
+
+        //--------------------------------------------------------------------------------------------------------------
+       Dialog dialog = new Dialog(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Device for Pairing");
+
+        LinearLayout parent = new LinearLayout(DeviceList.this);
+
+        parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        parent.setOrientation(LinearLayout.VERTICAL);
+
+        ListView modeList = new ListView(this);
+
+
+
+        //------------------To fixed height of listView------------------------------------
+        setListViewHeightBasedOnItems(modeList);
+        //RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(200, 0);
+        //modeList.setLayoutParams(params);
+        //modeList.requestLayout();
+        /******************************************************************************************************************
+        *
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        params.height = 20;
+        modeList.setLayoutParams(params);
+        modeList.requestLayout();
+
+        *
+        * */
+       // ViewGroup.LayoutParams listViewParams = (ViewGroup.LayoutParams)modeList.getLayoutParams();
+        //listViewParams.height = 20;
+       // modeList.smoothScrollToPosition(3);
+/*
+        ListAdapter listadp = modeList.getAdapter();
+        if (listadp != null) {
+            int totalHeight = 0;
+            for (int i = 0; i < listadp.getCount(); i++) {
+                View listItem = listadp.getView(i, null, modeList);
+                listItem.measure(0, 0);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+            ViewGroup.LayoutParams params = modeList.getLayoutParams();
+            params.height = totalHeight + (modeList.getDividerHeight() * (listadp.getCount() - 1));
+            modeList.setLayoutParams(params);
+            modeList.requestLayout();
+        }
+*/
+        //------------------End of fixed height of listView---------------------------------
+
+        final ArrayAdapter modeAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
+        modeList.setAdapter(modeAdapter);
+        modeList.setOnItemClickListener(myListClickListener);
+        builder.setView(modeList);
+      //  builder.show();
+        dialog = builder.create();
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, 600); //Controlling width and height.
+
+
+        //-------------------------------------------------------------------------------------------------------------
+
+
+
+    }
+
+
+    private void pairedDevicesListOriginal()
     {
         pairedDevices = myBluetooth.getBondedDevices();
         ArrayList list = new ArrayList();
@@ -368,6 +466,9 @@ public class DeviceList extends AppCompatActivity
     {
         public void onItemClick (AdapterView<?> av, View v, int arg2, long arg3)
         {
+
+
+
             //Get the device MAC address, the last 17 chars in the View
             String info = ((TextView) v).getText().toString();
             String address = info.substring(info.length() - 17);
@@ -378,7 +479,7 @@ public class DeviceList extends AppCompatActivity
             //Change the activity.
             //i.putExtra(EXTRA_ADDRESS, address); //this will be received at DataControl (class) Activity
             //startActivity(i);
-            new ConnectBT(address).execute(); //Call the class to connect
+            new ConnectBT(address,info).execute(); //Call the class to connect
         }
     };
 
@@ -404,8 +505,49 @@ public class DeviceList extends AppCompatActivity
             return true;
         }
 
+        if (id == R.id.action_delete) {
+
+
+//==============================End of Folder Delete using Alert Dialog=================================================================================
+            AlertDialog.Builder adb = new AlertDialog.Builder(this);
+           // adb.setView(Integer.parseInt("Delete Folder"));
+            adb.setTitle("Delete Folder");
+            adb.setMessage("Are you sure you want to delete this Folder?");
+            adb.setIcon(android.R.drawable.ic_dialog_alert);
+            adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+
+                   // File dir =new File( getApplicationContext().getFilesDir()+"/Temperature_Scan_Folder");
+                    File dir = new File(Environment.getExternalStorageDirectory()+"/Temperature_Scan_Folder");
+                    boolean success = deleteDir(dir);
+                    if(success) {
+                        Toast.makeText(DeviceList.this, "Successfully Deleted the Folder ",
+                                Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(DeviceList.this, "Folder Not Found",
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            });
+            adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(DeviceList.this, "Cancel",
+                            Toast.LENGTH_SHORT).show();
+                    //finish();
+                }
+            });
+            adb.show();
+
+//==========================================================End of Folder Deleted with Alert Dialog==================================
+
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
+
 
 
 //----------------------------------------------Cmamera-----------------------------------------------------------
@@ -629,23 +771,26 @@ public class DeviceList extends AppCompatActivity
         @Override
         public void onPictureTaken(byte[] data, Camera cam) {
             try {
-                String jpgPath = getCacheDir() + "/JBCameraCapture.jpg";
+                final String jpgPath = getCacheDir() + "/JBCameraCapture.jpg";
                 FileOutputStream jpg = new FileOutputStream(jpgPath);
                 jpg.write(data);
                 jpg.close();
 
                 Log.i(LOG_TAG, "written " + data.length + " bytes to " + jpgPath);
 
-                final Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+              //  final Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
 
-                Log.i(LOG_TAG, "bmp dimensions " + bmp.getWidth() + "x" + bmp.getHeight());
+         //       Log.i(LOG_TAG, "bmp dimensions " + bmp.getWidth() + "x" + bmp.getHeight());
+               // handleSamplingAndRotationBitmap(DeviceList.this, Uri.fromFile(new File("/sdcard/sample.jpg")));
+                final Bitmap bmp =  handleSamplingAndRotationBitmap(DeviceList.this, Uri.fromFile(new File(jpgPath)));
 
              //  final ImageView bmpView = (ImageView)findViewById(R.id.bitmap_view);
 
                 bmpView.post(new Runnable() {
                     @Override
                     public void run() {
-                        bmpView.setImageBitmap(bmp);
+                       bmpView.setImageBitmap(bmp);
+                     //   Picasso.get().load(Uri.fromFile(new File(jpgPath))).into(bmpView);
                       //  iv_your_image.setImageBitmap(bmp);
                       /*  Glide.with(DeviceList.this)
                                 .load(bmp)
@@ -653,6 +798,8 @@ public class DeviceList extends AppCompatActivity
                                 .into(iv_your_image);*/
                      //   bmpView.setRotation(-90);
                         bmpView.setVisibility(View.VISIBLE);
+
+
 
                         takeScreenshot();
 
@@ -872,11 +1019,12 @@ public class DeviceList extends AppCompatActivity
     private void takeScreenshot() {
         Date now = new Date();
         android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
+        String timeFormat =DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(now);
 
         try {
             // image naming and path  to include sd card  appending name you choose for file
             String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
-            String fileName=now + ".jpg";
+            String fileName= android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now)+"_"+str_cel+"_"+str_fah + ".jpg";
 
             //-------------------------------------
 
@@ -919,6 +1067,7 @@ public class DeviceList extends AppCompatActivity
 
 
     private boolean createDirectoryAndSaveFile(Bitmap imageToSave, String fileName) {
+        Log.d("fileNameNow",""+fileName);
       //  bmpView.setImageBitmap(imageToSave);
 
             File root = new File(Environment.getExternalStorageDirectory() + File.separator + "Temperature_Scan_Folder", "Image Folder");
@@ -940,7 +1089,16 @@ public class DeviceList extends AppCompatActivity
             out.flush();
             out.close();
             //==============================To Show Image in Gallery==============================================================
-            sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+          //  sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+            MediaScannerConnection.scanFile(getApplicationContext(), new String[] { root.getAbsolutePath() }, null, new MediaScannerConnection.OnScanCompletedListener() {
+
+                @Override
+                public void onScanCompleted(String path, Uri uri) {
+                    // TODO Auto-generated method stub
+
+                }
+            });
+
             //=====================================================================================================================
             return true;
         } catch (Exception e) {
@@ -954,11 +1112,13 @@ public class DeviceList extends AppCompatActivity
     private class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
     {
         String addressBLE=null;
+        String infoBLE=null;
         private boolean ConnectSuccess = true; //if it's here, it's almost connected
-        public ConnectBT(String address) {
+        public ConnectBT(String address,String info) {
             super();
             addressBLE=address;
-            // do stuff
+            infoBLE=info;
+            //Do stuff
         }
 
 
@@ -971,6 +1131,17 @@ public class DeviceList extends AppCompatActivity
         @Override
         protected Void doInBackground(Void... devices) //while the progress dialog is shown, the connection is done in background
         {
+
+            if(btSocket!=null){
+                try {
+                    btSocket.close();
+                    btSocket=null;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
             try
             {
                 if (btSocket == null || !isBtConnected)
@@ -996,18 +1167,20 @@ public class DeviceList extends AppCompatActivity
         {
             super.onPostExecute(result);
 
+
             if (!ConnectSuccess)
             {
                 Intent intent = getIntent();
                 msg("Connection Failed. Is it a SPP Bluetooth? Try again.");
-                finish();
-                startActivity(intent);
-
+                // finish();
+              //  startActivity(intent);
+               // Disconnect();
             }
             else
             {
                 msg("Connected.");
                 isBtConnected = true;
+                getSupportActionBar().setTitle(infoBLE);
 
 
 
@@ -1154,10 +1327,11 @@ public class DeviceList extends AppCompatActivity
                                 if(str_celcius != null && !str_celcius.isEmpty() && str_fahrenheit != null && !str_fahrenheit.isEmpty()){
                                 try {
 
-
+                                    Log.d("screenshot_image",""+bmpView);
                                     camera.takePicture(null, null, pictureCallback);
 
-
+                                   str_cel=str_celcius;
+                                   str_fah=str_fahrenheit;
 
                                   }catch (Exception e){
 
@@ -1173,13 +1347,15 @@ public class DeviceList extends AppCompatActivity
                                         //bmpView.setImageResource(android.R.color.transparent);
                                         //bmpView.setImageResource(0);
 
-
+                                        str_celcius=null;
+                                        str_fahrenheit=null;
 
                                         new Handler().postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
                                                 txt_celcius.setText("\u00B0C");
                                                 txt_fahrenheit.setText("\u00B0F");
+
                                                 txt_celcius.setBackgroundColor(getResources().getColor(R.color.limeGreen));
                                                 txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.limeGreen));
                                                // bmpView.setImageResource(0);
@@ -1373,5 +1549,245 @@ private void saveDataToFile(String sBody){
         return true;
     }
     //------------------------To check storage Permission--------------------------------------------------------------------------------------------
+
+    //======================To resize and rotate image===========================================================
+    /**
+     * This method is responsible for solving the rotation issue if exist. Also scale the images to
+     * 1024x1024 resolution
+     *
+     * @param context       The current context
+     * @param selectedImage The Image URI
+     * @return Bitmap image results
+     * @throws IOException
+     */
+    public static Bitmap handleSamplingAndRotationBitmap(Context context, Uri selectedImage)
+            throws IOException {
+        int MAX_HEIGHT = 1024;
+        int MAX_WIDTH = 1024;
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        InputStream imageStream = context.getContentResolver().openInputStream(selectedImage);
+        BitmapFactory.decodeStream(imageStream, null, options);
+        imageStream.close();
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, MAX_WIDTH, MAX_HEIGHT);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        imageStream = context.getContentResolver().openInputStream(selectedImage);
+        Bitmap img = BitmapFactory.decodeStream(imageStream, null, options);
+
+        img = rotateImageIfRequired(context, img, selectedImage);
+        return img;
+    }
+
+    /**
+     * Calculate an inSampleSize for use in a {@link BitmapFactory.Options} object when decoding
+     * bitmaps using the decode* methods from {@link BitmapFactory}. This implementation calculates
+     * the closest inSampleSize that will result in the final decoded bitmap having a width and
+     * height equal to or larger than the requested width and height. This implementation does not
+     * ensure a power of 2 is returned for inSampleSize which can be faster when decoding but
+     * results in a larger bitmap which isn't as useful for caching purposes.
+     *
+     * @param options   An options object with out* params already populated (run through a decode*
+     *                  method with inJustDecodeBounds==true
+     * @param reqWidth  The requested width of the resulting bitmap
+     * @param reqHeight The requested height of the resulting bitmap
+     * @return The value to be used for inSampleSize
+     */
+    private static int calculateInSampleSize(BitmapFactory.Options options,
+                                             int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            // Calculate ratios of height and width to requested height and width
+            final int heightRatio = Math.round((float) height / (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+
+            // Choose the smallest ratio as inSampleSize value, this will guarantee a final image
+            // with both dimensions larger than or equal to the requested height and width.
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+
+            // This offers some additional logic in case the image has a strange
+            // aspect ratio. For example, a panorama may have a much larger
+            // width than height. In these cases the total pixels might still
+            // end up being too large to fit comfortably in memory, so we should
+            // be more aggressive with sample down the image (=larger inSampleSize).
+
+            final float totalPixels = width * height;
+
+            // Anything more than 2x the requested pixels we'll sample down further
+            final float totalReqPixelsCap = reqWidth * reqHeight * 2;
+
+            while (totalPixels / (inSampleSize * inSampleSize) > totalReqPixelsCap) {
+                inSampleSize++;
+            }
+        }
+        return inSampleSize;
+    }
+
+
+    /**
+     * Rotate an image if required.
+     *
+     * @param img           The image bitmap
+     * @param selectedImage Image URI
+     * @return The resulted Bitmap after manipulation
+     */
+    private static Bitmap rotateImageIfRequired(Context context, Bitmap img, Uri selectedImage) throws IOException {
+
+        InputStream input = context.getContentResolver().openInputStream(selectedImage);
+        ExifInterface ei;
+        if (Build.VERSION.SDK_INT > 23)
+            ei = new ExifInterface(input);
+        else
+            ei = new ExifInterface(selectedImage.getPath());
+
+        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                return rotateImage(img, 90);
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                return rotateImage(img, 180);
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                return rotateImage(img, 270);
+            default:
+                return img;
+        }
+    }
+
+    private static Bitmap rotateImage(Bitmap img, int degree) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        Bitmap rotatedImg = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
+        img.recycle();
+        return rotatedImg;
+    }
+    //======================End of resize and rotate image=======================================================
+
+    //=====================================Start Delete Folder===================================================
+    public static boolean deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i=0; i<children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        return dir.delete();
+    }
+    //=====================================End Delete Folder=====================================================
+
+
+
+
+    public static boolean setListViewHeightBasedOnItems(ListView listView) {
+
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter != null) {
+
+            int numberOfItems = listAdapter.getCount();
+
+            // Get total height of all items.
+            int totalItemsHeight = 0;
+            for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
+                View item = listAdapter.getView(itemPos, null, listView);
+                item.measure(0, 0);
+                totalItemsHeight += item.getMeasuredHeight();
+            }
+
+            // Get total height of all item dividers.
+            int totalDividersHeight = listView.getDividerHeight() *
+                    (numberOfItems - 1);
+
+            // Set list height.
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalItemsHeight + totalDividersHeight;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+
+            return true;
+
+        } else {
+            return false;
+        }
+
+    }
+
+    private void Disconnect()
+    {
+     if (btSocket!=null) //If the btSocket is busy
+         {
+            try
+            {
+                btSocket.close(); //close connection
+            }
+            catch (IOException e)
+            { msg("Error");}
+         }
+  //    finish(); //return to the first layout
+
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+// TODO Auto-generated method stub
+        AlertDialog.Builder builder=new AlertDialog.Builder(DeviceList.this);
+        // builder.setCancelable(false);
+        builder.setTitle("Rate Us if u like this");
+        builder.setMessage("Do you want to Exit?");
+        builder.setPositiveButton("yes",new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                Toast.makeText(DeviceList.this, "Yes i wanna exit", Toast.LENGTH_LONG).show();
+
+                finish();
+            }
+        });
+        builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                Toast.makeText(DeviceList.this, "i wanna stay on this", Toast.LENGTH_LONG).show();
+                dialog.cancel();
+
+            }
+        });
+        builder.setNeutralButton("Rate",new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+
+                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
+                }
+
+            }
+        });
+        AlertDialog alert=builder.create();
+        alert.show();
+        //super.onBackPressed();
+    }
+
+
 
 }
