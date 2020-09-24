@@ -1,27 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:layout_weight="1"
-    android:id="@+id/relaff"
-    tools:context=".DeviceList"
+    android:layout_height="match_parent"
     android:background="#00003f">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorAccent"
-        android:elevation="4dp"
-        app:titleTextColor="#FFFFFF"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-<!--
+    <!--
     <TextView
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -74,60 +59,75 @@
         android:layout_marginTop="100dp" />-->
 
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorAccent"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="#FFFFFF" />
 
     <include
         layout="@layout/test_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp" />
+        android:layout_marginTop="60dp"
+    />
 
     <include
         android:id="@+id/cameraLayout"
         layout="@layout/activity_camera_main"
-        android:layout_width="395dp"
-        android:layout_height="353dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="50dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:layout_marginTop="200dp" />
 
     <include
         android:id="@+id/tempValueShow"
         layout="@layout/temp_value_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/cameraLayout"
-
-      />
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="54dp"
+        android:layout_marginBottom="106dp" />
 
     <LinearLayout
         android:id="@+id/LinearLayout02"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_alignBottom="@+id/tempValueShow"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"  >
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Paired Devices"
+        tools:layout_editor_absoluteX="-22dp"
+        tools:layout_editor_absoluteY="224dp">
 
-        android:layout_alignParentBottom="true">
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Paired Devices">
+    </Button>
 
-        </Button>
-        <Button
-            android:id="@+id/scanDevice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Scan Devices">
-        </Button>
+    <Button
+        android:id="@+id/scanDevice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Scan Devices"
+         ></Button>
     </LinearLayout>
 
-<!--
-    <ImageView
-        android:id="@+id/iv_your_image"
-        android:layout_width="162dp"
-        android:layout_height="100dp"
-        android:padding="2dp" />-->
+
+
+    <!--
+        <ImageView
+            android:id="@+id/iv_your_image"
+            android:layout_width="162dp"
+            android:layout_height="100dp"
+            android:padding="2dp" />-->
 
 
     <!--
