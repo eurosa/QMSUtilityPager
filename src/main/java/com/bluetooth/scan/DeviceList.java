@@ -1204,6 +1204,7 @@ public class DeviceList extends AppCompatActivity
                 // finish();
               //  startActivity(intent);
                // Disconnect();
+                getSupportActionBar().setTitle(R.string.app_name);
             }
             else
             {
