@@ -40,6 +40,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -86,6 +87,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import static android.content.ContentValues.TAG;
+import static com.bluetooth.scan.R.drawable.ic_camera_switch;
 
 
 public class DeviceList extends AppCompatActivity
@@ -158,6 +160,8 @@ public class DeviceList extends AppCompatActivity
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
     };
+    private    FrameLayout   layout;
+    private Button btnTag;
 
 
     //screenshot
@@ -182,6 +186,8 @@ public class DeviceList extends AppCompatActivity
         txt_celcius=findViewById(R.id.txt_celcius);
         txt_fahrenheit=findViewById(R.id.txt_fahrenheit);
         bmpView = findViewById(R.id.bitmap_view);
+
+
         //iv_your_image=findViewById(R.id.iv_your_image);
         //============================Temperature Counting View=====================================================//
         normalView=findViewById(R.id.normal_view);
@@ -201,10 +207,32 @@ public class DeviceList extends AppCompatActivity
         Log.d(LOG_TAG, "are we instant?" + isInstantApp);
         findViewById(R.id.preview_surface).setOnClickListener(clickListener);
         //findViewById(R.id.capture_button).setOnClickListener(clickListener);
-        //findViewById(R.id.switch_button).setOnClickListener(clickListener);
+    //    findViewById(R.id.switch_button).setOnClickListener(clickListener);
 
         //=======================================Camera=============================================
+        //============================Create Button Programmatically================================
+        //the layout on which you are working
+         layout =   findViewById(R.id.cameraLayout);
 
+        //set the properties for button
+        btnTag = new Button(this);
+        btnTag.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+     //   btnTag.setText("Switch Camera");
+
+        btnTag.setBackground(getDrawable(ic_camera_switch));
+
+        //add button to the layout
+        layout.addView(btnTag);
+
+        btnTag.setOnClickListener(new View.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View v) {
+                                        switchCamera();
+                                    }
+                                });
+
+        //===================================================End Create Button Programmatically=====
 
         //Calling widgets
         btnPaired = findViewById(R.id.button);
@@ -560,7 +588,7 @@ public class DeviceList extends AppCompatActivity
                 return;
             } else if (v.getId() == R.id.preview_surface) {
                 try {
-                    switchCamera();
+                 //   switchCamera();
                 //    camera.takePicture(null, null, pictureCallback);
                 } catch (RuntimeException e) {
                     Log.e(LOG_TAG, "preview_surface", e);
@@ -574,7 +602,7 @@ public class DeviceList extends AppCompatActivity
                     Log.e(LOG_TAG, "capture_button", e);
                 }
             } */
-            /*
+/*
             else if (v.getId() == R.id.switch_button) {
                 switchCamera();
             }*/
@@ -802,7 +830,7 @@ public class DeviceList extends AppCompatActivity
 
 
                         takeScreenshot();
-
+                        btnTag.setVisibility(View.VISIBLE);
                         try {
                             camera.startPreview();
                         }catch (Exception e){
@@ -1017,6 +1045,7 @@ public class DeviceList extends AppCompatActivity
     //camera screenshot
 
     private void takeScreenshot() {
+        btnTag.setVisibility(View.INVISIBLE);
         Date now = new Date();
         android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
         String timeFormat =DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(now);
