@@ -6,9 +6,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothSocket;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -49,11 +51,11 @@ import android.widget.ListView;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.widget.RelativeLayout;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
+
 import com.camerakit.CameraKitView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -87,6 +89,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import static android.content.ContentValues.TAG;
+import static com.bluetooth.scan.R.drawable.bluetooth;
 import static com.bluetooth.scan.R.drawable.ic_camera_switch;
 
 
@@ -104,6 +107,13 @@ public class DeviceList extends AppCompatActivity
     String address = null;
     TextView textView;
     boolean listViewFlag=true;
+
+    //-------------------------------Start ofClock in TextView---------------------------------------------
+    BroadcastReceiver _broadcastReceiver;
+    private final SimpleDateFormat _sdfWatchTime = new SimpleDateFormat("HH:mm:ss");
+    private TextView _tvTime;
+    private TextClock textClock;
+    //-------------------------------End of Clock in TextView----------------------------------------------
 
     //==============================To connect bluetooth devices============================
     //-----------------------------Camera----------------------------------------------------
@@ -162,7 +172,8 @@ public class DeviceList extends AppCompatActivity
     };
     private    FrameLayout   layout;
     private Button btnTag;
-
+    private TextView txt_time;
+private  TextView txt_date;
 
     //screenshot
     @Override
@@ -186,6 +197,8 @@ public class DeviceList extends AppCompatActivity
         txt_celcius=findViewById(R.id.txt_celcius);
         txt_fahrenheit=findViewById(R.id.txt_fahrenheit);
         bmpView = findViewById(R.id.bitmap_view);
+       // txt_date=findViewById(R.id.txt_date);
+        textClock=findViewById(R.id.hk_time);
 
 
         //iv_your_image=findViewById(R.id.iv_your_image);
@@ -367,7 +380,13 @@ public class DeviceList extends AppCompatActivity
         builder.detectFileUriExposure();
         //=======================================================================
 
+     //   String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
 
+// textView is the TextView view that should display it
+      //  txt_date.setText(currentDateTimeString);
+
+        //textClock.setFormat24Hour("MMM dd, yyyy");
+        textClock.getFormat24Hour();
 
     }
 
@@ -500,6 +519,7 @@ public class DeviceList extends AppCompatActivity
             //Get the device MAC address, the last 17 chars in the View
             String info = ((TextView) v).getText().toString();
             String address = info.substring(info.length() - 17);
+
 
             //Make an intent to start next activity.
             //Intent i = new Intent(DeviceList.this, DeviceList.class);
@@ -642,68 +662,84 @@ public class DeviceList extends AppCompatActivity
 
         }
 
+        _broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context ctx, Intent intent) {
+                //if (intent.getAction().compareTo(Intent.ACTION_TIME_TICK) == 0)
+                  //  txt_date.setText(_sdfWatchTime.format(new Date()));
+            }
+        };
+
+        registerReceiver(_broadcastReceiver, new IntentFilter(Intent.ACTION_TIME_TICK));
+
      //   cameraKitView.onStart();
     }
     @Override
     protected void onStop() {
        // cameraKitView.onStop();
         super.onStop();
+        if (_broadcastReceiver != null)
+            unregisterReceiver(_broadcastReceiver);
     }
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     private void requestCameraPermission() {
-        if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)&&shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)&&shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            AlertDialog confirmationDialog = new AlertDialog.Builder(this)
-                    .setMessage(R.string.request_permission)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
-                                    REQUEST_CAMERA_PERMISSION);
-                        }
-                    })
-                    .setNegativeButton(android.R.string.cancel,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                }
-                            })
-                    .create();
-            confirmationDialog.show();
-        } else {
-            requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CAMERA_PERMISSION);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)&&shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)&&shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                AlertDialog confirmationDialog = new AlertDialog.Builder(this)
+                        .setMessage(R.string.request_permission)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
+                                        REQUEST_CAMERA_PERMISSION);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                })
+                        .create();
+                confirmationDialog.show();
+            } else {
+                requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CAMERA_PERMISSION);
+            }
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     private void requestStoragePermission() {
-        if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)&&shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            AlertDialog confirmationDialog = new AlertDialog.Builder(this)
-                    .setMessage(R.string.request_permission)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
-                                    REQUEST_STORAGE_PERMISSION);
-                        }
-                    })
-                    .setNegativeButton(android.R.string.cancel,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                }
-                            })
-                    .create();
-            confirmationDialog.show();
-        } else {
-            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)&&shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                AlertDialog confirmationDialog = new AlertDialog.Builder(this)
+                        .setMessage(R.string.request_permission)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
+                                        REQUEST_STORAGE_PERMISSION);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                })
+                        .create();
+                confirmationDialog.show();
+            } else {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
+            }
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull final int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode,   String[] permissions,
+                                             final int[] grantResults) {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults.length != 3 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 AlertDialog errorDialog = new AlertDialog.Builder(this)
@@ -808,10 +844,10 @@ public class DeviceList extends AppCompatActivity
 
               //  final Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
 
-         //       Log.i(LOG_TAG, "bmp dimensions " + bmp.getWidth() + "x" + bmp.getHeight());
+
                // handleSamplingAndRotationBitmap(DeviceList.this, Uri.fromFile(new File("/sdcard/sample.jpg")));
                 final Bitmap bmp =  handleSamplingAndRotationBitmap(DeviceList.this, Uri.fromFile(new File(jpgPath)));
-
+                Log.i(LOG_TAG, "bmp dimensions " + bmp.getWidth() + "x" + bmp.getHeight());
              //  final ImageView bmpView = (ImageView)findViewById(R.id.bitmap_view);
 
                 bmpView.post(new Runnable() {
@@ -1210,7 +1246,9 @@ public class DeviceList extends AppCompatActivity
             {
                 msg("Connected.");
                 isBtConnected = true;
-                getSupportActionBar().setTitle(infoBLE);
+                String address = infoBLE.substring(infoBLE.length() - 17);
+                String name = infoBLE.replace(address, "");
+                getSupportActionBar().setTitle(name);
 
 
 
@@ -1784,6 +1822,16 @@ private void saveDataToFile(String sBody){
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
                 Toast.makeText(DeviceList.this, "Yes i wanna exit", Toast.LENGTH_LONG).show();
+                if (btSocket!=null) //If the btSocket is busy
+                {
+                    try
+                    {
+                        btSocket.close(); //close connection
+                        btSocket=null;
+                    }
+                    catch (IOException e)
+                    { msg("Error");}
+                }
 
                 finish();
             }

@@ -75,25 +75,34 @@
         layout="@layout/test_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-    />
+        android:layout_marginTop="80dp" />
 
     <include
         android:id="@+id/cameraLayout"
         layout="@layout/activity_camera_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
-        android:layout_marginTop="200dp" />
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="220dp" />
+
 
     <include
         android:id="@+id/tempValueShow"
         layout="@layout/temp_value_show"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="98dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="98dp" />
+
+    <include
+        layout="@layout/date_time"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="54dp"
-        android:layout_marginBottom="106dp" />
+        android:layout_marginBottom="45dp"
+        />
 
     <LinearLayout
         android:id="@+id/LinearLayout02"
