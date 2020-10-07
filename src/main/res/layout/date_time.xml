@@ -5,7 +5,6 @@
     android:background="@drawable/gradient_gray_box"
     android:orientation="horizontal" >
 
-
     <android.widget.TextClock
         android:id="@+id/hk_time"
         android:layout_width="match_parent"
