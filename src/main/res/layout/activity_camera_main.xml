@@ -1,54 +1,204 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".DeviceList">
+    android:background="#ffffff"
+    android:orientation="vertical">
 
-
-    <SurfaceView
-        android:id="@+id/preview_surface"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="84dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3">
 
-        android:clickable="false"
-        android:focusable="true"
-        android:screenReaderFocusable="true" />
+        <TextView
+            android:id="@+id/instNameView"
+            android:layout_width="69dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Name of the Institute:"
+            android:textAlignment="center"
+            android:textColor="#FF0000" />
 
+        <EditText
+            android:id="@+id/instEditText"
+            android:layout_width="95dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
 
-    <ImageView
-        android:id="@+id/bitmap_view"
+        <Button
+            android:id="@+id/instSend"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Send"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1024px"
-        android:rotation="-90"
-        android:scaleType="centerInside"
-        android:scaleY="-1"
-        android:visibility="visible" />
-<!--
+        android:layout_height="84dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/time_date_view"
+            android:layout_width="69dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Bank:"
+            android:textAlignment="center"
+            android:textColor="#FF0000" />
+
+        <EditText
+            android:id="@+id/timeDateEdit"
+            android:layout_width="95dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
+
         <Button
-            android:id="@+id/switch_button"
+            android:id="@+id/timeDateSend"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:layout_marginTop="100dp"
-            android:text="@string/switch_camera" />-->
-    <!--
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Send"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/bankIdView"
+            android:layout_width="69dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Bank Id:"
+            android:textAlignment="center"
+            android:textColor="#FF0000" />
+
+        <EditText
+            android:id="@+id/bankIdEdit"
+            android:layout_width="95dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
+
         <Button
-            android:id="@+id/capture_button"
-            android:layout_marginTop="100dp"
+            android:id="@+id/bankIdSend"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|end"
-            android:text="@string/take_picture" />-->
-    <!--
-    <com.camerakit.CameraKitView
-        android:id="@+id/camera"
-        android:layout_width="500dp"
-        android:layout_height="500dp"
-        android:adjustViewBounds="true"
-        android:keepScreenOn="true"
-        app:camera_flash="auto"
-        app:camera_facing="front"
-        app:camera_focus="continuous"
-        app:camera_permissions="camera" />-->
-</FrameLayout>
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Send"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/counterNameView"
+            android:layout_width="69dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Name of Counter:"
+            android:textAlignment="center"
+            android:textColor="#FF0000" />
+
+        <EditText
+            android:id="@+id/countNameEdit"
+            android:layout_width="95dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/countNameSend"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Send"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

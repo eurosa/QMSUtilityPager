@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.bluetooth.scan"
+        applicationId "com.qms.utility"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1

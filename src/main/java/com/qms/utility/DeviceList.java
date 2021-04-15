@@ -1,7 +1,6 @@
-package com.bluetooth.scan;
+package com.qms.utility;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -16,7 +15,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.media.MediaScannerConnection;
@@ -26,16 +24,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,23 +45,20 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.widget.RelativeLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.camerakit.CameraKitView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.exifinterface.media.ExifInterface;
+import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.instantapps.InstantApps;
-import com.muddzdev.quickshot.QuickShot;
-import com.squareup.picasso.Picasso;
+import com.google.android.material.tabs.TabLayout;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -74,7 +66,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.BreakIterator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -84,13 +75,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import static android.content.ContentValues.TAG;
-import static com.bluetooth.scan.R.drawable.bluetooth;
-import static com.bluetooth.scan.R.drawable.ic_camera_switch;
 
 
 public class DeviceList extends AppCompatActivity
@@ -140,8 +126,7 @@ public class DeviceList extends AppCompatActivity
             { Manifest.permission.WRITE_EXTERNAL_STORAGE };
     private ImageView imageView;
     private Bitmap bitmap;
-    private TextView txt_fahrenheit;
-    private TextView txt_celcius;
+
     private String str_celcius;
     private String str_fahrenheit;
     private ImageView bmpView;
@@ -157,10 +142,7 @@ public class DeviceList extends AppCompatActivity
     private int normalCount=0;
     private int moderateCount=0;
     private int highCount=0;
-    private TextView normalView;
-    private TextView moderateView;
-    private TextView highView;
-    private TextView totalView;
+
     private ImageView iv_your_image;
     private String str_cel,str_fah;
 
@@ -172,9 +154,12 @@ public class DeviceList extends AppCompatActivity
     };
     private    FrameLayout   layout;
     private Button btnTag;
-    private TextView txt_time;
-private  TextView txt_date;
 
+
+    //+++++++++++++++++++++++++++ Pager and TabLayout +++++++++++++++++++++++++++++++++++++++++++++
+    TabLayout tabLayout;
+    ViewPager viewPager;
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //screenshot
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -190,23 +175,47 @@ private  TextView txt_date;
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        // getSupportActionBar().setDisplayShowHomeEnabled(true);
         //=========================Toolbar End============================================================
+        //+++++++++++++++++++ TabLayout and ViewPager ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+        tabLayout.addTab(tabLayout.newTab().setText("General"));
+        tabLayout.addTab(tabLayout.newTab().setText("Counter Label"));
+
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        final MyAdapter adapter = new MyAdapter(this,getSupportFragmentManager(),
+                tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //cameraKitView = findViewById(R.id.camera);
         //-------------------------------------To Receive device address from background==================
-        textView=findViewById(R.id.txt_normal);
-        txt_celcius=findViewById(R.id.txt_celcius);
-        txt_fahrenheit=findViewById(R.id.txt_fahrenheit);
-        bmpView = findViewById(R.id.bitmap_view);
+        //textView=findViewById(R.id.txt_normal);
+        //txt_celcius=findViewById(R.id.txt_celcius);
+        //txt_fahrenheit=findViewById(R.id.txt_fahrenheit);
        // txt_date=findViewById(R.id.txt_date);
-        textClock=findViewById(R.id.hk_time);
+        //textClock=findViewById(R.id.hk_time);
 
 
         //iv_your_image=findViewById(R.id.iv_your_image);
         //============================Temperature Counting View=====================================================//
-        normalView=findViewById(R.id.normal_view);
-        moderateView=findViewById(R.id.moderate_view);
-        highView=findViewById(R.id.high_view);
-        totalView=findViewById(R.id.total_view);
+        //normalView=findViewById(R.id.normal_view);
+        //moderateView=findViewById(R.id.moderate_view);
+        //highView=findViewById(R.id.high_view);
+        //totalView=findViewById(R.id.total_view);
         //============================Temperature Countning View====================================================//
 
 
@@ -218,34 +227,10 @@ private  TextView txt_date;
 
         boolean isInstantApp = InstantApps.getPackageManagerCompat(this).isInstantApp();
         Log.d(LOG_TAG, "are we instant?" + isInstantApp);
-        findViewById(R.id.preview_surface).setOnClickListener(clickListener);
-        //findViewById(R.id.capture_button).setOnClickListener(clickListener);
-    //    findViewById(R.id.switch_button).setOnClickListener(clickListener);
 
-        //=======================================Camera=============================================
-        //============================Create Button Programmatically================================
-        //the layout on which you are working
-         layout =   findViewById(R.id.cameraLayout);
 
-        //set the properties for button
-        btnTag = new Button(this);
-        btnTag.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-     //   btnTag.setText("Switch Camera");
 
-        btnTag.setBackground(getDrawable(ic_camera_switch));
 
-        //add button to the layout
-        layout.addView(btnTag);
-
-        btnTag.setOnClickListener(new View.OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View v) {
-                                        switchCamera();
-                                    }
-                                });
-
-        //===================================================End Create Button Programmatically=====
 
         //Calling widgets
         btnPaired = findViewById(R.id.button);
@@ -380,13 +365,6 @@ private  TextView txt_date;
         builder.detectFileUriExposure();
         //=======================================================================
 
-     //   String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
-
-// textView is the TextView view that should display it
-      //  txt_date.setText(currentDateTimeString);
-
-        //textClock.setFormat24Hour("MMM dd, yyyy");
-        textClock.getFormat24Hour();
 
     }
 
@@ -597,46 +575,10 @@ private  TextView txt_date;
 
 
 
-
-//----------------------------------------------Cmamera-----------------------------------------------------------
-
-    private View.OnClickListener clickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            if (camera == null) {
-                return;
-            } else if (v.getId() == R.id.preview_surface) {
-                try {
-                 //   switchCamera();
-                //    camera.takePicture(null, null, pictureCallback);
-                } catch (RuntimeException e) {
-                    Log.e(LOG_TAG, "preview_surface", e);
-                }
-            }
-            /*else if (v.getId() == R.id.capture_button) {
-                try {
-                  //  takeScreenshot();
-                    camera.takePicture(null, null, pictureCallback);
-                } catch (RuntimeException e) {
-                    Log.e(LOG_TAG, "capture_button", e);
-                }
-            } */
-/*
-            else if (v.getId() == R.id.switch_button) {
-                switchCamera();
-            }*/
-        }
-    };
-
-    public void switchCamera() {
-        startCamera(1 - cameraId);
-    }
-
     @Override
     public void onResume() {
         super.onResume();
-        setSurface();
+
       //  cameraKitView.onResume();
     }
 
@@ -748,7 +690,7 @@ private  TextView txt_date;
                finish();
             } else {
                 waitForPermission = false;
-                startCamera(cameraId);
+                // startCamera(cameraId);
             }
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -903,7 +845,7 @@ private  TextView txt_date;
         @Override
         public void surfaceCreated(SurfaceHolder holder) {
             Log.i(LOG_TAG, "surfaceCreated callback");
-            startCamera(cameraId);
+            //startCamera(cameraId);
         }
 
         @Override
@@ -915,38 +857,11 @@ private  TextView txt_date;
 
     };
 
-    private void setSurface() {
-        SurfaceView previewSurfaceView = (SurfaceView)findViewById(R.id.preview_surface);
-        previewSurfaceView.getHolder().addCallback(shCallback);
-    }
+
 
     Handler cameraHandler;
 
-    protected void startCamera(final int id) {
 
-        if (cameraHandler == null) {
-            HandlerThread handlerThread = new HandlerThread("CameraHandlerThread");
-            handlerThread.start();
-            cameraHandler = new Handler(handlerThread.getLooper());
-        }
-        Log.d(LOG_TAG, "startCamera(" + id + "): " + (waitForPermission ? "waiting" : "proceeding"));
-        if (waitForPermission) {
-            return;
-        }
-        releaseCamera();
-        cameraHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                final Camera camera = openCamera(id);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        startPreview(id, camera);
-                    }
-                });
-            }
-        });
-    }
 
     private void releaseCamera() {
         if (camera != null) {
@@ -1042,23 +957,6 @@ private  TextView txt_date;
         camera.setParameters(params);
     }
 
-    private void startPreview(int id, Camera c) {
-        if (c != null) {
-            try {
-                SurfaceView previewSurfaceView = (SurfaceView)findViewById(R.id.preview_surface);
-                SurfaceHolder holder = previewSurfaceView.getHolder();
-                c.setPreviewDisplay(holder);
-                camera = c;
-                cameraId = id;
-                restartPreview();
-            } catch (IOException e) {
-                e.printStackTrace();
-                c.release();
-            }
-        }
-    }
-
-    //Camera-----------------------------------------------------------------------
 
     //camera screenshot
     private void saveScreenshot() {
@@ -1333,16 +1231,10 @@ private  TextView txt_date;
                                 if(readString.equals("LOW".trim())){
                                     Log.d("readMessage",""+readMessage);
 
-                                    txt_celcius.setBackgroundColor(getResources().getColor(R.color.redColor));
-                                    txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.redColor));
-                                    txt_celcius.setText(readString);
-                                    txt_fahrenheit.setText(readString);
+
                                 }else  if(readString.equals("HIGH".trim())){
 
-                                    txt_celcius.setBackgroundColor(getResources().getColor(R.color.redColor));
-                                    txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.redColor));
-                                    txt_celcius.setText(readString);
-                                    txt_fahrenheit.setText(readString);
+
                                 }
 
                                 try {
@@ -1354,35 +1246,19 @@ private  TextView txt_date;
 
                                     if (normalLow <= Double.parseDouble(double_str_celcius) && normalHigh >= Double.parseDouble(double_str_celcius)) {
 
-                                        txt_celcius.setBackgroundColor(getResources().getColor(R.color.limeGreen));
-                                        txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.limeGreen));
-                                        txt_celcius.setText(str_celcius);
-                                        txt_fahrenheit.setText(str_fahrenheit);
-                                        normalCount=normalCount+1;
-                                        normalView.setText(""+normalCount);
-                                        Log.d("normalCount", "surfaceCreated callback:"+normalCount);
+
 
                                     } else if (moderateLow <= Double.parseDouble(double_str_celcius) && moderateHigh >= Double.parseDouble(double_str_celcius)) {
 
-                                        txt_celcius.setBackgroundColor(getResources().getColor(R.color.blueColor));
-                                        txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.blueColor));
-                                        txt_celcius.setText(str_celcius);
-                                        txt_fahrenheit.setText(str_fahrenheit);
-                                        moderateCount = moderateCount+1;
-                                        moderateView.setText(""+moderateCount);
+
 
                                     } else if (maxLow <= Double.parseDouble(double_str_celcius) && maxHigh >= Double.parseDouble(double_str_celcius)) {
 
-                                        txt_celcius.setBackgroundColor(getResources().getColor(R.color.redColor));
-                                        txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.redColor));
-                                        txt_celcius.setText(str_celcius);
-                                        txt_fahrenheit.setText(str_fahrenheit);
-                                        highCount = highCount+1;
-                                        highView.setText(""+highCount);
+
 
                                     }
 
-                                    totalView.setText(""+(normalCount + moderateCount + highCount));
+
 
                                     saveDataToFile(str_celcius+" "+"/"+" "+str_fahrenheit);
 
@@ -1421,11 +1297,7 @@ private  TextView txt_date;
                                         new Handler().postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
-                                                txt_celcius.setText("\u00B0C");
-                                                txt_fahrenheit.setText("\u00B0F");
 
-                                                txt_celcius.setBackgroundColor(getResources().getColor(R.color.limeGreen));
-                                                txt_fahrenheit.setBackgroundColor(getResources().getColor(R.color.limeGreen));
                                                // bmpView.setImageResource(0);
                                                 //bmpView.setImageBitmap(null);
                                              //  bmpView.destroyDrawingCache();

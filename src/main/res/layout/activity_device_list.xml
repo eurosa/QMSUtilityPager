@@ -6,8 +6,30 @@
     android:layout_height="match_parent"
     android:background="#00003f">
 
-    <!--
-    <TextView
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1db995"
+        android:layout_marginTop="47dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tabLayout"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="100dp"
+        tools:layout_editor_absoluteX="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+    <!--<Textview
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:text="0"
@@ -66,7 +88,6 @@
         android:background="?attr/colorAccent"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
@@ -79,7 +100,7 @@
         tools:layout_conversion_absoluteWidth="0dp" />
 
 
-    <include
+    <!--<include
         layout="@layout/test_layout"
         android:layout_width="match_parent"
         android:layout_height="97dp"
@@ -90,9 +111,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.072"
         tools:layout_conversion_absoluteHeight="0dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+        tools:layout_conversion_absoluteWidth="0dp" />-->
 
-    <include
+   <!-- <include
         android:id="@+id/cameraLayout"
         layout="@layout/activity_camera_main"
         android:layout_width="match_parent"
@@ -104,9 +125,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.426"
         tools:layout_conversion_absoluteHeight="0dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+        tools:layout_conversion_absoluteWidth="0dp" />-->
 
-    <include
+    <!--<include
         android:id="@+id/tempValueShow"
         layout="@layout/temp_value_show"
         android:layout_width="match_parent"
@@ -118,9 +139,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.83"
         tools:layout_conversion_absoluteHeight="0dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+        tools:layout_conversion_absoluteWidth="0dp" />-->
 
-    <include
+    <!--<include
         layout="@layout/date_time"
         android:layout_width="match_parent"
         android:layout_height="64dp"
@@ -130,7 +151,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.938"
         tools:layout_conversion_absoluteHeight="0dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+        tools:layout_conversion_absoluteWidth="0dp" />-->
 
     <Button
         android:id="@+id/button"

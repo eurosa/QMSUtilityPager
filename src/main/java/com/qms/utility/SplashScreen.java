@@ -1,4 +1,4 @@
-package com.bluetooth.scan;
+package com.qms.utility;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

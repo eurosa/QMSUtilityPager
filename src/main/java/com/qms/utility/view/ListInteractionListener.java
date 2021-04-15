@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.bluetooth.scan.view;
+package com.qms.utility.view;
 
 /**
  * Interface that defines how to handle interaction with a RecyclerView list or one of its elements.
