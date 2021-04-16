@@ -573,7 +573,15 @@ public class DeviceList extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-
+   /********************************************************************************************************
+    *
+    *     Just cool man and join in the day to day marketing here just cool man and go to horn area
+    *
+    * ***************This program is designed for QMS utility and serving the issue*************************
+    * ******************************************************************************************************
+    *
+    *
+    * ******************************************************************************************************/
 
     @Override
     public void onResume() {
