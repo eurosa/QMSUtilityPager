@@ -26,5 +26,11 @@
     <string name="request_permission">This app needs camera permission.</string>
     <string name="take_picture">take picture</string>
     <string name="switch_camera">switch camera</string>
+    <string name="K2">K2</string>
+    <string name="dr">dr</string>
+    <string name="AL">Al</string>
+    <string name="Rx">Rx</string>
+    <string name="Result">Result</string>
+    <string name="K1">k1</string>
 
 </resources>

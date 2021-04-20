@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".CounterLabel">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/cntLabelOneView"
+                android:layout_width="120dp"
+                android:layout_height="39dp"
+                android:text="Counter Label 1:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.024"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.022"></TextView>
+
+            <EditText
+                android:id="@+id/cntLabelOneEditText"
+                android:layout_width="127dp"
+                android:layout_height="37dp"
+                android:background="@drawable/backwithborder"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.602"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/btn_delete"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.01"></EditText>
+
+            <Button
+                android:id="@+id/sendcntLabelOne"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/instEditText"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.01"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelTwoView"
+                android:layout_width="128dp"
+                android:layout_height="33dp"
+                android:text="Counter Label 2:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.049"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.067">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelTwoEditText"
+                android:layout_width="127dp"
+                android:layout_height="37dp"
+                android:background="@drawable/backwithborder"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.602"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/btn_delete"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.068"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelTwo"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/instEditText"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.063"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelThreeView"
+                android:layout_width="131dp"
+                android:layout_height="32dp"
+
+                android:text="Counter Label 3:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.126">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelThreeEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:background="@drawable/backwithborder"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.603"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.131"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelThree"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.127"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelFourView"
+                android:layout_width="131dp"
+                android:layout_height="32dp"
+
+                android:text="Counter Label 4:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.2">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelFourEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:textColor="@color/redColor"
+                android:background="@drawable/backwithborder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.197"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelFour"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.198"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+
+            <TextView
+                android:id="@+id/cntLabelFiveView"
+                android:layout_width="127dp"
+                android:layout_height="54dp"
+
+                android:text="Counter Label 5:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.257">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelFiveEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:textColor="@color/redColor"
+                android:background="@drawable/backwithborder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.603"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.261"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelFive"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.266"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelSixView"
+                android:layout_width="135dp"
+                android:layout_height="49dp"
+
+                android:text="Counter Label 6:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.025"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.325">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelSixEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:background="@drawable/backwithborder"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.335"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelSix"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.33"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelSevenView"
+                android:layout_width="135dp"
+                android:layout_height="49dp"
+
+                android:text="Counter Label 7:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.025"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.396">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelSevenEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:background="@drawable/backwithborder"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.405"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelSeven"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelEightView"
+                android:layout_width="135dp"
+                android:layout_height="49dp"
+
+                android:text="Counter Label 8:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.025"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.477">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelEightEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:textColor="@color/redColor"
+                android:background="@drawable/backwithborder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.603"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.469"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelEight"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.465"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelNineView"
+                android:layout_width="135dp"
+                android:layout_height="49dp"
+
+                android:text="Counter Label 9:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.544">
+
+            </TextView>
+
+
+            <EditText
+                android:id="@+id/cntLabelNineEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:background="@drawable/backwithborder"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.536"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelNine"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.532"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelTenView"
+                android:layout_width="135dp"
+                android:layout_height="49dp"
+
+                android:text="Counter Label 10:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.61">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelTenEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:textColor="@color/redColor"
+                android:background="@drawable/backwithborder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.601"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelTen"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.599"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelElevenView"
+                android:layout_width="135dp"
+                android:layout_height="49dp"
+
+                android:text="Counter Label 11:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.663">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelElevenEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:textColor="@color/redColor"
+                android:background="@drawable/backwithborder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.652"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelEleven"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.658"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelTweleveView"
+                android:layout_width="135dp"
+                android:layout_height="49dp"
+
+                android:text="Counter Label 12:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.719">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelTweleveEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:textColor="@color/redColor"
+                android:background="@drawable/backwithborder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.709"></EditText>
+
+
+            <Button
+                android:id="@+id/sendCntLabelTweleve"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.714"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelThirteenView"
+                android:layout_width="135dp"
+                android:layout_height="49dp"
+
+                android:text="Counter Label 13:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.068"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.789">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelThirteenEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:background="@drawable/backwithborder"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.77"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelThirteen"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.771"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelFourteenView"
+                android:layout_width="135dp"
+                android:layout_height="49dp"
+                android:text="Counter Label 14:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.851">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelFourteenEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:textColor="@color/redColor"
+                android:background="@drawable/backwithborder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.851"></EditText>
+
+
+            <Button
+                android:id="@+id/sendCntLabelFourteen"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.853"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelFifteenView"
+                android:layout_width="135dp"
+                android:layout_height="49dp"
+                android:text="Counter Label 15:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.923">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelFifteenEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+                android:background="@drawable/backwithborder"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.925"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelFifteen"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.924"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/cntLabelSixteenView"
+                android:layout_width="135dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="860dp"
+                android:text="Counter Label 16:"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.054"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.995">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/cntLabelSixteenEditText"
+                android:layout_width="126dp"
+                android:layout_height="36dp"
+
+                android:background="@drawable/backwithborder"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.995"></EditText>
+
+            <Button
+                android:id="@+id/sendCntLabelSixteen"
+                android:layout_width="77dp"
+                android:layout_height="43dp"
+
+                android:text="Send"
+                android:textColor="@color/redColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.995"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
