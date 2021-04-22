@@ -37,6 +37,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -79,8 +80,7 @@ import java.util.UUID;
 import static android.content.ContentValues.TAG;
 
 
-public class DeviceList extends AppCompatActivity
-{
+public class DeviceList extends AppCompatActivity implements  View.OnClickListener {
     private static final String MY_PREFS_NAME = "MyTxtFile";;
     //  private CameraKitView cameraKitView;
     //==============================To Connect Bluetooth Device=============================
@@ -111,6 +111,23 @@ public class DeviceList extends AppCompatActivity
     private boolean waitForPermission = false;
     private boolean waitForStoragePermission = false;
     //-----------------------------------Camera-----------------------------------------------
+
+    //**************** General Fragment ******************************************************
+    private EditText instEditText, timeDateEditText, bankIdEditText, counterNameEditText,
+            tokenSlipBEditText, tokenSlipAEditText,
+            tokenSlip9EditText, cTimeEditText, copyNoEditText, totalCounterEditText,
+            cntLabelOneEditText,cntLabelTwoEditText,cntLabelThreeEditText,cntLabelFourEditText,
+            cntLabelFiveEditText,cntLabelSixEditText,cntLabelSevenEditText,cntLabelEightEditText,
+            cntLabelNineEditText,cntLabelTenEditText,cntLabelElevenEditText,cntLabelTweleveEditText,
+            cntLabelThirteenEditText,cntLabelFourteenEditText,cntLabelFifteenEditText,cntLabelSixteenEditText;
+
+    private Button sendcntLabelOne,sendCntLabelTwo,sendCntLabelThree,sendCntLabelFour,sendCntLabelFive,
+            sendCntLabelSix,sendCntLabelSeven,sendCntLabelEight,sendCntLabelNine,sendCntLabelTen,
+            sendCntLabelEleven,sendCntLabelTweleve,sendCntLabelThirteen,sendCntLabelFourteen,sendCntLabelFifteen,sendCntLabelSixteen,
+            btnInstitute,btnBankId,sendTimeDate,counterTimeDate,sendTotalCounter,sendCopyNo,sendCTime,
+            sendTokenSlip9,sendTokenSlipA,sendTokenSlipB;
+
+    //**************** General Fragment End **************************************************
 
 
     //widgets
@@ -159,6 +176,8 @@ public class DeviceList extends AppCompatActivity
     //+++++++++++++++++++++++++++ Pager and TabLayout +++++++++++++++++++++++++++++++++++++++++++++
     TabLayout tabLayout;
     ViewPager viewPager;
+
+
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //screenshot
     @Override
@@ -208,6 +227,87 @@ public class DeviceList extends AppCompatActivity
         //txt_fahrenheit=findViewById(R.id.txt_fahrenheit);
        // txt_date=findViewById(R.id.txt_date);
         //textClock=findViewById(R.id.hk_time);
+
+       //**************** General Fragment & Counter Label EditText ***************************************************************************************************************************
+        instEditText=findViewById(R.id.instEditText);
+        bankIdEditText=findViewById(R.id.bankIdEditText);
+        timeDateEditText=findViewById(R.id.timeDateEditText);
+        counterNameEditText=findViewById(R.id.counterNameEditText);
+
+        totalCounterEditText=findViewById(R.id.totalCounterEditText);
+        copyNoEditText=findViewById(R.id.copyNoEditText);
+        cTimeEditText=findViewById(R.id.cTimeEditText);
+        tokenSlip9EditText=findViewById(R.id.tokenSlip9EditText);
+
+        tokenSlipAEditText=findViewById(R.id.tokenSlipAEditText);
+        tokenSlipBEditText=findViewById(R.id.tokenSlipBEditText);
+
+        // ++++++++++++++++++++++++++++++Counter Label EditText++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        cntLabelOneEditText=findViewById(R.id.cntLabelOneEditText);
+        cntLabelTwoEditText=findViewById(R.id.cntLabelTwoEditText);
+        cntLabelThreeEditText=findViewById(R.id.cntLabelThreeEditText);
+        cntLabelFourEditText=findViewById(R.id.cntLabelFourEditText);
+
+        cntLabelFiveEditText=findViewById(R.id.cntLabelFiveEditText);
+        cntLabelSixEditText=findViewById(R.id.cntLabelSixEditText);
+        cntLabelSevenEditText=findViewById(R.id.cntLabelSevenEditText);
+        cntLabelEightEditText=findViewById(R.id.cntLabelEightEditText);
+
+        cntLabelNineEditText=findViewById(R.id.cntLabelNineEditText);
+        cntLabelTenEditText=findViewById(R.id.cntLabelTenEditText);
+
+        cntLabelElevenEditText=findViewById(R.id.cntLabelElevenEditText);
+        cntLabelTweleveEditText=findViewById(R.id.cntLabelTweleveEditText);
+        cntLabelThirteenEditText=findViewById(R.id.cntLabelThirteenEditText);
+        cntLabelFourteenEditText=findViewById(R.id.cntLabelFourteenEditText);
+
+        cntLabelFifteenEditText=findViewById(R.id.cntLabelFifteenEditText);
+        cntLabelSixteenEditText=findViewById(R.id.cntLabelSixteenEditText);
+
+
+        /*************************************************************************************************
+        * ***************************General Button*******************************************************
+        * ************************************************************************************************/
+ ;
+
+        btnInstitute=findViewById(R.id.btnInstitute);
+        btnBankId=findViewById(R.id.btnBankId);
+        sendTimeDate=findViewById(R.id.sendTimeDate);
+        counterTimeDate=findViewById(R.id.counterTimeDate);
+
+        sendTotalCounter=findViewById(R.id.sendTotalCounter);
+        sendCopyNo=findViewById(R.id.sendCopyNo);
+        sendCTime=findViewById(R.id.sendCTime);
+        sendTokenSlip9=findViewById(R.id.sendTokenSlip9);
+
+        sendTokenSlipA=findViewById(R.id.sendTokenSlipA);
+        sendTokenSlipB=findViewById(R.id.sendTokenSlipB);
+
+
+
+        sendcntLabelOne=findViewById(R.id.sendcntLabelOne);
+        sendCntLabelTwo=findViewById(R.id.sendCntLabelTwo);
+        sendCntLabelThree=findViewById(R.id.sendCntLabelThree);
+        sendCntLabelFour=findViewById(R.id.sendCntLabelFour);
+
+        sendCntLabelFive=findViewById(R.id.sendCntLabelFive);
+        sendCntLabelSix=findViewById(R.id.sendCntLabelSix);
+        sendCntLabelSeven=findViewById(R.id.sendCntLabelSeven);
+        sendCntLabelEight=findViewById(R.id.sendCntLabelEight);
+
+        sendCntLabelNine=findViewById(R.id.sendCntLabelNine);
+        sendCntLabelTen=findViewById(R.id.sendCntLabelTen);
+
+        sendCntLabelEleven=findViewById(R.id.sendCntLabelEleven);
+        sendCntLabelTweleve=findViewById(R.id.sendCntLabelTweleve);
+        sendCntLabelThirteen=findViewById(R.id.sendCntLabelThirteen);
+        sendCntLabelFourteen=findViewById(R.id.sendCntLabelFourteen);
+
+        sendCntLabelFifteen=findViewById(R.id.sendCntLabelFifteen);
+        sendCntLabelSixteen=findViewById(R.id.sendCntLabelSixteen);
+
+
+        //**************** General Fragment End **********************************************************************************************************************
 
 
         //iv_your_image=findViewById(R.id.iv_your_image);
@@ -1078,6 +1178,28 @@ public class DeviceList extends AppCompatActivity
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        /*Button sendcntLabelOne,sendCntLabelTwo,sendCntLabelThree,sendCntLabelFour,sendCntLabelFive,
+                sendCntLabelSix,sendCntLabelSeven,sendCntLabelEight,sendCntLabelNine,sendCntLabelTen,
+                sendCntLabelEleven,sendCntLabelTweleve,sendCntLabelThirteen,sendCntLabelFourteen,sendCntLabelFifteen,sendCntLabelSixteen,
+                btnInstitute,btnBankId,sendTimeDate,counterTimeDate,sendTotalCounter,sendCopyNo,sendCTime,
+                sendTokenSlip9,sendTokenSlipA,sendTokenSlipB
+
+          EditText instEditText, timeDateEditText, bankIdEditText, counterNameEditText,
+            tokenSlipBEditText, tokenSlipAEditText,
+            tokenSlip9EditText, cTimeEditText, copyNoEditText, totalCounterEditText,
+            cntLabelOneEditText,cntLabelTwoEditText,cntLabelThreeEditText,cntLabelFourEditText,
+            cntLabelFiveEditText,cntLabelSixEditText,cntLabelSevenEditText,cntLabelEightEditText,
+            cntLabelNineEditText,cntLabelTenEditText,cntLabelElevenEditText,cntLabelTweleveEditText,
+            cntLabelThirteenEditText,cntLabelFourteenEditText,cntLabelFifteenEditText,cntLabelSixteenEditText;
+                */
+        switch (v.getId()) {
+            case R.id.sendcntLabelOne:
+                 sendData(cntLabelOneEditText);
+        }
+    }
+
 
     //=================================To Connect Bluetooth Device====================================
     private class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
@@ -1197,7 +1319,32 @@ public class DeviceList extends AppCompatActivity
         }
     }
 
+    private void sendData(EditText editText)
+    {
+        if (btSocket!=null)
+        {
+            try
+            {
 
+
+                final Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        // myLabel.setText(sendEditText.getText().toString());
+                        handler.postDelayed(this,100);
+                    }
+                },100);
+
+                btSocket.getOutputStream().write(editText.getText().toString().getBytes());
+            }
+            catch (IOException e)
+            {
+                msg("Error");
+            }
+        }
+    }
 
     public void receiveData() throws IOException{
 
