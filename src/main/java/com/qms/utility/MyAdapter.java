@@ -18,7 +18,7 @@ public class MyAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                General generalFragment = new General();
+                General generalFragment = new General(context);
                 return generalFragment;
             case 1:
                 CounterLabel counterLabelFragment = new CounterLabel();

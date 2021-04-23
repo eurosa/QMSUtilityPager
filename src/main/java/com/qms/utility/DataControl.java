@@ -44,7 +44,7 @@ public class DataControl extends Activity {
 
 
 
-   // Button btnOn, btnOff, btnDis;
+    // Button btnOn, btnOff, btnDis;
     Button On, Off, Discnt, Abt;
     String address = null;
     private ProgressDialog progress;

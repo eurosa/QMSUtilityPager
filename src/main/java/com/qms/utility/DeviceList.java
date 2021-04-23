@@ -185,14 +185,14 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
-//----------------------------Grant storage permission--------------------------------------------------
+        //----------------------------Grant storage permission--------------------------------------------------
 
         //----------------------------------------------------------------------------------------------
         //=========================Adding Toolbar in android layout======================================
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
         //=========================Toolbar End============================================================
         //+++++++++++++++++++ TabLayout and ViewPager ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -210,6 +210,8 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+               // Log.d("TAG", "onTabSelected: " + tab.getPosition());
+
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
@@ -219,6 +221,19 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
             }
         });
 
+        View view = viewPager;
+        if (view !=null) {
+            view.findViewById(R.id.sendcntLabelOne);
+            Log.d("TAG","Helllfd"+view.getId());
+        }
+
+
+       /* viewPager.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View view) {
+                                             Log.d("TAG", "onTabSelected: " + view.getId());
+                                         }
+                                     });*/
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //cameraKitView = findViewById(R.id.camera);
         //-------------------------------------To Receive device address from background==================
@@ -229,40 +244,40 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         //textClock=findViewById(R.id.hk_time);
 
        //**************** General Fragment & Counter Label EditText ***************************************************************************************************************************
-        instEditText=findViewById(R.id.instEditText);
-        bankIdEditText=findViewById(R.id.bankIdEditText);
-        timeDateEditText=findViewById(R.id.timeDateEditText);
-        counterNameEditText=findViewById(R.id.counterNameEditText);
+        instEditText=viewPager.findViewById(R.id.instEditText);
+        bankIdEditText=viewPager.findViewById(R.id.bankIdEditText);
+        timeDateEditText=viewPager.findViewById(R.id.timeDateEditText);
+        counterNameEditText=viewPager.findViewById(R.id.counterNameEditText);
 
-        totalCounterEditText=findViewById(R.id.totalCounterEditText);
-        copyNoEditText=findViewById(R.id.copyNoEditText);
-        cTimeEditText=findViewById(R.id.cTimeEditText);
-        tokenSlip9EditText=findViewById(R.id.tokenSlip9EditText);
+        totalCounterEditText=viewPager.findViewById(R.id.totalCounterEditText);
+        copyNoEditText=viewPager.findViewById(R.id.copyNoEditText);
+        cTimeEditText=viewPager.findViewById(R.id.cTimeEditText);
+        tokenSlip9EditText=viewPager.findViewById(R.id.tokenSlip9EditText);
 
-        tokenSlipAEditText=findViewById(R.id.tokenSlipAEditText);
-        tokenSlipBEditText=findViewById(R.id.tokenSlipBEditText);
+        tokenSlipAEditText=viewPager.findViewById(R.id.tokenSlipAEditText);
+        tokenSlipBEditText=viewPager.findViewById(R.id.tokenSlipBEditText);
 
         // ++++++++++++++++++++++++++++++Counter Label EditText++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        cntLabelOneEditText=findViewById(R.id.cntLabelOneEditText);
-        cntLabelTwoEditText=findViewById(R.id.cntLabelTwoEditText);
-        cntLabelThreeEditText=findViewById(R.id.cntLabelThreeEditText);
-        cntLabelFourEditText=findViewById(R.id.cntLabelFourEditText);
+        cntLabelOneEditText=viewPager.findViewById(R.id.cntLabelOneEditText);
+        cntLabelTwoEditText=viewPager.findViewById(R.id.cntLabelTwoEditText);
+        cntLabelThreeEditText=viewPager.findViewById(R.id.cntLabelThreeEditText);
+        cntLabelFourEditText=viewPager.findViewById(R.id.cntLabelFourEditText);
 
-        cntLabelFiveEditText=findViewById(R.id.cntLabelFiveEditText);
-        cntLabelSixEditText=findViewById(R.id.cntLabelSixEditText);
-        cntLabelSevenEditText=findViewById(R.id.cntLabelSevenEditText);
-        cntLabelEightEditText=findViewById(R.id.cntLabelEightEditText);
+        cntLabelFiveEditText=viewPager.findViewById(R.id.cntLabelFiveEditText);
+        cntLabelSixEditText=viewPager.findViewById(R.id.cntLabelSixEditText);
+        cntLabelSevenEditText=viewPager.findViewById(R.id.cntLabelSevenEditText);
+        cntLabelEightEditText=viewPager.findViewById(R.id.cntLabelEightEditText);
 
-        cntLabelNineEditText=findViewById(R.id.cntLabelNineEditText);
-        cntLabelTenEditText=findViewById(R.id.cntLabelTenEditText);
+        cntLabelNineEditText=viewPager.findViewById(R.id.cntLabelNineEditText);
+        cntLabelTenEditText=viewPager.findViewById(R.id.cntLabelTenEditText);
 
-        cntLabelElevenEditText=findViewById(R.id.cntLabelElevenEditText);
-        cntLabelTweleveEditText=findViewById(R.id.cntLabelTweleveEditText);
-        cntLabelThirteenEditText=findViewById(R.id.cntLabelThirteenEditText);
-        cntLabelFourteenEditText=findViewById(R.id.cntLabelFourteenEditText);
+        cntLabelElevenEditText=viewPager.findViewById(R.id.cntLabelElevenEditText);
+        cntLabelTweleveEditText=viewPager.findViewById(R.id.cntLabelTweleveEditText);
+        cntLabelThirteenEditText=viewPager.findViewById(R.id.cntLabelThirteenEditText);
+        cntLabelFourteenEditText=viewPager.findViewById(R.id.cntLabelFourteenEditText);
 
-        cntLabelFifteenEditText=findViewById(R.id.cntLabelFifteenEditText);
-        cntLabelSixteenEditText=findViewById(R.id.cntLabelSixteenEditText);
+        cntLabelFifteenEditText=viewPager.findViewById(R.id.cntLabelFifteenEditText);
+        cntLabelSixteenEditText=viewPager.findViewById(R.id.cntLabelSixteenEditText);
 
 
         /*************************************************************************************************
@@ -270,41 +285,42 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         * ************************************************************************************************/
  ;
 
-        btnInstitute=findViewById(R.id.btnInstitute);
-        btnBankId=findViewById(R.id.btnBankId);
-        sendTimeDate=findViewById(R.id.sendTimeDate);
-        counterTimeDate=findViewById(R.id.counterTimeDate);
+        btnInstitute=viewPager.findViewById(R.id.btnInstitute);
+        btnBankId=viewPager.findViewById(R.id.btnBankId);
+        sendTimeDate=viewPager.findViewById(R.id.sendTimeDate);
+        counterTimeDate=viewPager.findViewById(R.id.counterTimeDate);
 
-        sendTotalCounter=findViewById(R.id.sendTotalCounter);
-        sendCopyNo=findViewById(R.id.sendCopyNo);
-        sendCTime=findViewById(R.id.sendCTime);
-        sendTokenSlip9=findViewById(R.id.sendTokenSlip9);
+        sendTotalCounter=viewPager.findViewById(R.id.sendTotalCounter);
+        sendCopyNo=viewPager.findViewById(R.id.sendCopyNo);
+        sendCTime=viewPager.findViewById(R.id.sendCTime);
+        sendTokenSlip9=viewPager.findViewById(R.id.sendTokenSlip9);
 
-        sendTokenSlipA=findViewById(R.id.sendTokenSlipA);
-        sendTokenSlipB=findViewById(R.id.sendTokenSlipB);
+        sendTokenSlipA=viewPager.findViewById(R.id.sendTokenSlipA);
+        sendTokenSlipB=viewPager.findViewById(R.id.sendTokenSlipB);
 
 
 
-        sendcntLabelOne=findViewById(R.id.sendcntLabelOne);
-        sendCntLabelTwo=findViewById(R.id.sendCntLabelTwo);
-        sendCntLabelThree=findViewById(R.id.sendCntLabelThree);
-        sendCntLabelFour=findViewById(R.id.sendCntLabelFour);
+        sendcntLabelOne=viewPager.findViewById(R.id.sendcntLabelOne);
+        // sendcntLabelOne.setOnClickListener(this);
+        sendCntLabelTwo=viewPager.findViewById(R.id.sendCntLabelTwo);
+        sendCntLabelThree=viewPager.findViewById(R.id.sendCntLabelThree);
+        sendCntLabelFour=viewPager.findViewById(R.id.sendCntLabelFour);
 
-        sendCntLabelFive=findViewById(R.id.sendCntLabelFive);
-        sendCntLabelSix=findViewById(R.id.sendCntLabelSix);
-        sendCntLabelSeven=findViewById(R.id.sendCntLabelSeven);
-        sendCntLabelEight=findViewById(R.id.sendCntLabelEight);
+        sendCntLabelFive=viewPager.findViewById(R.id.sendCntLabelFive);
+        sendCntLabelSix=viewPager.findViewById(R.id.sendCntLabelSix);
+        sendCntLabelSeven=viewPager.findViewById(R.id.sendCntLabelSeven);
+        sendCntLabelEight=viewPager.findViewById(R.id.sendCntLabelEight);
 
-        sendCntLabelNine=findViewById(R.id.sendCntLabelNine);
-        sendCntLabelTen=findViewById(R.id.sendCntLabelTen);
+        sendCntLabelNine=viewPager.findViewById(R.id.sendCntLabelNine);
+        sendCntLabelTen=viewPager.findViewById(R.id.sendCntLabelTen);
 
-        sendCntLabelEleven=findViewById(R.id.sendCntLabelEleven);
-        sendCntLabelTweleve=findViewById(R.id.sendCntLabelTweleve);
-        sendCntLabelThirteen=findViewById(R.id.sendCntLabelThirteen);
-        sendCntLabelFourteen=findViewById(R.id.sendCntLabelFourteen);
+        sendCntLabelEleven=viewPager.findViewById(R.id.sendCntLabelEleven);
+        sendCntLabelTweleve=viewPager.findViewById(R.id.sendCntLabelTweleve);
+        sendCntLabelThirteen=viewPager.findViewById(R.id.sendCntLabelThirteen);
+        sendCntLabelFourteen=viewPager.findViewById(R.id.sendCntLabelFourteen);
 
-        sendCntLabelFifteen=findViewById(R.id.sendCntLabelFifteen);
-        sendCntLabelSixteen=findViewById(R.id.sendCntLabelSixteen);
+        sendCntLabelFifteen=viewPager.findViewById(R.id.sendCntLabelFifteen);
+        sendCntLabelSixteen=viewPager.findViewById(R.id.sendCntLabelSixteen);
 
 
         //**************** General Fragment End **********************************************************************************************************************
@@ -953,7 +969,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         @Override
         public void surfaceCreated(SurfaceHolder holder) {
             Log.i(LOG_TAG, "surfaceCreated callback");
-            //startCamera(cameraId);
+            // startCamera(cameraId);
         }
 
         @Override
@@ -1103,13 +1119,13 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
             // create bitmap screen capture
             View v1 = getWindow().getDecorView().getRootView();
-         //   View v2 = getWindow().takeSurface();
+            //   View v2 = getWindow().takeSurface();
             v1.setDrawingCacheEnabled(true);
             Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
             v1.setDrawingCacheEnabled(false);
 
-        //    File imageFile = new File(mPath);
-        //    Log.d("takeshot",""+imageFile);
+            //    File imageFile = new File(mPath);
+            //    Log.d("takeshot",""+imageFile);
 
 /*
             FileOutputStream outputStream = new FileOutputStream(imageFile);
@@ -1180,6 +1196,8 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        // Toast.makeText(this, ""+v.getId(),
+        //           Toast.LENGTH_LONG).show();
         /*Button sendcntLabelOne,sendCntLabelTwo,sendCntLabelThree,sendCntLabelFour,sendCntLabelFive,
                 sendCntLabelSix,sendCntLabelSeven,sendCntLabelEight,sendCntLabelNine,sendCntLabelTen,
                 sendCntLabelEleven,sendCntLabelTweleve,sendCntLabelThirteen,sendCntLabelFourteen,sendCntLabelFifteen,sendCntLabelSixteen,
@@ -1196,7 +1214,13 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                 */
         switch (v.getId()) {
             case R.id.sendcntLabelOne:
-                 sendData(cntLabelOneEditText);
+                 // String cntLabelOneEditTextData = "$BnkL"+cntLabelOneEditText.getText().toString()+";";
+                 // sendData(cntLabelOneEditTextData);
+                 Log.d("Fucking:","cntLabelOneEditTextData");
+                // Toast.makeText(this, cntLabelOneEditTextData,
+                // Toast.LENGTH_LONG).show();
+                // break;
+
         }
     }
 
@@ -1278,8 +1302,6 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                 String name = infoBLE.replace(address, "");
                 getSupportActionBar().setTitle(name);
 
-
-
 /*
                 try {
                     receiveData();
@@ -1319,13 +1341,12 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         }
     }
 
-    private void sendData(EditText editText)
+    public void sendData(String text)
     {
         if (btSocket!=null)
         {
             try
             {
-
 
                 final Handler handler=new Handler();
                 handler.postDelayed(new Runnable() {
@@ -1337,7 +1358,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                     }
                 },100);
 
-                btSocket.getOutputStream().write(editText.getText().toString().getBytes());
+                btSocket.getOutputStream().write(text.getBytes());
             }
             catch (IOException e)
             {
