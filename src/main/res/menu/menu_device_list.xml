@@ -5,12 +5,12 @@
         android:icon="@drawable/ic_share"
         android:orderInCategory="100"
         app:showAsAction="never"
-        android:title="Share Data File" />
+        android:title="Set New Record or Update Record" />
 
-    <item android:id="@+id/action_delete"
+    <item android:id="@+id/action_reset"
         android:icon="@drawable/ic_share"
         android:orderInCategory="100"
         app:showAsAction="never"
-        android:title="Delete All Data" />
+        android:title="RESET" />
 
 </menu>

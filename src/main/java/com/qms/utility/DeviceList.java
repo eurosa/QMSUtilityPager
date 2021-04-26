@@ -643,15 +643,17 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            shareFileWithApps();
+            // shareFileWithApps();
+            recordSetUp();
             return true;
         }
 
-        if (id == R.id.action_delete) {
+        if (id == R.id.action_reset) {
 
-
+            sendData("$RESET" +""+ ";");
+            Toast.makeText(getApplicationContext(), "Data has been successfully reset", Toast.LENGTH_SHORT).show();
 //==============================End of Folder Delete using Alert Dialog=================================================================================
-            AlertDialog.Builder adb = new AlertDialog.Builder(this);
+          /*  AlertDialog.Builder adb = new AlertDialog.Builder(this);
            // adb.setView(Integer.parseInt("Delete Folder"));
             adb.setTitle("Delete Folder");
             adb.setMessage("Are you sure you want to delete this Folder?");
@@ -680,7 +682,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                 }
             });
             adb.show();
-
+*/
 //==========================================================End of Folder Deleted with Alert Dialog==================================
 
             return true;
@@ -1915,6 +1917,38 @@ private void saveDataToFile(String sBody){
         //super.onBackPressed();
     }
 
+public void recordSetUp(){
 
+    AlertDialog.Builder adb = new AlertDialog.Builder(this);
+    // adb.setView(Integer.parseInt("Delete Folder"));
+    adb.setTitle("Record Settings");
+    // adb.setMessage("Are you sure you want to delete this Folder?");
+    adb.setIcon(android.R.drawable.ic_dialog_alert);
+    String[] anyData = {"New Record"};
+
+    adb.setItems(anyData, new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which) {
+                case 0: // horse
+
+            }
+        }
+    });
+    adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int which) {
+
+
+        }
+    });
+    adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int which) {
+            Toast.makeText(DeviceList.this, "Cancel",
+                    Toast.LENGTH_SHORT).show();
+            //finish();
+        }
+    });
+    adb.show();
+}
 
 }
