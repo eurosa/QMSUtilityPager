@@ -1196,9 +1196,9 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        // Toast.makeText(this, ""+v.getId(),
-        //           Toast.LENGTH_LONG).show();
-        /*Button sendcntLabelOne,sendCntLabelTwo,sendCntLabelThree,sendCntLabelFour,sendCntLabelFive,
+        //Toast.makeText(this, ""+v.getId(),
+        //      Toast.LENGTH_LONG).show();
+        /*      Button sendcntLabelOne,sendCntLabelTwo,sendCntLabelThree,sendCntLabelFour,sendCntLabelFive,
                 sendCntLabelSix,sendCntLabelSeven,sendCntLabelEight,sendCntLabelNine,sendCntLabelTen,
                 sendCntLabelEleven,sendCntLabelTweleve,sendCntLabelThirteen,sendCntLabelFourteen,sendCntLabelFifteen,sendCntLabelSixteen,
                 btnInstitute,btnBankId,sendTimeDate,counterTimeDate,sendTotalCounter,sendCopyNo,sendCTime,
@@ -1217,6 +1217,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                  // String cntLabelOneEditTextData = "$BnkL"+cntLabelOneEditText.getText().toString()+";";
                  // sendData(cntLabelOneEditTextData);
                  Log.d("Fucking:","cntLabelOneEditTextData");
+                 Log.d("Just Cool Man","");
                 // Toast.makeText(this, cntLabelOneEditTextData,
                 // Toast.LENGTH_LONG).show();
                 // break;
