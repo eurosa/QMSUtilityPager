@@ -235,8 +235,8 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                 Toast.makeText(getApplicationContext(),
                         "Selected page position: " + position+" "+adapter.getItem(position), Toast.LENGTH_SHORT).show();
                 Fragment activeFragment = adapter.getItem(position);
-                if(position == 0)
-                    ((General)activeFragment).onRefresh();
+                //if(position == 0)
+                  //  ((General)activeFragment).onRefresh();
             }
 
             // This method will be invoked when the current page is scrolled
@@ -723,17 +723,15 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
             if (id == R.id.action_save) {
                 // getGeneralData();
-
-
-
+                Toast.makeText(getApplicationContext(), "Data has been saved successfully"+""+dataModel.getBankId(), Toast.LENGTH_SHORT).show();
                 int pos = viewPager.getCurrentItem();
                 Fragment activeFragment = adapter.getItem(pos);
-                if(pos == 0)
-                    ((General)activeFragment).onRefresh();
+               /* if(pos == 0)
+                    ((General)activeFragment).onRefresh();*/
 
                  // countries.getGeneralData();
                 dbHandler.Add_Contact(dataModel);
-                dispatchInformations("989");
+               // dispatchInformations("989");
 
                 /*
 
@@ -761,7 +759,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         // TODO Auto-generated method stub
         super.onAttachFragment(fragment);
 
-        Toast.makeText(getApplicationContext(), String.valueOf(fragment.getId()), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getApplicationContext(), String.valueOf(fragment.getId()), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -1312,12 +1310,12 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
     @Override
     public void communicate(String comm) {
-        Toast.makeText(getApplicationContext(),"Received: "+comm,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),"Received: "+comm,Toast.LENGTH_LONG).show();
     }
 
 public void dispatchInformations(String ff){
 
-    Toast.makeText(getApplicationContext(),"Received: Sex",Toast.LENGTH_LONG).show();
+    Toast.makeText(getApplicationContext(),"Received: "+ff,Toast.LENGTH_LONG).show();
 }
     //=================================To Connect Bluetooth Device====================================
     private class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread

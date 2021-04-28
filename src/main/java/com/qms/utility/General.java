@@ -63,7 +63,7 @@ public class General extends Fragment {
         View rootView  = inflater.inflate(R.layout.fragment_general, container, false);
 
 
-        sendData("Andrews");
+       // sendData("Andrews");
         //onRefresh();
 
         return  rootView;
@@ -122,6 +122,206 @@ public class General extends Fragment {
             }
 
         });
+
+
+        bankIdEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setBankId(bankIdEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+
+        timeDateEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setTimeDate(timeDateEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+        cTimeEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setcTime(cTimeEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+        counterNameEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCounterName(counterNameEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+        totalCounterEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setTotalCounter(totalCounterEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+        copyNoEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCopyNo(copyNoEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+        tokenSlip9EditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setTokenSlip9(tokenSlip9EditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+        tokenSlipAEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setTokenSlipA(tokenSlipAEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+        tokenSlipBEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setTokenSlipB(tokenSlipBEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+
 
         btnInstitute.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,17 +407,15 @@ public class General extends Fragment {
 
         // Toast.makeText(getContext(), "Instucfv "+instEditText.getText().toString(), Toast.LENGTH_SHORT).show();
 
-        dataModel.setBankId(bankIdEditText.getText().toString());
-        dataModel.setcTime(cTimeEditText.getText().toString());
-        dataModel.setTotalCounter(totalCounterEditText.getText().toString());
-        dataModel.setTimeDate(timeDateEditText.getText().toString());
-        dataModel.setCopyNo(copyNoEditText.getText().toString());
-        dataModel.setTokenSlip9(tokenSlip9EditText.getText().toString());
-        dataModel.setTokenSlipA(tokenSlipAEditText.getText().toString());
-        dataModel.setTokenSlipB(tokenSlipBEditText.getText().toString());
-        dataModel.setCounterName(counterNameEditText.getText().toString());
 
-        ((DeviceList)getActivity()).dispatchInformations("test");
+
+
+        /***************************************************************************************************
+        *
+         * **  Activity method call from fragment
+        *
+        * **************************************************************************************************/
+        //((DeviceList)getActivity()).dispatchInformations("test");
     }
 
     @Override
