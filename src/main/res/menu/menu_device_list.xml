@@ -13,4 +13,10 @@
         app:showAsAction="never"
         android:title="RESET" />
 
+    <item android:id="@+id/action_save"
+        android:icon="@drawable/ic_share"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="Save All Data" />
+
 </menu>

@@ -56,6 +56,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.exifinterface.media.ExifInterface;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.instantapps.InstantApps;
@@ -80,7 +81,7 @@ import java.util.UUID;
 import static android.content.ContentValues.TAG;
 
 
-public class DeviceList extends AppCompatActivity implements  View.OnClickListener {
+public class DeviceList extends AppCompatActivity implements  View.OnClickListener,FragmentToActivity {
     private static final String MY_PREFS_NAME = "MyTxtFile";;
     //  private CameraKitView cameraKitView;
     //==============================To Connect Bluetooth Device=============================
@@ -101,8 +102,8 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
     private TextClock textClock;
     //-------------------------------End of Clock in TextView----------------------------------------------
 
-    //==============================To connect bluetooth devices============================
-    //-----------------------------Camera----------------------------------------------------
+    //==============================To connect bluetooth devices===========================================
+    //-----------------------------Camera------------------------------------------------------------------
     private static final String LOG_TAG = "JBCamera";
     private static final int REQUEST_CAMERA_PERMISSION = 21;
     private static final int REQUEST_STORAGE_PERMISSION = 22;
@@ -110,7 +111,9 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
     private Camera camera = null;
     private boolean waitForPermission = false;
     private boolean waitForStoragePermission = false;
-    //-----------------------------------Camera-----------------------------------------------
+    DatabaseHandler dbHandler = new DatabaseHandler(this);
+    DataModel dataModel = new DataModel();
+     //-----------------------------------Camera-----------------------------------------------
 
     //**************** General Fragment ******************************************************
     private EditText instEditText, timeDateEditText, bankIdEditText, counterNameEditText,
@@ -176,6 +179,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
     //+++++++++++++++++++++++++++ Pager and TabLayout +++++++++++++++++++++++++++++++++++++++++++++
     TabLayout tabLayout;
     ViewPager viewPager;
+    private MyAdapter adapter;
 
 
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -202,9 +206,10 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         tabLayout.addTab(tabLayout.newTab().setText("Counter Label"));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        final MyAdapter adapter = new MyAdapter(this,getSupportFragmentManager(),
-                tabLayout.getTabCount());
+          adapter = new MyAdapter(this,getSupportFragmentManager(),
+                tabLayout.getTabCount(), dataModel);
         viewPager.setAdapter(adapter);
+        viewPager.getCurrentItem(); // --> 2
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -220,6 +225,38 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+        // Attach the page change listener inside the activity
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            // This method will be invoked when a new page becomes selected.
+            @Override
+            public void onPageSelected(int position) {
+                Toast.makeText(getApplicationContext(),
+                        "Selected page position: " + position+" "+adapter.getItem(position), Toast.LENGTH_SHORT).show();
+                Fragment activeFragment = adapter.getItem(position);
+                if(position == 0)
+                    ((General)activeFragment).onRefresh();
+            }
+
+            // This method will be invoked when the current page is scrolled
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                // Code goes here
+            }
+
+            // Called when the scroll state changes:
+            // SCROLL_STATE_IDLE, SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                // Code goes here
+            }
+        });
+
+       /* int pos = viewPager.getCurrentItem();
+        Fragment activeFragment = adapter.getItem(pos);
+        if(pos == 0)
+            ((General)activeFragment).onRefresh();*/
 
         View view = viewPager;
         if (view !=null) {
@@ -670,7 +707,6 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                     }else{
                         Toast.makeText(DeviceList.this, "Folder Not Found",
                                 Toast.LENGTH_SHORT).show();
-
                     }
                 }
             });
@@ -682,16 +718,63 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                 }
             });
             adb.show();
-*/
-//==========================================================End of Folder Deleted with Alert Dialog==================================
+*/     return true;
+        }
 
-            return true;
+            if (id == R.id.action_save) {
+                // getGeneralData();
+
+
+
+                int pos = viewPager.getCurrentItem();
+                Fragment activeFragment = adapter.getItem(pos);
+                if(pos == 0)
+                    ((General)activeFragment).onRefresh();
+
+                 // countries.getGeneralData();
+                dbHandler.Add_Contact(dataModel);
+                dispatchInformations("989");
+
+                /*
+
+                General fragment1 = (General) getSupportFragmentManager().findFragmentById(R.id.general_fg);
+                View frag=fragment1.getView();
+                EditText editText1 =(EditText) frag.findViewById(R.id.instEditText);
+                String message=editText1.getText().toString();
+                Toast.makeText(getApplicationContext(), "Data has been saved successfully", Toast.LENGTH_SHORT).show();*/
+
+                //  Toast.makeText(getApplicationContext(), "Data has been saved successfully", Toast.LENGTH_SHORT).show();
+
+                //  Toast.makeText(getApplicationContext(), "Data has been saved successfully"+adapter.getItem(0)+"  kjk "+ dataModel.getInstName()+""+countries.dataModel.getInstName(), Toast.LENGTH_SHORT).show();
+                //  ==========================================================End of Folder Deleted with Alert Dialog==================================
+
+                return true;
+
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-   /********************************************************************************************************
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        // TODO Auto-generated method stub
+        super.onAttachFragment(fragment);
+
+        Toast.makeText(getApplicationContext(), String.valueOf(fragment.getId()), Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void getFromUser(View view) {
+        General fragment1 = (General) getSupportFragmentManager().findFragmentById(R.id.general_fg);
+        View frag=fragment1.getView();
+        EditText editText1 =(EditText) frag.findViewById(R.id.instEditText);
+        String message=editText1.getText().toString();
+        Toast.makeText(getApplicationContext(), "Data has been saved successfully"+message, Toast.LENGTH_SHORT).show();
+        //  sendMessage(message);
+    }
+
+    /********************************************************************************************************
     *
     *     Just cool man and join in the day to day marketing here just cool man and go to horn area
     *
@@ -1227,7 +1310,15 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         }
     }
 
+    @Override
+    public void communicate(String comm) {
+        Toast.makeText(getApplicationContext(),"Received: "+comm,Toast.LENGTH_LONG).show();
+    }
 
+public void dispatchInformations(String ff){
+
+    Toast.makeText(getApplicationContext(),"Received: Sex",Toast.LENGTH_LONG).show();
+}
     //=================================To Connect Bluetooth Device====================================
     private class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
     {
@@ -1950,5 +2041,7 @@ public void recordSetUp(){
     });
     adb.show();
 }
+
+
 
 }

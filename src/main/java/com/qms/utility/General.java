@@ -2,6 +2,9 @@ package com.qms.utility;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,8 @@ import androidx.fragment.app.Fragment;
 
 public class General extends Fragment {
     Context context;
+    private FragmentToActivity mCallback;
+
     //**************** General Fragment ******************************************************
     private EditText instEditText, timeDateEditText, bankIdEditText, counterNameEditText,
             tokenSlipBEditText, tokenSlipAEditText,
@@ -28,15 +33,48 @@ public class General extends Fragment {
             btnInstitute,btnBankId,sendTimeDate,counterTimeDate,sendTotalCounter,sendCopyNo,sendCTime,
             sendTokenSlip9,sendTokenSlipA,sendTokenSlipB;
 
+    DataModel dataModel;
     //**************** General Fragment End **************************************************
-    public General(Context c) {
+    public General(Context c, DataModel model) {
         // Required empty public constructor
         context = c;
+        dataModel = model;
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mCallback = (FragmentToActivity) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement FragmentToActivity");
+        }
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.i("Right", "onCreate()");
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView  = inflater.inflate(R.layout.fragment_general, container, false);
+
+
+        sendData("Andrews");
+        //onRefresh();
+
+        return  rootView;
+    }
+
+
+    @Override
+    public void onViewCreated(View rootView, Bundle savedInstanceState) {
+        // Setup any handles to view objects here
+        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+
         btnInstitute=rootView.findViewById(R.id.btnInstitute);
         btnBankId=rootView.findViewById(R.id.btnBankId);
         sendTimeDate=rootView.findViewById(R.id.sendTimeDate);
@@ -64,7 +102,26 @@ public class General extends Fragment {
         tokenSlipAEditText=rootView.findViewById(R.id.tokenSlipAEditText);
         tokenSlipBEditText=rootView.findViewById(R.id.tokenSlipBEditText);
 
+        instEditText.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setInstName(instEditText.getText().toString());
+               // if(s.length() != 0)
+                 //   instEditText.setText("");
+
+            }
+
+        });
 
         btnInstitute.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +129,7 @@ public class General extends Fragment {
                 String instEditTextData = "$BnkL"+instEditText.getText().toString()+";";
                 ((DeviceList)getActivity()).sendData(instEditTextData);
                 Toast.makeText(getContext(), "Institute Name has been successfully sent", Toast.LENGTH_SHORT).show();
+
             }
         });
         btnBankId.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +205,54 @@ public class General extends Fragment {
             }
         });
 
-        return  rootView;
+        // Toast.makeText(getContext(), "Instucfv "+instEditText.getText().toString(), Toast.LENGTH_SHORT).show();
+
+        dataModel.setBankId(bankIdEditText.getText().toString());
+        dataModel.setcTime(cTimeEditText.getText().toString());
+        dataModel.setTotalCounter(totalCounterEditText.getText().toString());
+        dataModel.setTimeDate(timeDateEditText.getText().toString());
+        dataModel.setCopyNo(copyNoEditText.getText().toString());
+        dataModel.setTokenSlip9(tokenSlip9EditText.getText().toString());
+        dataModel.setTokenSlipA(tokenSlipAEditText.getText().toString());
+        dataModel.setTokenSlipB(tokenSlipBEditText.getText().toString());
+        dataModel.setCounterName(counterNameEditText.getText().toString());
+
+        ((DeviceList)getActivity()).dispatchInformations("test");
     }
+
+    @Override
+    public void onDetach() {
+        mCallback = null;
+        super.onDetach();
+    }
+
+    public void onRefresh() {
+        Toast.makeText(context, "Fragment : Refresh called."+dataModel.getInstName(),
+                Toast.LENGTH_SHORT).show();
+    }
+    private void sendData(String comm)
+    {
+
+        mCallback.communicate(comm);
+
+    }
+
+
+
+
+
+   /* public  void getGeneralData(){
+        dataModel.setInstName(instEditText.getText().toString());
+        dataModel.setBankId(bankIdEditText.getText().toString());
+        dataModel.setcTime(cTimeEditText.getText().toString());
+        dataModel.setTotalCounter(totalCounterEditText.getText().toString());
+        dataModel.setTimeDate(timeDateEditText.getText().toString());
+        dataModel.setCopyNo(copyNoEditText.getText().toString());
+        dataModel.setTokenSlip9(tokenSlip9EditText.getText().toString());
+        dataModel.setTokenSlipA(tokenSlipAEditText.getText().toString());
+        dataModel.setTokenSlipB(tokenSlipBEditText.getText().toString());
+        dataModel.setCounterName(counterNameEditText.getText().toString());
+
+
+    }*/
 }

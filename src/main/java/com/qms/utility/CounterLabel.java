@@ -25,8 +25,10 @@ public class CounterLabel extends Fragment {
             sendCntLabelEleven,sendCntLabelTweleve,sendCntLabelThirteen,sendCntLabelFourteen,sendCntLabelFifteen,sendCntLabelSixteen,
             btnInstitute,btnBankId,sendTimeDate,counterTimeDate,sendTotalCounter,sendCopyNo,sendCTime,
             sendTokenSlip9,sendTokenSlipA,sendTokenSlipB;
-    public CounterLabel() {
+    DataModel dataModel;
+    public CounterLabel(DataModel model) {
         // Required empty public constructor
+        dataModel = model;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

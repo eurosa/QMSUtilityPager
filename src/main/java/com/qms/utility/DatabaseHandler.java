@@ -60,8 +60,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void Add_Contact(DataModel contact) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, contact.getName()); // Name
-        values.put(KEY_EMAIL, contact.getEmail()); //  Email
+       // values.put(KEY_NAME, contact.getName()); // Name
+       // values.put(KEY_EMAIL, contact.getEmail()); //  Email
 
         // Inserting Row
         db.insert(TABLE_CONTACTS, null, values);
@@ -76,8 +76,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_ID, KEY_NAME, KEY_EMAIL }, KEY_ID + "=?", new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-
-        DataModel contact = new DataModel(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+        DataModel contact = new DataModel();
+     //  DataModel contact = new DataModel(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
         // return contact
         cursor.close();
         db.close();
@@ -102,8 +102,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 do {
                     DataModel contact = new DataModel();
                     contact.setID(Integer.parseInt(cursor.getString(0)));
-                    contact.setName(cursor.getString(1));
-                    contact.setEmail(cursor.getString(2));
+                    //contact.setName(cursor.getString(1));
+                   // contact.setEmail(cursor.getString(2));
                     //   contact.setImage(cursor.getBlob(3));
                     // Adding contact to list
                     contact_list.add(contact);
@@ -128,8 +128,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, contact.getName());
-        values.put(KEY_EMAIL, contact.getEmail());
+       // values.put(KEY_NAME, contact.getName());
+        //values.put(KEY_EMAIL, contact.getEmail());
         //  values.put(KEY_IMAGE, contact.getImage());
 
         // updating row

@@ -9,19 +9,21 @@ import androidx.fragment.app.FragmentPagerAdapter;
 public class MyAdapter extends FragmentPagerAdapter {
     Context context;
     int totalTabs;
-    public MyAdapter(Context c, FragmentManager fm, int totalTabs) {
+    DataModel model;
+    public MyAdapter(Context c, FragmentManager fm, int totalTabs, DataModel dataModel) {
         super(fm);
         context = c;
         this.totalTabs = totalTabs;
+        model = dataModel;
     }
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                General generalFragment = new General(context);
+                General generalFragment = new General(context, model);
                 return generalFragment;
             case 1:
-                CounterLabel counterLabelFragment = new CounterLabel();
+                CounterLabel counterLabelFragment = new CounterLabel(model);
                 return counterLabelFragment;
             default:
                 return null;
