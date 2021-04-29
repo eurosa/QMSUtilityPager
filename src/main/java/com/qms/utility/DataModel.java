@@ -226,6 +226,7 @@ public class DataModel {
     public String cTime;
     public String copyNo;
     public String totalCounter;
+
     public String cntLabelOne;
     public String cntLabelTwo;
     public String cntLabelThree;

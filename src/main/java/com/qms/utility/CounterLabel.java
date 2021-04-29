@@ -1,6 +1,8 @@
 package com.qms.utility;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +79,333 @@ public class CounterLabel extends Fragment {
 
         cntLabelFifteenEditText=rootView.findViewById(R.id.cntLabelFifteenEditText);
         cntLabelSixteenEditText=rootView.findViewById(R.id.cntLabelSixteenEditText);
+
+
+
+        cntLabelOneEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelOne(cntLabelOneEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+        cntLabelTwoEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelTwo(cntLabelTwoEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+        cntLabelThreeEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelThree(cntLabelThreeEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+        cntLabelFourEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelFour(cntLabelFourEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+
+
+        cntLabelFiveEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelFive(cntLabelFiveEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+        cntLabelSixEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelSix(cntLabelSixEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+        cntLabelSevenEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelSeven(cntLabelSevenEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+        cntLabelEightEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelEight(cntLabelEightEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+        cntLabelNineEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelNine(cntLabelNineEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+        cntLabelTenEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelTen(cntLabelTenEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+        cntLabelTweleveEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelTweleve(cntLabelTweleveEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+        cntLabelThirteenEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelThirteen(cntLabelThirteenEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+        cntLabelFourteenEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelFourteen(cntLabelFourteenEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+        cntLabelFifteenEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelFifteen(cntLabelFifteenEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+        cntLabelSixteenEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataModel.setCntLabelSixteen(cntLabelSixteenEditText.getText().toString());
+                // if(s.length() != 0)
+                //   instEditText.setText("");
+
+            }
+
+        });
+
+
+
 
         sendcntLabelOne.setOnClickListener(new View.OnClickListener() {
             @Override

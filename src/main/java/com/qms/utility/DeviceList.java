@@ -318,9 +318,8 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
 
         /*************************************************************************************************
-        * ***************************General Button*******************************************************
-        * ************************************************************************************************/
- ;
+        *************************************General Button***********************************************
+        **************************************************************************************************/
 
         btnInstitute=viewPager.findViewById(R.id.btnInstitute);
         btnBankId=viewPager.findViewById(R.id.btnBankId);
@@ -723,14 +722,14 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
             if (id == R.id.action_save) {
                 // getGeneralData();
-                Toast.makeText(getApplicationContext(), "Data has been saved successfully"+""+dataModel.getBankId(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Data has been saved successfully"+"Bank ID: "+dataModel.getBankId()+" Counter Label One:"+dataModel.getCntLabelOne(), Toast.LENGTH_SHORT).show();
                 int pos = viewPager.getCurrentItem();
                 Fragment activeFragment = adapter.getItem(pos);
                /* if(pos == 0)
                     ((General)activeFragment).onRefresh();*/
 
                  // countries.getGeneralData();
-                dbHandler.Add_Contact(dataModel);
+                dbHandler.Add_QmsUtility(dataModel);
                // dispatchInformations("989");
 
                 /*
