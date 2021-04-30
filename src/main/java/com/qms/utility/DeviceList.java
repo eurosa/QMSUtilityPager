@@ -27,6 +27,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Surface;
@@ -46,6 +47,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.widget.Spinner;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -180,6 +182,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
     TabLayout tabLayout;
     ViewPager viewPager;
     private MyAdapter adapter;
+    private SpinnerDialog mSpinnerDialog;
 
 
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -680,7 +683,18 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             // shareFileWithApps();
-            recordSetUp();
+            DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+            ArrayList<String> labels = db.Get_QmsUtility();
+            mSpinnerDialog = new SpinnerDialog(this, labels, new SpinnerDialog.DialogListener() {
+                public void cancelled() {
+                    // do your code here
+                }
+                public void ready(int n) {
+                    // do your code here
+                }
+            });
+            mSpinnerDialog.show();
+            //recordSetUp();
             return true;
         }
 
@@ -2013,7 +2027,8 @@ public void recordSetUp(){
     // adb.setMessage("Are you sure you want to delete this Folder?");
     adb.setIcon(android.R.drawable.ic_dialog_alert);
     String[] anyData = {"New Record"};
-
+   // loadSpinnerData();
+    /*
     adb.setItems(anyData, new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
@@ -2023,6 +2038,8 @@ public void recordSetUp(){
             }
         }
     });
+     */
+
     adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int which) {
 
@@ -2039,6 +2056,32 @@ public void recordSetUp(){
     adb.show();
 }
 
+     /***********************************************************************************************
+     * Function to load the spinner data from SQLite database
+     ***********************************************************************************************/
+  /*  private void loadSpinnerData() {
+        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+        ArrayList<Sr> labels = db.Get_QmsUtility();
 
+        // Creating adapter for spinner
+        // ArrayAdapter<DataModel> dataAdapter = new ArrayAdapter<DataModel>(this,android.R.layout.simple_spinner_item, labels);
+
+        // Drop down layout style - list view with radio button
+        // dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View myView = inflater.inflate(R.layout.layout_checkin_items, null);
+        dialogBuilder.setView(myView);
+        Spinner checkInProviders =  myView .findViewById(R.id.providers);
+        ArrayAdapter<DataModel> dataAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, labels);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        checkInProviders.setAdapter(dataAdapter);
+        dialogBuilder.show();
+        // attaching data adapter to spinner
+        // spinner.setAdapter(dataAdapter);
+    }*/
 
 }
