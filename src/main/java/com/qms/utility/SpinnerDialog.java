@@ -4,14 +4,16 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class SpinnerDialog extends Dialog {
-    private ArrayList<String> mList;
+    private ArrayList<DataModel> mList;
     private Context mContext;
     private Spinner mSpinner;
 
@@ -22,11 +24,11 @@ public class SpinnerDialog extends Dialog {
 
     private DialogListener mReadyListener;
 
-    public SpinnerDialog(Context context, ArrayList<String> list, DialogListener readyListener) {
+    public SpinnerDialog(Context context, ArrayList<DataModel> list, DialogListener readyListener) {
         super(context);
         mReadyListener = readyListener;
         mContext = context;
-        mList = new ArrayList<String>();
+        mList = new ArrayList<DataModel>();
         mList = list;
     }
 
@@ -36,8 +38,28 @@ public class SpinnerDialog extends Dialog {
 
         setContentView(R.layout.spinner_dialog);
         mSpinner = findViewById (R.id.dialog_spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<> (mContext, android.R.layout.simple_spinner_dropdown_item, mList);
+        ArrayAdapter<DataModel> adapter = new ArrayAdapter<DataModel> (mContext, android.R.layout.simple_spinner_dropdown_item, mList);
+        // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         mSpinner.setAdapter(adapter);
+
+
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                DataModel qmsUtility = (DataModel) parent.getSelectedItem();
+                Toast.makeText(getContext(), "Country ID: "+qmsUtility.getID()+",  Country Name : "+qmsUtility.getInstName(), Toast.LENGTH_SHORT).show();
+                // mSpinner.getSelectedItem();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        // mSpinner.setSelection(adapter.getPosition(myItem));//Optional to set the selected item.
 
         Button buttonOK =  findViewById(R.id.dialogOK);
         Button buttonCancel =  findViewById(R.id.dialogCancel);
@@ -54,5 +76,10 @@ public class SpinnerDialog extends Dialog {
                 SpinnerDialog.this.dismiss();
             }
         });
+
+
     }
+
+
+
 }

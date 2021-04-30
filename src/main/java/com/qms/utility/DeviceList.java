@@ -684,7 +684,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         if (id == R.id.action_settings) {
             // shareFileWithApps();
             DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-            ArrayList<String> labels = db.Get_QmsUtility();
+            ArrayList<DataModel> labels = db.Get_QmsUtility();
             mSpinnerDialog = new SpinnerDialog(this, labels, new SpinnerDialog.DialogListener() {
                 public void cancelled() {
                     // do your code here
@@ -765,6 +765,8 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
 
     @Override
@@ -2056,32 +2058,6 @@ public void recordSetUp(){
     adb.show();
 }
 
-     /***********************************************************************************************
-     * Function to load the spinner data from SQLite database
-     ***********************************************************************************************/
-  /*  private void loadSpinnerData() {
-        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-        ArrayList<Sr> labels = db.Get_QmsUtility();
 
-        // Creating adapter for spinner
-        // ArrayAdapter<DataModel> dataAdapter = new ArrayAdapter<DataModel>(this,android.R.layout.simple_spinner_item, labels);
-
-        // Drop down layout style - list view with radio button
-        // dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = this.getLayoutInflater();
-        final View myView = inflater.inflate(R.layout.layout_checkin_items, null);
-        dialogBuilder.setView(myView);
-        Spinner checkInProviders =  myView .findViewById(R.id.providers);
-        ArrayAdapter<DataModel> dataAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, labels);
-
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        checkInProviders.setAdapter(dataAdapter);
-        dialogBuilder.show();
-        // attaching data adapter to spinner
-        // spinner.setAdapter(dataAdapter);
-    }*/
 
 }

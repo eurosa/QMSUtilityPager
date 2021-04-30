@@ -53,7 +53,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     Context context;
 
-    private final ArrayList<String> qms_list = new ArrayList<>();
+    private final ArrayList<DataModel> qms_list = new ArrayList<>();
 
     public DatabaseHandler(Context context) {
 
@@ -151,7 +151,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 */
 
     // Getting All QmsUtility
-    public ArrayList<String> Get_QmsUtility() {
+    public ArrayList<DataModel> Get_QmsUtility() {
         try {
             qms_list.clear();
 
@@ -166,13 +166,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 do {
                     DataModel contact = new DataModel();
                     contact.setID(Integer.parseInt(cursor.getString(0)));
-                    Toast.makeText(context, "Something: "+cursor.getString(0),
-                            Toast.LENGTH_SHORT).show();
-                    // contact.setName(cursor.getString(1));
+                   // Toast.makeText(context, "Something: "+cursor.getString(1),
+                      //      Toast.LENGTH_SHORT).show();
+                    contact.setInstName(cursor.getString(1));
                     // contact.setEmail(cursor.getString(2));
                     // contact.setImage(cursor.getBlob(3));
                     // Adding contact to list
-                    qms_list.add(cursor.getString(0));
+                    qms_list.add(contact);
                 } while (cursor.moveToNext());
             }
 
