@@ -10,9 +10,11 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
 import java.util.ArrayList;
 
-public class SpinnerDialog extends Dialog {
+public class SpinnerDialog extends AlertDialog {
     private ArrayList<DataModel> mList;
     private Context mContext;
     private Spinner mSpinner;
@@ -28,7 +30,7 @@ public class SpinnerDialog extends Dialog {
         super(context);
         mReadyListener = readyListener;
         mContext = context;
-        mList = new ArrayList<DataModel>();
+        mList = new ArrayList<>();
         mList = list;
     }
 
@@ -38,7 +40,7 @@ public class SpinnerDialog extends Dialog {
 
         setContentView(R.layout.spinner_dialog);
         mSpinner = findViewById (R.id.dialog_spinner);
-        ArrayAdapter<DataModel> adapter = new ArrayAdapter<DataModel> (mContext, android.R.layout.simple_spinner_dropdown_item, mList);
+        ArrayAdapter<DataModel> adapter = new ArrayAdapter<> (mContext, android.R.layout.simple_spinner_dropdown_item, mList);
         // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mSpinner.setAdapter(adapter);
