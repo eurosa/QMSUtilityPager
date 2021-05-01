@@ -1582,11 +1582,12 @@ public void dispatchInformations(String ff){
 
                                 }
                                         // Take screen shot
-                                        //bitmap = ScreenShott.getInstance().takeScreenShotOfView(hidden_txtview);
-                                        //bitmap = ScreenShott.getInstance().takeScreenShotOfJustView(hidden_txtview);
-                                        //bitmap = ScreenShott.getInstance().takeScreenShotOfTextureView(hidden_textureview);
+                                        // bitmap = ScreenShott.getInstance().takeScreenShotOfView(hidden_txtview);
+                                        // bitmap = ScreenShott.getInstance().takeScreenShotOfJustView(hidden_txtview);
+                                        // bitmap = ScreenShott.getInstance().takeScreenShotOfTextureView(hidden_textureview);
                                         // bitmap = ScreenShott.getInstance().takeScreenShotOfView(view);
                                         // Display in imageview
+
                                     try{
                                         //saveScreenshot();
                                         //bmpView.setImageResource(android.R.color.transparent);

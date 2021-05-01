@@ -55,7 +55,7 @@ public class SpinnerDialog extends AlertDialog {
                // Toast.makeText(getContext(), "Country ID: "+qmsUtility.getID()+",  Country Name : "+qmsUtility.getInstName(), Toast.LENGTH_SHORT).show();
                 mParent = parent;
                 // mSpinner.getSelectedItem();
-Toast.makeText(getContext(), "Country ID: "+parent.getItemAtPosition(position).toString()+",  Country Name : ", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(getContext(), "Country ID: "+parent.getItemAtPosition(position).toString()+",  Country Name : ", Toast.LENGTH_SHORT).show();
             }
 
             @Override
