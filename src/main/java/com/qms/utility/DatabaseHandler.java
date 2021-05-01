@@ -53,7 +53,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     Context context;
 
-    private final ArrayList<DataModel> qms_list = new ArrayList<>();
+    private final ArrayList<String> qms_list = new ArrayList<>();
 
     public DatabaseHandler(Context context) {
 
@@ -151,10 +151,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 */
 
     // Getting All QmsUtility
-    public ArrayList<DataModel> Get_QmsUtility() {
+    public ArrayList<String> Get_QmsUtility() {
         try {
             qms_list.clear();
-
+            qms_list.add("New Record");
             // Select All Query
             String selectQuery = "SELECT  * FROM " + TABLE_QMS_UTILITY;
 
@@ -164,15 +164,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             // looping through all rows and adding to list
             if (cursor.moveToFirst()) {
                 do {
-                    DataModel contact = new DataModel();
-                    contact.setID(Integer.parseInt(cursor.getString(0)));
+                   // DataModel contact = new DataModel();
+                  //  contact.setID(Integer.parseInt(cursor.getString(0)));
                    // Toast.makeText(context, "Something: "+cursor.getString(1),
                       //      Toast.LENGTH_SHORT).show();
-                    contact.setInstName(cursor.getString(1));
+                    //contact.setInstName(cursor.getString(1));
                     // contact.setEmail(cursor.getString(2));
                     // contact.setImage(cursor.getBlob(3));
                     // Adding contact to list
-                    qms_list.add(contact);
+                    qms_list.add(cursor.getString(0));
+                    // qms_list.add(cursor.getString(1));
                 } while (cursor.moveToNext());
             }
 
@@ -186,6 +187,40 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         return qms_list;
+    }
+
+
+    // Getting All QmsUtility
+    public void getQmsUtility(String id, DataModel dataModel) {
+        try {
+
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_QMS_UTILITY+" WHERE id = ?";
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, new String[] {id});
+
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+                    // DataModel contact = new DataModel();
+                    //  contact.setID(Integer.parseInt(cursor.getString(0)));
+                    dataModel.setInstName(cursor.getString(1));
+
+
+                } while (cursor.moveToNext());
+            }
+
+            // return contact list
+            cursor.close();
+            db.close();
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            Log.e("all_qmsUtility", "" + e);
+        }
+
+
     }
 
 

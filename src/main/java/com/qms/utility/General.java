@@ -34,6 +34,8 @@ public class General extends Fragment {
             sendTokenSlip9,sendTokenSlipA,sendTokenSlipB;
 
     DataModel dataModel;
+    private View rootView;
+
     //**************** General Fragment End **************************************************
     public General(Context c, DataModel model) {
         // Required empty public constructor
@@ -51,31 +53,20 @@ public class General extends Fragment {
                     + " must implement FragmentToActivity");
         }
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("Right", "onCreate()");
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView  = inflater.inflate(R.layout.fragment_general, container, false);
+        rootView  = inflater.inflate(R.layout.fragment_general, container, false);
 
-
-       // sendData("Andrews");
-        //onRefresh();
-
-        return  rootView;
-    }
-
-
-    @Override
-    public void onViewCreated(View rootView, Bundle savedInstanceState) {
-        // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
-
-        btnInstitute=rootView.findViewById(R.id.btnInstitute);
+        btnInstitute=rootView.getRootView().findViewById(R.id.btnInstitute);
         btnBankId=rootView.findViewById(R.id.btnBankId);
         sendTimeDate=rootView.findViewById(R.id.sendTimeDate);
         counterTimeDate=rootView.findViewById(R.id.counterTimeDate);
@@ -89,7 +80,7 @@ public class General extends Fragment {
         sendTokenSlipB=rootView.findViewById(R.id.sendTokenSlipB);
 
 
-        instEditText=rootView.findViewById(R.id.instEditText);
+        instEditText=rootView.getRootView().findViewById(R.id.instEditText);
         bankIdEditText=rootView.findViewById(R.id.bankIdEditText);
         timeDateEditText=rootView.findViewById(R.id.timeDateEditText);
         counterNameEditText=rootView.findViewById(R.id.counterNameEditText);
@@ -101,6 +92,19 @@ public class General extends Fragment {
 
         tokenSlipAEditText=rootView.findViewById(R.id.tokenSlipAEditText);
         tokenSlipBEditText=rootView.findViewById(R.id.tokenSlipBEditText);
+        // sendData("Andrews");
+        // onRefresh();
+
+        return  rootView;
+    }
+
+
+    @Override
+    public void onViewCreated(View rootView, Bundle savedInstanceState) {
+        // Setup any handles to view objects here
+        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+
+
 
         instEditText.addTextChangedListener(new TextWatcher() {
 
@@ -116,7 +120,7 @@ public class General extends Fragment {
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 dataModel.setInstName(instEditText.getText().toString());
-               // if(s.length() != 0)
+                // if(s.length() != 0)
                  //   instEditText.setText("");
 
             }
@@ -428,13 +432,40 @@ public class General extends Fragment {
         Toast.makeText(context, "Fragment : Refresh called."+dataModel.getInstName(),
                 Toast.LENGTH_SHORT).show();
     }
+
+    public void changeTextOfGeneralFragment(DataModel dataModel)
+    {
+
+        bankIdEditText.setText(dataModel.getBankId());
+        instEditText.setText(dataModel.getInstName());
+        timeDateEditText.setText(dataModel.getTimeDate());
+        cTimeEditText.setText(dataModel.getcTime());
+        counterNameEditText.setText(dataModel.getCounterName());
+        tokenSlipAEditText.setText(dataModel.getTokenSlipA());
+        tokenSlipBEditText.setText(dataModel.getTokenSlipB());
+        tokenSlip9EditText.setText(dataModel.getTokenSlip9());
+        copyNoEditText.setText(dataModel.getCopyNo());
+        totalCounterEditText.setText(dataModel.getTotalCounter());
+
+        // rootView.setBackgroundResource(R.color.colorPrimaryDark);
+
+    }
+    public void setValueToEditText() {
+
+       // instEditText.setText("090");
+        Toast.makeText(context, "Fragment : Refresh called."+dataModel.getInstName(),
+                Toast.LENGTH_SHORT).show();
+    }
+
     private void sendData(String comm)
     {
 
         mCallback.communicate(comm);
 
     }
-
+    public EditText getInstEditText(){
+        return instEditText;
+    }
 
 
 

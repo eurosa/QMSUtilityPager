@@ -538,4 +538,30 @@ public class CounterLabel extends Fragment {
 
         return rootView;
     }
+
+
+    public void changeTextOfCounterFragment(DataModel dataModel)
+    {
+
+        cntLabelOneEditText.setText(dataModel.getCntLabelOne());
+        cntLabelTwoEditText.setText(dataModel.getCntLabelTwo());
+        cntLabelThreeEditText.setText(dataModel.getCntLabelThree());
+        cntLabelFourEditText.setText(dataModel.getCntLabelFour());
+        cntLabelFiveEditText.setText(dataModel.getCntLabelFive());
+        cntLabelSixEditText.setText(dataModel.getCntLabelSix());
+        cntLabelSevenEditText.setText(dataModel.getCntLabelSeven());
+        cntLabelEightEditText.setText(dataModel.getCntLabelEight());
+        cntLabelNineEditText.setText(dataModel.getCntLabelNine());
+        cntLabelTenEditText.setText(dataModel.getCntLabelTen());
+        cntLabelElevenEditText.setText(dataModel.getCntLabelEleven());
+        cntLabelTweleveEditText.setText(dataModel.getCntLabelTweleve());
+        cntLabelThirteenEditText.setText(dataModel.getCntLabelThirteen());
+        cntLabelFourteenEditText.setText(dataModel.getCntLabelFourteen());
+        cntLabelFifteenEditText.setText(dataModel.getCntLabelFifteen());
+        cntLabelSixteenEditText.setText(dataModel.getCntLabelSixteen());
+
+        // rootView.setBackgroundResource(R.color.colorPrimaryDark);
+
+    }
+
 }

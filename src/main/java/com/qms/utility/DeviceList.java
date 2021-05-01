@@ -118,7 +118,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
      //-----------------------------------Camera-----------------------------------------------
 
     //**************** General Fragment ******************************************************
-    private EditText instEditText, timeDateEditText, bankIdEditText, counterNameEditText,
+    /*private EditText instEditText, timeDateEditText, bankIdEditText, counterNameEditText,
             tokenSlipBEditText, tokenSlipAEditText,
             tokenSlip9EditText, cTimeEditText, copyNoEditText, totalCounterEditText,
             cntLabelOneEditText,cntLabelTwoEditText,cntLabelThreeEditText,cntLabelFourEditText,
@@ -130,7 +130,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
             sendCntLabelSix,sendCntLabelSeven,sendCntLabelEight,sendCntLabelNine,sendCntLabelTen,
             sendCntLabelEleven,sendCntLabelTweleve,sendCntLabelThirteen,sendCntLabelFourteen,sendCntLabelFifteen,sendCntLabelSixteen,
             btnInstitute,btnBankId,sendTimeDate,counterTimeDate,sendTotalCounter,sendCopyNo,sendCTime,
-            sendTokenSlip9,sendTokenSlipA,sendTokenSlipB;
+            sendTokenSlip9,sendTokenSlipA,sendTokenSlipB;*/
 
     //**************** General Fragment End **************************************************
 
@@ -236,10 +236,20 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
             @Override
             public void onPageSelected(int position) {
                 Toast.makeText(getApplicationContext(),
-                        "Selected page position: " + position+" "+adapter.getItem(position), Toast.LENGTH_SHORT).show();
-                Fragment activeFragment = adapter.getItem(position);
-                //if(position == 0)
-                  //  ((General)activeFragment).onRefresh();
+                        "Selected page position: " + position+" Inst:"+dataModel.getInstName(), Toast.LENGTH_SHORT).show();
+
+                Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + viewPager.getCurrentItem());
+                // based on the current position you can then cast the page to the correct
+                // class and call the method:
+                if (viewPager.getCurrentItem() == 0 && page != null) {
+                    ((General)page).changeTextOfGeneralFragment(dataModel);
+                }
+
+                if (viewPager.getCurrentItem() == 1 && page != null) {
+                    ((CounterLabel)page).changeTextOfCounterFragment(dataModel);
+                }
+
+
             }
 
             // This method will be invoked when the current page is scrolled
@@ -284,7 +294,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         //textClock=findViewById(R.id.hk_time);
 
        //**************** General Fragment & Counter Label EditText ***************************************************************************************************************************
-        instEditText=viewPager.findViewById(R.id.instEditText);
+       /* instEditText=viewPager.findViewById(R.id.instEditText);
         bankIdEditText=viewPager.findViewById(R.id.bankIdEditText);
         timeDateEditText=viewPager.findViewById(R.id.timeDateEditText);
         counterNameEditText=viewPager.findViewById(R.id.counterNameEditText);
@@ -317,14 +327,14 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         cntLabelFourteenEditText=viewPager.findViewById(R.id.cntLabelFourteenEditText);
 
         cntLabelFifteenEditText=viewPager.findViewById(R.id.cntLabelFifteenEditText);
-        cntLabelSixteenEditText=viewPager.findViewById(R.id.cntLabelSixteenEditText);
+        cntLabelSixteenEditText=viewPager.findViewById(R.id.cntLabelSixteenEditText);*/
 
 
         /*************************************************************************************************
         *************************************General Button***********************************************
         **************************************************************************************************/
 
-        btnInstitute=viewPager.findViewById(R.id.btnInstitute);
+        /*btnInstitute=viewPager.findViewById(R.id.btnInstitute);
         btnBankId=viewPager.findViewById(R.id.btnBankId);
         sendTimeDate=viewPager.findViewById(R.id.sendTimeDate);
         counterTimeDate=viewPager.findViewById(R.id.counterTimeDate);
@@ -359,7 +369,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         sendCntLabelFourteen=viewPager.findViewById(R.id.sendCntLabelFourteen);
 
         sendCntLabelFifteen=viewPager.findViewById(R.id.sendCntLabelFifteen);
-        sendCntLabelSixteen=viewPager.findViewById(R.id.sendCntLabelSixteen);
+        sendCntLabelSixteen=viewPager.findViewById(R.id.sendCntLabelSixteen);*/
 
 
         //**************** General Fragment End **********************************************************************************************************************
@@ -683,14 +693,35 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             // shareFileWithApps();
-            DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-            ArrayList<DataModel> labels = db.Get_QmsUtility();
+            final DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+            ArrayList<String> labels = db.Get_QmsUtility();
             mSpinnerDialog = new SpinnerDialog(this, labels, new SpinnerDialog.DialogListener() {
                 public void cancelled() {
                     // do your code here
                 }
-                public void ready(int n) {
+                public void ready(String n) {
                     // do your code here
+                    db.getQmsUtility(n,dataModel);
+
+
+                    Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + viewPager.getCurrentItem());
+                    // based on the current position you can then cast the page to the correct
+                    // class and call the method:
+                    if (viewPager.getCurrentItem() == 0 && page != null) {
+                        ((General)page).changeTextOfGeneralFragment(dataModel);
+                    }
+
+                    if (viewPager.getCurrentItem() == 1 && page != null) {
+                        ((CounterLabel)page).changeTextOfCounterFragment(dataModel);
+                    }
+
+
+
+                        //((General)activeFragment).changeTextOfFragment(dataModel.getInstName());
+                        //((General)activeFragment).getInstEditText().setText("98");
+                        //instEditText.setText(dataModel.getInstName());
+
+
                 }
             });
             mSpinnerDialog.show();
@@ -735,29 +766,16 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         }
 
             if (id == R.id.action_save) {
-                // getGeneralData();
-                Toast.makeText(getApplicationContext(), "Data has been saved successfully"+"Bank ID: "+dataModel.getBankId()+" Counter Label One:"+dataModel.getCntLabelOne(), Toast.LENGTH_SHORT).show();
-                int pos = viewPager.getCurrentItem();
+
+                /*int pos = viewPager.getCurrentItem();
                 Fragment activeFragment = adapter.getItem(pos);
-               /* if(pos == 0)
+               if(pos == 0 || pos==1)
                     ((General)activeFragment).onRefresh();*/
 
                  // countries.getGeneralData();
                 dbHandler.Add_QmsUtility(dataModel);
-               // dispatchInformations("989");
 
-                /*
-
-                General fragment1 = (General) getSupportFragmentManager().findFragmentById(R.id.general_fg);
-                View frag=fragment1.getView();
-                EditText editText1 =(EditText) frag.findViewById(R.id.instEditText);
-                String message=editText1.getText().toString();
-                Toast.makeText(getApplicationContext(), "Data has been saved successfully", Toast.LENGTH_SHORT).show();*/
-
-                //  Toast.makeText(getApplicationContext(), "Data has been saved successfully", Toast.LENGTH_SHORT).show();
-
-                //  Toast.makeText(getApplicationContext(), "Data has been saved successfully"+adapter.getItem(0)+"  kjk "+ dataModel.getInstName()+""+countries.dataModel.getInstName(), Toast.LENGTH_SHORT).show();
-                //  ==========================================================End of Folder Deleted with Alert Dialog==================================
+                // Toast.makeText(getApplicationContext(), "Data has been saved successfully", Toast.LENGTH_SHORT).show();
 
                 return true;
 
