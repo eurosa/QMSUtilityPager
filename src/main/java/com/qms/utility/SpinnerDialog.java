@@ -44,9 +44,9 @@ public class SpinnerDialog extends AlertDialog {
 
         setContentView(R.layout.spinner_dialog);
         mSpinner = findViewById (R.id.dialog_spinner);
-        adapter = new ArrayAdapter<> (mContext, android.R.layout.simple_spinner_dropdown_item, mList);
+        adapter = new ArrayAdapter<String> (mContext, R.layout.spinner_item, mList);
         // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+        // adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         mSpinner.setAdapter(adapter);
         /*********************************************************************************************
         * Initial Select item position using dataModel
