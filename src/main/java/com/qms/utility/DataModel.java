@@ -244,6 +244,28 @@ public class DataModel {
     public String cntLabelFifteen;
     public String cntLabelSixteen;
 
+    public int selectionPosition;
+
+    public String getLastSelectedItem() {
+        return lastSelectedItem;
+    }
+
+    public void setLastSelectedItem(String lastSelectedItem) {
+        this.lastSelectedItem = lastSelectedItem;
+    }
+
+    public String lastSelectedItem;
+
+    public int getSelectionPosition() {
+        return selectionPosition;
+    }
+
+    public void setSelectionPosition(int selectionPosition) {
+        this.selectionPosition = selectionPosition;
+    }
+
+
+
 
     public DataModel() {
         super();

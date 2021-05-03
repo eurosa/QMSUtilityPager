@@ -15,10 +15,12 @@ import androidx.appcompat.app.AlertDialog;
 import java.util.ArrayList;
 
 public class SpinnerDialog extends AlertDialog {
-    private ArrayList<String> mList;
+    public ArrayList<String> mList;
     private Context mContext;
-    private Spinner mSpinner;
-    private AdapterView<?> mParent;
+    public Spinner mSpinner;
+    public AdapterView<?> mParent;
+    public ArrayAdapter<String> adapter;
+    public DataModel dataModel;
 
     public interface DialogListener {
         public void ready(String n);
@@ -27,12 +29,13 @@ public class SpinnerDialog extends AlertDialog {
 
     private DialogListener mReadyListener;
 
-    public SpinnerDialog(Context context, ArrayList<String> list, DialogListener readyListener) {
+    public SpinnerDialog(Context context, ArrayList<String> list,DataModel model, DialogListener readyListener) {
         super(context);
         mReadyListener = readyListener;
         mContext = context;
         mList = new ArrayList<>();
         mList = list;
+        dataModel = model;
     }
 
     @Override
@@ -41,10 +44,17 @@ public class SpinnerDialog extends AlertDialog {
 
         setContentView(R.layout.spinner_dialog);
         mSpinner = findViewById (R.id.dialog_spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<> (mContext, android.R.layout.simple_spinner_dropdown_item, mList);
+        adapter = new ArrayAdapter<> (mContext, android.R.layout.simple_spinner_dropdown_item, mList);
         // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mSpinner.setAdapter(adapter);
+        /*********************************************************************************************
+        * Initial Select item position using dataModel
+        *
+        * *******************************************************************************************/
+        mSpinner.setSelection(dataModel.getSelectionPosition());
+
+        // *****************************************************************************************
 
 
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

@@ -35,6 +35,7 @@ import android.view.SurfaceHolder;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -235,8 +236,8 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
             // This method will be invoked when a new page becomes selected.
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(getApplicationContext(),
-                        "Selected page position: " + position+" Inst:"+dataModel.getInstName(), Toast.LENGTH_SHORT).show();
+               /* Toast.makeText(getApplicationContext(),
+                        "Selected page position: " + position, Toast.LENGTH_SHORT).show();*/
 
                 Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + viewPager.getCurrentItem());
                 // based on the current position you can then cast the page to the correct
@@ -248,8 +249,6 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                 if (viewPager.getCurrentItem() == 1 && page != null) {
                     ((CounterLabel)page).changeTextOfCounterFragment(dataModel);
                 }
-
-
             }
 
             // This method will be invoked when the current page is scrolled
@@ -695,7 +694,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
             // shareFileWithApps();
             final DatabaseHandler db = new DatabaseHandler(getApplicationContext());
             ArrayList<String> labels = db.Get_QmsUtility();
-            mSpinnerDialog = new SpinnerDialog(this, labels, new SpinnerDialog.DialogListener() {
+            mSpinnerDialog = new SpinnerDialog(this, labels,dataModel, new SpinnerDialog.DialogListener() {
                 public void cancelled() {
                     // do your code here
                 }
@@ -715,16 +714,26 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                         ((CounterLabel)page).changeTextOfCounterFragment(dataModel);
                     }
 
+                    int selectionPosition= mSpinnerDialog.adapter.getPosition(n);
+                    mSpinnerDialog.mSpinner.setSelection(selectionPosition);
+                    Log.d("SelectedPosition: ",""+selectionPosition);
+                    dataModel.setSelectionPosition(selectionPosition);
+                    dataModel.setLastSelectedItem((n));
 
-
-                        //((General)activeFragment).changeTextOfFragment(dataModel.getInstName());
-                        //((General)activeFragment).getInstEditText().setText("98");
-                        //instEditText.setText(dataModel.getInstName());
+                    // ((General)activeFragment).changeTextOfFragment(dataModel.getInstName());
+                    // ((General)activeFragment).getInstEditText().setText("98");
+                    // instEditText.setText(dataModel.getInstName());
 
 
                 }
             });
+
             mSpinnerDialog.show();
+            /*************************************************************************************************************
+            * When Click on EditText then android keyboard not opened but adding the below line solved the problem
+            *
+            **************************************************************************************************************/
+            mSpinnerDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
             //recordSetUp();
             return true;
         }
@@ -773,8 +782,12 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                     ((General)activeFragment).onRefresh();*/
 
                  // countries.getGeneralData();
-                dbHandler.Add_QmsUtility(dataModel);
-
+                if(dataModel.getLastSelectedItem() =="New Record") {
+                    dbHandler.Add_QmsUtility(dataModel);
+                }else {
+                    int updated_id = dbHandler.Update_QmsUtility(dataModel);
+                    Toast.makeText(getApplicationContext(), "Data has been updated successfully", Toast.LENGTH_SHORT).show();
+                }
                 // Toast.makeText(getApplicationContext(), "Data has been saved successfully", Toast.LENGTH_SHORT).show();
 
                 return true;

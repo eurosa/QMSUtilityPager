@@ -225,17 +225,41 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     // Updating single qmsUtility
-    public int Update_QmsUtility(DataModel contact) {
+    public int Update_QmsUtility(DataModel dataModel) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        //values.put(KEY_NAME, contact.getName());
-        //values.put(KEY_EMAIL, contact.getEmail());
-        //values.put(KEY_IMAGE, contact.getImage());
+        values.put(KEY_INST_NAME, dataModel.getInstName()); // Name
+        values.put(KEY_BANK_ID, dataModel.getBankId()); //  Email
+        values.put(KEY_COUNTER_NAME, dataModel.getCounterName()); // Name
+        values.put(KEY_TOKEN_SLIP_B, dataModel.getTokenSlipB()); //  Email
+        values.put(KEY_TOKEN_SLIP_A, dataModel.getTokenSlipA()); // Name
+        values.put(KEY_TOKEN_SLIP_9, dataModel.getTokenSlip9()); //  Email
+        values.put(KEY_TOTAL_COUNTER, dataModel.getTotalCounter()); // Name
+        values.put(KEY_COPY_NO, dataModel.getCopyNo()); //  Email
+        values.put(KEY_TIME_DATE, dataModel.getTimeDate()); // Name
+        values.put(KEY_C_TIME, dataModel.getcTime()); //  Email
+
+        values.put(KEY_LABEL_1, dataModel.getCntLabelOne()); // Name
+        values.put(KEY_LABEL_2, dataModel.getCntLabelTwo()); //  Email
+        values.put(KEY_LABEL_3, dataModel.getCntLabelThree()); // Name
+        values.put(KEY_LABEL_4, dataModel.getCntLabelFour()); //  Email
+        values.put(KEY_LABEL_5, dataModel.getCntLabelFive()); // Name
+        values.put(KEY_LABEL_6, dataModel.getCntLabelSix()); //  Email
+        values.put(KEY_LABEL_7, dataModel.getCntLabelSeven()); // Name
+        values.put(KEY_LABEL_8, dataModel.getCntLabelEight()); //  Email
+        values.put(KEY_LABEL_9, dataModel.getCntLabelNine()); // Name
+        values.put(KEY_LABEL_10, dataModel.getCntLabelTen()); //  Email
+        values.put(KEY_LABEL_11, dataModel.getCntLabelEleven()); // Name
+        values.put(KEY_LABEL_12, dataModel.getCntLabelTweleve()); //  Email
+        values.put(KEY_LABEL_13, dataModel.getCntLabelThirteen()); // Name
+        values.put(KEY_LABEL_14, dataModel.getCntLabelFourteen()); //  Email
+        values.put(KEY_LABEL_15, dataModel.getCntLabelFifteen()); // Name
+        values.put(KEY_LABEL_16, dataModel.getCntLabelSixteen()); //  Email
 
         // updating row
         return db.update(TABLE_QMS_UTILITY, values, KEY_ID + " = ?",
-                new String[] { String.valueOf(contact.getID()) });
+                new String[] { String.valueOf(dataModel.getID()) });
     }
 
 
