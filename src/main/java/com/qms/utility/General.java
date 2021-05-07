@@ -330,82 +330,92 @@ public class General extends Fragment {
         btnInstitute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String instEditTextData = "$BnkL"+instEditText.getText().toString()+";";
+               String instData  = fixedLengthString(instEditText.getText().toString(), 28);
+
+                String instEditTextData = "$BnkL"+instData+";";
                 ((DeviceList)getActivity()).sendData(instEditTextData);
-                Toast.makeText(getContext(), "Institute Name has been successfully sent", Toast.LENGTH_SHORT).show();
 
             }
         });
         btnBankId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String bankIdEditTextData = "$BnkL"+bankIdEditText.getText().toString()+";";
+                String bankID  = fixedLengthString(bankIdEditText.getText().toString(), 28);
+                String bankIdEditTextData = "$BnkL"+bankID+";";
                 ((DeviceList)getActivity()).sendData(bankIdEditTextData);
-                Toast.makeText(getContext(), "Bank id has been successfully sent", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Bank id has been successfully sent", Toast.LENGTH_SHORT).show();
             }
         });
         sendTimeDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String timeDateEditTextData = "$TIME"+timeDateEditText.getText().toString()+";";
+                String timeDate  = fixedLengthString(timeDateEditText.getText().toString(), 28);
+                String timeDateEditTextData = "$TIME"+timeDate.toString()+";";
                 ((DeviceList)getActivity()).sendData(timeDateEditTextData);
-                Toast.makeText(getContext(), "Time and Date has been successfully sent", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Time and Date has been successfully sent", Toast.LENGTH_SHORT).show();
             }
         });
         counterTimeDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String counterNameEditTextData = "$CTID"+counterNameEditText.getText().toString()+";";
+                String counterName  = fixedLengthString(counterNameEditText.getText().toString(), 28);
+                String counterNameEditTextData = "$CTID"+counterName+";";
                 ((DeviceList)getActivity()).sendData(counterNameEditTextData);
-                Toast.makeText(getContext(), "Counter Time and Date has been successfully sent", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Counter Time and Date has been successfully sent", Toast.LENGTH_SHORT).show();
             }
         });
         totalCounterEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String totalCounterEditTextData = "$CNTR"+totalCounterEditText.getText().toString()+";";
+                String totalCounter  = fixedLengthString(totalCounterEditText.getText().toString(), 28);
+                String totalCounterEditTextData = "$CNTR"+totalCounter+";";
                 ((DeviceList)getActivity()).sendData(totalCounterEditTextData);
-                Toast.makeText(getContext(), "Total Counter has been successfully sent", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Total Counter has been successfully sent", Toast.LENGTH_SHORT).show();
             }
         });
         sendCopyNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String copyNoEditTextData = "$LaC3"+copyNoEditText.getText().toString()+";";
-                ((DeviceList)getActivity()).sendData("uuu");
-                Toast.makeText(getContext(), "sendCopyNo", Toast.LENGTH_SHORT).show();
+                String copyNo  = fixedLengthString(copyNoEditText.getText().toString(), 28);
+                String copyNoEditTextData = "$LaC3"+copyNo+";";
+                ((DeviceList)getActivity()).sendData(copyNoEditTextData);
+                //Toast.makeText(getContext(), "sendCopyNo", Toast.LENGTH_SHORT).show();
             }
         });
         sendCTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cTimeEditTextData = "$CLTM"+cTimeEditText.getText().toString()+";";
+                String cTime  = fixedLengthString(cTimeEditText.getText().toString(), 28);
+                String cTimeEditTextData = "$CLTM"+cTime+";";
                 ((DeviceList)getActivity()).sendData(cTimeEditTextData);
-                Toast.makeText(getContext(), "Time has been successfully sent", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Time has been successfully sent", Toast.LENGTH_SHORT).show();
             }
         });
         sendTokenSlip9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String tokenSlip9EditTextData = "$TSL9"+tokenSlip9EditText.getText().toString()+";";
+                String tokenSlip9  = fixedLengthString(tokenSlip9EditText.getText().toString(), 28);
+                String tokenSlip9EditTextData = "$TSL9"+tokenSlip9+";";
                 ((DeviceList)getActivity()).sendData(tokenSlip9EditTextData);
-                Toast.makeText(getContext(), "Token Slip 9 has been successfully sent", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Token Slip 9 has been successfully sent", Toast.LENGTH_SHORT).show();
             }
         });
         sendTokenSlipA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String tokenSlipAEditTextData = "$TSLA"+tokenSlipAEditText.getText().toString()+";";
+                String tokenSlipA  = fixedLengthString(tokenSlipAEditText.getText().toString(), 28);
+                String tokenSlipAEditTextData = "$TSLA"+tokenSlipA+";";
                 ((DeviceList)getActivity()).sendData(tokenSlipAEditTextData);
-                Toast.makeText(getContext(), "Token Slip A has been successfully sent", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Token Slip A has been successfully sent", Toast.LENGTH_SHORT).show();
             }
         });
         sendTokenSlipB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String tokenSlipBEditTextData = "$TSLB"+tokenSlipBEditText.getText().toString()+";";
+                String tokenSlipB  = fixedLengthString(tokenSlipBEditText.getText().toString(), 28);
+                String tokenSlipBEditTextData = "$TSLB"+tokenSlipB+";";
                 ((DeviceList)getActivity()).sendData(tokenSlipBEditTextData);
-                Toast.makeText(getContext(), "Token Slip B has been successfully sent", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Token Slip B has been successfully sent", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -420,6 +430,24 @@ public class General extends Fragment {
         *
         * **************************************************************************************************/
         //((DeviceList)getActivity()).dispatchInformations("test");
+    }
+
+
+    private String fixedLengthString(String textData , int lenght)
+    {
+        // String stringData = textData.rightPad(lenght, ' ').Substring(0, lenght);
+        // String stringData = leftpad(textData,28);
+        String stringData = rightpad(textData,28);
+        return stringData;
+    }
+
+
+    private String leftpad(String text, int length) {
+        return String.format("%" + length + "." + length + "s", text);
+    }
+
+    private String rightpad(String text, int length) {
+        return String.format("%-" + length + "." + length + "s", text);
     }
 
     @Override

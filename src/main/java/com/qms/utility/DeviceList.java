@@ -1481,6 +1481,7 @@ public void dispatchInformations(String ff){
 
     public void sendData(String text)
     {
+        OutputStream tmpOut = null;
         if (btSocket!=null)
         {
             try
@@ -1495,8 +1496,15 @@ public void dispatchInformations(String ff){
                         handler.postDelayed(this,100);
                     }
                 },100);
+                byte[] msgBuffer = text.getBytes();
+                Log.d("SendText1",text);
+                tmpOut = btSocket.getOutputStream();
+                Log.d("SendText2",msgBuffer.toString());
+                tmpOut.write(msgBuffer);
+                tmpOut.flush();
 
-                btSocket.getOutputStream().write(text.getBytes());
+
+                Toast.makeText(this, "Data has been successfully sent", Toast.LENGTH_SHORT).show();
             }
             catch (IOException e)
             {
@@ -1504,6 +1512,7 @@ public void dispatchInformations(String ff){
             }
         }
     }
+
 
     public void receiveData() throws IOException{
 

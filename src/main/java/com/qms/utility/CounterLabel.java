@@ -406,137 +406,170 @@ public class CounterLabel extends Fragment {
 
 
 
-
         sendcntLabelOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelOneEditTextData = "$LaC1"+cntLabelOneEditText.getText().toString()+";";
+                String cntLabelOne  = fixedLengthString(cntLabelOneEditText.getText().toString(), 28);
+                String cntLabelOneEditTextData = "$LaC1"+cntLabelOne+";";
                 ((DeviceList)getActivity()).sendData(cntLabelOneEditTextData);
-                Toast.makeText(getContext(), "sendcntLabelOne", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "sendcntLabelOne", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelTwoEditTextData = "$LaC2"+cntLabelTwoEditText.getText().toString()+";";
+                String cntLabelTwo  = fixedLengthString(cntLabelTwoEditText.getText().toString(), 28);
+                String cntLabelTwoEditTextData = "$LaC2"+cntLabelTwo+";";
                 ((DeviceList)getActivity()).sendData(cntLabelTwoEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelTwo", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "sendCntLabelTwo", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelThreeEditTextData = "$LaC3"+cntLabelThreeEditText.getText().toString()+";";
+                String cntLabelThree  = fixedLengthString(cntLabelThreeEditText.getText().toString(), 28);
+                String cntLabelThreeEditTextData = "$LaC3"+cntLabelThree+";";
                 ((DeviceList)getActivity()).sendData(cntLabelThreeEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelThree", Toast.LENGTH_SHORT).show();
+                //oast.makeText(getContext(), "sendCntLabelThree", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelFourEditTextData = "$LaC4"+cntLabelFourEditText.getText().toString()+";";
+                String cntLabelFour  = fixedLengthString(cntLabelFourEditText.getText().toString(), 28);
+                String cntLabelFourEditTextData = "$LaC4"+cntLabelFour+";";
                 ((DeviceList)getActivity()).sendData(cntLabelFourEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelFour", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "sendCntLabelFour", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelFiveEditTextData = "LaC5"+cntLabelFiveEditText.getText().toString()+";";
+                String cntLabelFive  = fixedLengthString(cntLabelFiveEditText.getText().toString(), 28);
+                String cntLabelFiveEditTextData = "LaC5"+cntLabelFive+";";
                 ((DeviceList)getActivity()).sendData(cntLabelFiveEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelFive", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "sendCntLabelFive", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelSix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelSixEditTextData = "$LaC6"+cntLabelSixEditText.getText().toString()+";";
+                String cntLabelSix  = fixedLengthString(cntLabelSixEditText.getText().toString(), 28);
+                String cntLabelSixEditTextData = "$LaC6"+cntLabelSix+";";
                 ((DeviceList)getActivity()).sendData(cntLabelSixEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelSix", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getContext(), "sendCntLabelSix", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelSeven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelSevenEditTextData = "LaC7"+cntLabelSevenEditText.getText().toString()+";";
+                String cntLabelSeven  = fixedLengthString(cntLabelSevenEditText.getText().toString(), 28);
+                String cntLabelSevenEditTextData = "LaC7"+cntLabelSeven+";";
                 ((DeviceList)getActivity()).sendData(cntLabelSevenEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelSeven", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getContext(), "sendCntLabelSeven", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelEight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelEightEditTextData = "$LaC8"+cntLabelEightEditText.getText().toString()+";";
+                String cntLabelEight  = fixedLengthString(cntLabelEightEditText.getText().toString(), 28);
+                String cntLabelEightEditTextData = "$LaC8"+cntLabelEight+";";
                 ((DeviceList)getActivity()).sendData(cntLabelEightEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelEight", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getContext(), "sendCntLabelEight", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelNine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelNineEditTextData = "$LaC9"+cntLabelNineEditText.getText().toString()+";";
+                String cntLabelNine  = fixedLengthString(cntLabelNineEditText.getText().toString(), 28);
+                String cntLabelNineEditTextData = "$LaC9"+cntLabelNine+";";
                 ((DeviceList)getActivity()).sendData(cntLabelNineEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelNine", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "sendCntLabelNine", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelTen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelTenEditTextData = "$LaCA"+cntLabelTenEditText.getText().toString()+";";
+                String cntLabelTenE  = fixedLengthString(cntLabelTenEditText.getText().toString(), 28);
+                String cntLabelTenEditTextData = "$LaCA"+cntLabelTenE+";";
                 ((DeviceList)getActivity()).sendData(cntLabelTenEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelTen", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "sendCntLabelTen", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelEleven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelEleveneEditTextData = "$LaCB"+cntLabelElevenEditText.getText().toString()+";";
+                String cntLabelEleven  = fixedLengthString(cntLabelElevenEditText.getText().toString(), 28);
+                String cntLabelEleveneEditTextData = "$LaCB"+cntLabelEleven+";";
                 ((DeviceList)getActivity()).sendData(cntLabelEleveneEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelEleven", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(), "sendCntLabelEleven", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelTweleve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelTweleveEditTextData = "$LaCC"+cntLabelTweleveEditText.getText().toString()+";";
+                String cntLabelTweleve  = fixedLengthString(cntLabelTweleveEditText.getText().toString(), 28);
+                String cntLabelTweleveEditTextData = "$LaCC"+cntLabelTweleve+";";
                 ((DeviceList)getActivity()).sendData(cntLabelTweleveEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelTweleve", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "sendCntLabelTweleve", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelThirteen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelThirteenEditTextData = "$LaCD"+cntLabelThirteenEditText.getText().toString()+";";
+                String cntLabelThirteen  = fixedLengthString(cntLabelThirteenEditText.getText().toString(), 28);
+                String cntLabelThirteenEditTextData = "$LaCD"+cntLabelThirteen+";";
                 ((DeviceList)getActivity()).sendData(cntLabelThirteenEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelThirteen", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "sendCntLabelThirteen", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelFourteen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelFourEditTextData = "$LaCE"+cntLabelFourEditText.getText().toString()+";";
+                String cntLabelFourteen  = fixedLengthString(cntLabelFourteenEditText.getText().toString(), 28);
+                String cntLabelFourEditTextData = "$LaCE"+cntLabelFourteen+";";
                 ((DeviceList)getActivity()).sendData(cntLabelFourEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelFourteen", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "sendCntLabelFourteen", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelFifteen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelFifteenEditTextData = "$LaCF"+cntLabelFifteenEditText.getText().toString()+";";
+                String cntLabelFifteen  = fixedLengthString(cntLabelFifteenEditText.getText().toString(), 28);
+                String cntLabelFifteenEditTextData = "$LaCF"+cntLabelFifteen+";";
                 ((DeviceList)getActivity()).sendData(cntLabelFifteenEditTextData);
-                Toast.makeText(getContext(), "bsendCntLabelFifteen", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "bsendCntLabelFifteen", Toast.LENGTH_SHORT).show();
             }
         });
         sendCntLabelSixteen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cntLabelSixEditTextData = "$LaCG"+cntLabelSixEditText.getText().toString()+";";
-                ((DeviceList)getActivity()).sendData(cntLabelSixEditTextData);
-                Toast.makeText(getContext(), "sendCntLabelSixteen", Toast.LENGTH_SHORT).show();
+                String cntLabelSixteen  = fixedLengthString(cntLabelSixteenEditText.getText().toString(), 28);
+                String cntLabelSixteenEditTextData = "$LaCG"+cntLabelSixteen+";";
+                ((DeviceList)getActivity()).sendData(cntLabelSixteenEditTextData);
+                //Toast.makeText(getContext(), "sendCntLabelSixteen", Toast.LENGTH_SHORT).show();
             }
         });
 
         return rootView;
+    }
+
+
+    private String fixedLengthString(String textData , int lenght)
+    {
+        // String stringData = textData.rightPad(lenght, ' ').Substring(0, lenght);
+        // String stringData = leftpad(textData,28);
+        String stringData = rightpad(textData,28);
+        return stringData;
+    }
+
+
+    private String leftpad(String text, int length) {
+        return String.format("%" + length + "." + length + "s", text);
+    }
+
+    private String rightpad(String text, int length) {
+        return String.format("%-" + length + "." + length + "s", text);
     }
 
 
