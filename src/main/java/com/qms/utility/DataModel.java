@@ -246,6 +246,16 @@ public class DataModel {
 
     public int selectionPosition;
 
+    public String getRecordName() {
+        return recordName;
+    }
+
+    public void setRecordName(String recordName) {
+        this.recordName = recordName;
+    }
+
+    public String recordName;
+
     public String getLastSelectedItem() {
         return lastSelectedItem;
     }

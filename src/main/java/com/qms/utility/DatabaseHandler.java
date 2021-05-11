@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -50,6 +51,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_LABEL_14 = "cntLabelFourteen";
     private static final String KEY_LABEL_15 = "cntLabelFifteen";
     private static final String KEY_LABEL_16 = "cntLabelSixteen";
+    private static final String KEY_RECORD_NAME = "recordName";
 
     Context context;
 
@@ -75,7 +77,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_LABEL_4 + " TEXT ,"+ KEY_LABEL_5 + " TEXT ,"+ KEY_LABEL_6 + " TEXT ,"+ KEY_LABEL_7 + " TEXT ,"
                 + KEY_LABEL_8 + " TEXT ,"+ KEY_LABEL_9 + " TEXT ,"+ KEY_LABEL_10 + " TEXT ,"+ KEY_LABEL_11 + " TEXT ,"
                 + KEY_LABEL_12 + " TEXT ,"+ KEY_LABEL_13 + " TEXT ,"+ KEY_LABEL_14 + " TEXT ,"+ KEY_LABEL_15 + " TEXT ,"
-                + KEY_LABEL_16 + " TEXT "+ ")";
+                + KEY_LABEL_16 + " TEXT ,"+ KEY_RECORD_NAME + " TEXT not null unique"+ ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -121,6 +123,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_LABEL_14, dataModel.getCntLabelFourteen()); //  Email
         values.put(KEY_LABEL_15, dataModel.getCntLabelFifteen()); // Name
         values.put(KEY_LABEL_16, dataModel.getCntLabelSixteen()); //  Email
+        values.put(KEY_RECORD_NAME, dataModel.getRecordName()); //  Email
+
 
         // Inserting Row
         long rowInserted = db.insert(TABLE_QMS_UTILITY, null, values);
@@ -153,6 +157,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Getting All QmsUtility
     public ArrayList<String> Get_QmsUtility() {
         try {
+            // https://stackoverflow.com/questions/14331175/load-from-spinner-sqlite-with-text-and-value
             qms_list.clear();
             qms_list.add("New Record");
             // Select All Query
@@ -165,14 +170,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 do {
                    // DataModel contact = new DataModel();
-                  //  contact.setID(Integer.parseInt(cursor.getString(0)));
+                   //  contact.setID(Integer.parseInt(cursor.getString(0)));
                    // Toast.makeText(context, "Something: "+cursor.getString(1),
-                      //      Toast.LENGTH_SHORT).show();
-                    //contact.setInstName(cursor.getString(1));
-                    // contact.setEmail(cursor.getString(2));
-                    // contact.setImage(cursor.getBlob(3));
-                    // Adding contact to list
-                    qms_list.add(cursor.getString(0));
+                   //      Toast.LENGTH_SHORT).show();
+                   // contact.setInstName(cursor.getString(1));
+                   // contact.setEmail(cursor.getString(2));
+                   // contact.setImage(cursor.getBlob(3));
+                   // Adding contact to list
+                    qms_list.add(cursor.getString(cursor.getColumnIndex("recordName")));
+                    // qms_list.add(cursor.getString(cursor.getColumnIndex("recordName")));
                     // qms_list.add(cursor.getString(1));
                 } while (cursor.moveToNext());
             }
@@ -190,12 +196,35 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
+    public List < SpinnerObject> getAllLabels(){
+        List< SpinnerObject > labels = new ArrayList < SpinnerObject > ();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_QMS_UTILITY;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if ( cursor.moveToFirst () ) {
+            do {
+                labels.add ( new SpinnerObject ( cursor.getString(0) , cursor.getString(1) ) );
+            } while (cursor.moveToNext());
+        }
+
+        // closing connection
+        cursor.close();
+        db.close();
+
+        // returning labels
+        return labels;
+    }
+
     // Getting All QmsUtility
     public void getQmsUtility(String id, DataModel dataModel) {
         try {
 
             // Select All Query
-            String selectQuery = "SELECT  * FROM " + TABLE_QMS_UTILITY+" WHERE id = ?";
+            String selectQuery = "SELECT  * FROM " + TABLE_QMS_UTILITY+" WHERE recordName = ?";
 
             SQLiteDatabase db = this.getWritableDatabase();
             Cursor cursor = db.rawQuery(selectQuery, new String[] {id});
@@ -205,8 +234,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 do {
                     // DataModel contact = new DataModel();
                     //  contact.setID(Integer.parseInt(cursor.getString(0)));
-                    dataModel.setInstName(cursor.getString(1));
+                    dataModel.setInstName(cursor.getString(cursor.getColumnIndex("instName")));
+                    dataModel.setRecordName(cursor.getString(cursor.getColumnIndex("recordName")));
+                   /* private static final String KEY_ID = "id";
+                    private static final String KEY_INST_NAME = "instName";
+                    private static final String KEY_TIME_DATE = "timeDate";
+                    private static final String KEY_BANK_ID = "bankId";
+                    private static final String KEY_COUNTER_NAME = "counterName";
+                    private static final String KEY_TOKEN_SLIP_B = "tokenSlipB";
+                    private static final String KEY_TOKEN_SLIP_A = "tokenSlipA";
+                    private static final String KEY_TOKEN_SLIP_9 = "tokenSlip9";
+                    private static final String KEY_C_TIME = "cTime";
+                    private static final String KEY_COPY_NO = "copyNo";
+                    private static final String KEY_TOTAL_COUNTER = "totalCounter";
 
+                    private static final String KEY_LABEL_1 = "cntLabelOne";
+                    private static final String KEY_LABEL_2 = "cntLabelTwo";
+                    private static final String KEY_LABEL_3 = "cntLabelThree";
+                    private static final String KEY_LABEL_4 = "cntLabelFour";
+                    private static final String KEY_LABEL_5 = "cntLabelFive";
+                    private static final String KEY_LABEL_6 = "cntLabelSix";
+                    private static final String KEY_LABEL_7 = "cntLabelSeven";
+                    private static final String KEY_LABEL_8 = "cntLabelEight";
+                    private static final String KEY_LABEL_9 = "cntLabelNine";
+                    private static final String KEY_LABEL_10 = "cntLabelTen";
+                    private static final String KEY_LABEL_11 = "cntLabelEleven";
+                    private static final String KEY_LABEL_12 = "cntLabelTweleve";
+                    private static final String KEY_LABEL_13 = "cntLabelThirteen";
+                    private static final String KEY_LABEL_14 = "cntLabelFourteen";
+                    private static final String KEY_LABEL_15 = "cntLabelFifteen";
+                    private static final String KEY_LABEL_16 = "cntLabelSixteen";
+                    private static final String KEY_RECORD_NAME = "recordName";*/
 
                 } while (cursor.moveToNext());
             }
@@ -256,6 +314,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_LABEL_14, dataModel.getCntLabelFourteen()); //  Email
         values.put(KEY_LABEL_15, dataModel.getCntLabelFifteen()); // Name
         values.put(KEY_LABEL_16, dataModel.getCntLabelSixteen()); //  Email
+        values.put(KEY_RECORD_NAME, dataModel.getRecordName()); //  Email
 
         // updating row
         return db.update(TABLE_QMS_UTILITY, values, KEY_ID + " = ?",

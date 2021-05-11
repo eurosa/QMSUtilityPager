@@ -184,6 +184,8 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
     ViewPager viewPager;
     private MyAdapter adapter;
     private SpinnerDialog mSpinnerDialog;
+    private DatabaseHandler db;
+    private ArrayList<String> labels;
 
 
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -273,7 +275,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         View view = viewPager;
         if (view !=null) {
             view.findViewById(R.id.sendcntLabelOne);
-            Log.d("TAG","Helllfd"+view.getId());
+
         }
 
 
@@ -528,12 +530,51 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         StrictMode.setVmPolicy(builder.build());
         builder.detectFileUriExposure();
         //=======================================================================
-
-
+        db = new DatabaseHandler(getApplicationContext());
+        getSpinnerDialog();
+        dataModel.setSelectionPosition(0);
+        dataModel.setLastSelectedItem(("New Record"));
     }
 
 
+   public void getSpinnerDialog(){
 
+       labels = db.Get_QmsUtility();
+       mSpinnerDialog = new SpinnerDialog(this, labels,dataModel, new SpinnerDialog.DialogListener() {
+           public void cancelled() {
+               // do your code here
+           }
+           public void ready(String n) {
+               // do your code here
+               db.getQmsUtility(n,dataModel);
+
+
+               Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + viewPager.getCurrentItem());
+               // based on the current position you can then cast the page to the correct
+               // class and call the method:
+               if (viewPager.getCurrentItem() == 0 && page != null) {
+                   ((General)page).changeTextOfGeneralFragment(dataModel);
+               }
+
+               if (viewPager.getCurrentItem() == 1 && page != null) {
+                   ((CounterLabel)page).changeTextOfCounterFragment(dataModel);
+               }
+
+               int selectionPosition= mSpinnerDialog.adapter.getPosition(n);
+               mSpinnerDialog.mSpinner.setSelection(selectionPosition);
+               Log.d("SelectedPosition: ",""+selectionPosition);
+               dataModel.setSelectionPosition(selectionPosition);
+               dataModel.setLastSelectedItem((n));
+
+               // ((General)activeFragment).changeTextOfFragment(dataModel.getInstName());
+               // ((General)activeFragment).getInstEditText().setText("98");
+               // instEditText.setText(dataModel.getInstName());
+
+           }
+
+       });
+
+   }
 
 
     private void ScanDevicesList(){
@@ -657,7 +698,6 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         {
 
 
-
             //Get the device MAC address, the last 17 chars in the View
             String info = ((TextView) v).getText().toString();
             String address = info.substring(info.length() - 17);
@@ -692,8 +732,8 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             // shareFileWithApps();
-            final DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-            ArrayList<String> labels = db.Get_QmsUtility();
+
+            labels = db.Get_QmsUtility();
             mSpinnerDialog = new SpinnerDialog(this, labels,dataModel, new SpinnerDialog.DialogListener() {
                 public void cancelled() {
                     // do your code here
@@ -781,14 +821,16 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                if(pos == 0 || pos==1)
                     ((General)activeFragment).onRefresh();*/
 
-                 // countries.getGeneralData();
+                // countries.getGeneralData();
+
+                // Log.d("selectedItem",mSpinnerDialog.mSpinner.getSelectedItem().toString());
                 if(dataModel.getLastSelectedItem() =="New Record") {
                     dbHandler.Add_QmsUtility(dataModel);
                 }else {
                     int updated_id = dbHandler.Update_QmsUtility(dataModel);
                     Toast.makeText(getApplicationContext(), "Data has been updated successfully", Toast.LENGTH_SHORT).show();
                 }
-                // Toast.makeText(getApplicationContext(), "Data has been saved successfully", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getApplicationContext(), "Data has been saved successfully", Toast.LENGTH_SHORT).show();
 
                 return true;
 
@@ -996,7 +1038,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
             }
         }
     //    cameraKitView.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------
     }
 /*
     @Override
