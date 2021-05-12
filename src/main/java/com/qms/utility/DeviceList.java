@@ -534,6 +534,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         getSpinnerDialog();
         dataModel.setSelectionPosition(0);
         dataModel.setLastSelectedItem(("New Record"));
+        dataModel.setRecordName(" ");
     }
 
 
@@ -574,6 +575,9 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
        });
 
+
+
+
    }
 
 
@@ -603,7 +607,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
 
         //--------------------------------------------------------------------------------------------------------------
-       Dialog dialog = new Dialog(this);
+        Dialog dialog = new Dialog(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Select Device for Pairing");
 
@@ -840,7 +844,13 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
     }
 
 
-
+    private boolean isEmpty(DataModel dataModel) {
+        if(dataModel.getRecordName()==""){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     @Override
     public void onAttachFragment(Fragment fragment) {
@@ -885,7 +895,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
             if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED&&checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 waitForPermission = true;
-                requestCameraPermission();
+               // requestCameraPermission();
 
             }
 /*

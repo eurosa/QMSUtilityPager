@@ -107,4 +107,10 @@ public class SpinnerDialog extends AlertDialog {
 
     }
 
+   /* private boolean isEmpty(EditText etText) {
+        return etText.getText().toString().trim().length() == 0;
+    }*/
+
+
+
 }

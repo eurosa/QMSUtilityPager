@@ -123,8 +123,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_LABEL_14, dataModel.getCntLabelFourteen()); //  Email
         values.put(KEY_LABEL_15, dataModel.getCntLabelFifteen()); // Name
         values.put(KEY_LABEL_16, dataModel.getCntLabelSixteen()); //  Email
-        values.put(KEY_RECORD_NAME, dataModel.getRecordName()); //  Email
-
+        values.put(KEY_RECORD_NAME, dataModel.getRecordName().trim()); //  Email
+        if (dataModel.getRecordName().trim().equals("")) {
+            Toast.makeText(context.getApplicationContext(), "Please Enter Record Name", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Inserting Row
         long rowInserted = db.insert(TABLE_QMS_UTILITY, null, values);
@@ -236,34 +239,51 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     //  contact.setID(Integer.parseInt(cursor.getString(0)));
                     dataModel.setInstName(cursor.getString(cursor.getColumnIndex("instName")));
                     dataModel.setRecordName(cursor.getString(cursor.getColumnIndex("recordName")));
-                   /* private static final String KEY_ID = "id";
-                    private static final String KEY_INST_NAME = "instName";
-                    private static final String KEY_TIME_DATE = "timeDate";
-                    private static final String KEY_BANK_ID = "bankId";
-                    private static final String KEY_COUNTER_NAME = "counterName";
-                    private static final String KEY_TOKEN_SLIP_B = "tokenSlipB";
-                    private static final String KEY_TOKEN_SLIP_A = "tokenSlipA";
-                    private static final String KEY_TOKEN_SLIP_9 = "tokenSlip9";
-                    private static final String KEY_C_TIME = "cTime";
-                    private static final String KEY_COPY_NO = "copyNo";
-                    private static final String KEY_TOTAL_COUNTER = "totalCounter";
+                    dataModel.setTimeDate(cursor.getString(cursor.getColumnIndex("timeDate")));
+                    dataModel.setBankId(cursor.getString(cursor.getColumnIndex("bankId")));
+                    dataModel.setCounterName(cursor.getString(cursor.getColumnIndex("counterName")));
+                    dataModel.setTokenSlipB(cursor.getString(cursor.getColumnIndex("tokenSlipB")));
+                    dataModel.setTokenSlipA(cursor.getString(cursor.getColumnIndex("tokenSlipA")));
+                    dataModel.setTokenSlip9(cursor.getString(cursor.getColumnIndex("tokenSlip9")));
+                    dataModel.setcTime(cursor.getString(cursor.getColumnIndex("cTime")));
+                    dataModel.setCopyNo(cursor.getString(cursor.getColumnIndex("copyNo")));
 
-                    private static final String KEY_LABEL_1 = "cntLabelOne";
-                    private static final String KEY_LABEL_2 = "cntLabelTwo";
-                    private static final String KEY_LABEL_3 = "cntLabelThree";
-                    private static final String KEY_LABEL_4 = "cntLabelFour";
-                    private static final String KEY_LABEL_5 = "cntLabelFive";
-                    private static final String KEY_LABEL_6 = "cntLabelSix";
-                    private static final String KEY_LABEL_7 = "cntLabelSeven";
-                    private static final String KEY_LABEL_8 = "cntLabelEight";
-                    private static final String KEY_LABEL_9 = "cntLabelNine";
-                    private static final String KEY_LABEL_10 = "cntLabelTen";
-                    private static final String KEY_LABEL_11 = "cntLabelEleven";
-                    private static final String KEY_LABEL_12 = "cntLabelTweleve";
-                    private static final String KEY_LABEL_13 = "cntLabelThirteen";
-                    private static final String KEY_LABEL_14 = "cntLabelFourteen";
-                    private static final String KEY_LABEL_15 = "cntLabelFifteen";
-                    private static final String KEY_LABEL_16 = "cntLabelSixteen";
+                    dataModel.setCntLabelOne(cursor.getString(cursor.getColumnIndex("cntLabelOne")));
+                    dataModel.setCntLabelTwo(cursor.getString(cursor.getColumnIndex("cntLabelTwo")));
+                    dataModel.setCntLabelThree(cursor.getString(cursor.getColumnIndex("cntLabelThree")));
+                    dataModel.setCntLabelFour(cursor.getString(cursor.getColumnIndex("cntLabelFour")));
+                    dataModel.setCntLabelFive(cursor.getString(cursor.getColumnIndex("cntLabelFive")));
+                    dataModel.setCntLabelSix(cursor.getString(cursor.getColumnIndex("cntLabelSix")));
+                    dataModel.setCntLabelSeven(cursor.getString(cursor.getColumnIndex("cntLabelSeven")));
+                    dataModel.setCntLabelEight(cursor.getString(cursor.getColumnIndex("cntLabelEight")));
+                    dataModel.setCntLabelNine(cursor.getString(cursor.getColumnIndex("cntLabelNine")));
+                    dataModel.setCntLabelTen(cursor.getString(cursor.getColumnIndex("cntLabelTen")));
+                    dataModel.setCntLabelEleven(cursor.getString(cursor.getColumnIndex("cntLabelEleven")));
+                    dataModel.setCntLabelTweleve(cursor.getString(cursor.getColumnIndex("cntLabelTweleve")));
+                    dataModel.setCntLabelThirteen(cursor.getString(cursor.getColumnIndex("cntLabelThirteen")));
+                    dataModel.setCntLabelFourteen(cursor.getString(cursor.getColumnIndex("cntLabelFourteen")));
+                    dataModel.setCntLabelFifteen(cursor.getString(cursor.getColumnIndex("cntLabelFifteen")));
+                    dataModel.setCntLabelSixteen(cursor.getString(cursor.getColumnIndex("cntLabelSixteen")));
+
+                   /* private static final String KEY_ID = "id";
+
+
+                    private static final String KEY_LABEL_1 = "";
+                    private static final String KEY_LABEL_2 = "";
+                    private static final String KEY_LABEL_3 = "";
+                    private static final String KEY_LABEL_4 = "";
+                    private static final String KEY_LABEL_5 = "";
+                    private static final String KEY_LABEL_6 = "";
+                    private static final String KEY_LABEL_7 = "";
+                    private static final String KEY_LABEL_8 = "";
+                    private static final String KEY_LABEL_9 = "";
+                    private static final String KEY_LABEL_10 = "";
+                    private static final String KEY_LABEL_11 = "";
+                    private static final String KEY_LABEL_12 = "";
+                    private static final String KEY_LABEL_13 = "";
+                    private static final String KEY_LABEL_14 = "";
+                    private static final String KEY_LABEL_15 = "";
+                    private static final String KEY_LABEL_16 = "";
                     private static final String KEY_RECORD_NAME = "recordName";*/
 
                 } while (cursor.moveToNext());
@@ -315,10 +335,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_LABEL_15, dataModel.getCntLabelFifteen()); // Name
         values.put(KEY_LABEL_16, dataModel.getCntLabelSixteen()); //  Email
         values.put(KEY_RECORD_NAME, dataModel.getRecordName()); //  Email
-
+        //Toast.makeText(context, "Label Eleven: " + dataModel.getCntLabelEleven(), Toast.LENGTH_SHORT).show();
         // updating row
-        return db.update(TABLE_QMS_UTILITY, values, KEY_ID + " = ?",
-                new String[] { String.valueOf(dataModel.getID()) });
+        return db.update(TABLE_QMS_UTILITY, values, "recordName" + " = ?",
+                new String[] { String.valueOf(dataModel.getRecordName()) });
+      //  return db.update(TABLE_QMS_UTILITY, values, KEY_ID + " = ?",
+      //          new String[] { String.valueOf(dataModel.getID()) });
+
     }
 
 
