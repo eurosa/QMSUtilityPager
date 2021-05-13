@@ -9,14 +9,30 @@
         android:textColor="@color/redColor"
         android:text="Please select an option"
         />
-    <Spinner
+
+    <FrameLayout
+        android:id="@+id/frma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_label"
+        android:background="@drawable/custom_spn_background">
+
+        <Spinner
+            android:id="@+id/dialog_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dropDownSelector="@color/colorAccent"
+            android:spinnerMode="dropdown"
+            android:tooltipText="Select floor" />
+    </FrameLayout>
+   <!-- <Spinner
         android:id="@+id/dialog_spinner"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_marginTop="40dp"
         android:spinnerMode="dropdown"
         android:theme="@style/spinnerColor"
-        />
+        />-->
 
     <TextView
         android:id="@+id/dialogTextView"
@@ -25,7 +41,7 @@
         android:layout_marginTop="10dp"
         android:text="Record Name:"
         android:textColor="@color/redColor"
-        android:layout_below="@id/dialog_spinner"
+        android:layout_below="@id/frma"
         />
 
     <EditText
