@@ -100,7 +100,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:titleTextColor="#FFFFFF"
         tools:layout_conversion_absoluteHeight="0dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+        tools:layout_conversion_absoluteWidth="0dp"/>
 
 
     <!--<include
