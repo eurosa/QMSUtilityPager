@@ -18,4 +18,10 @@
         android:orderInCategory="100"
         app:showAsAction="never"
         android:title="Save All Data" />
+
+    <item android:id="@+id/action_preview"
+        android:icon="@drawable/ic_share"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="Click to Slip Preview" />
 </menu>

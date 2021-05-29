@@ -9,5 +9,8 @@
     <color name="limeGreen">#32CD32</color>
     <color name="blueColor">#0000FF</color>
     <color name="highGray">#7F3356</color>
+    <color name="textLabel">#000000</color>
+    <color name="tLabel">#689a92</color>
+    <color name="editTextColor">#000000</color>
 
 </resources>

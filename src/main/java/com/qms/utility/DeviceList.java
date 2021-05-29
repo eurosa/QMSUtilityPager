@@ -27,6 +27,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -77,6 +78,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
@@ -840,9 +842,159 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
         }
 
+            if(id==R.id.action_preview){
+              //  openDialog();
+               /* AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("Write your message here.");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();*/
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+                LinearLayout layout = new LinearLayout(this);
+                LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layout.setOrientation(LinearLayout.VERTICAL);
+                layout.setLayoutParams(parms);
+
+                layout.setGravity(Gravity.CLIP_VERTICAL);
+                layout.setPadding(2, 2, 2, 2);
+
+                TextView tv = new TextView(this);
+                tv.setText("Token No. 07");
+                tv.setPadding(10, 10, 10, 10);
+                tv.setGravity(Gravity.CENTER);
+                tv.setTextSize(33);
+
+                /*TextView tv2 = new TextView(this);
+                tv2.setText("Token No 07");
+                tv2.setPadding(40, 40, 40, 40);
+                tv2.setGravity(Gravity.CENTER);
+                tv2.setTextSize(20);*/
+
+
+                TextView tv1StarOne = new TextView(this);
+                tv1StarOne.setGravity(Gravity.CENTER);
+                tv1StarOne.setText("********************************");
+
+
+                TextView tv2StarTwo = new TextView(this);
+                tv2StarTwo.setGravity(Gravity.CENTER);
+                tv2StarTwo.setText("********************************");
+
+                TextView tvCntName = new TextView(this);
+                tvCntName.setGravity(Gravity.CENTER);
+                tvCntName.setText("Counter No.:"+dataModel.getCntLabelOne());
+
+                TextView tvInstName = new TextView(this);
+                tvInstName.setGravity(Gravity.CENTER);
+                tvInstName.setText(dataModel.getInstName());
+
+                TextView tvTimeDateHeader = new TextView(this);
+                tvTimeDateHeader.setGravity(Gravity.CENTER);
+                tvTimeDateHeader.setText("TIME"+"                      "+"DATE");
+
+                TextView tvTimeDate = new TextView(this);
+                tvTimeDate.setGravity(Gravity.CENTER);
+                String currentDate = new SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(new Date());
+                String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+                tvTimeDate.setText(currentTime+"               "+currentDate);
+
+                TextView tvLabelOne = new TextView(this);
+                tvLabelOne.setGravity(Gravity.CENTER);
+                tvLabelOne.setText(dataModel.getTokenSlip9());
+
+                TextView tvLabelTwo = new TextView(this);
+                tvLabelTwo.setGravity(Gravity.CENTER);
+                tvLabelTwo.setText(dataModel.getTokenSlipA());
+
+                TextView tvLabelThree = new TextView(this);
+                tvLabelThree.setGravity(Gravity.CENTER);
+                tvLabelThree.setText(dataModel.getTokenSlipB());
+
+
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.bottomMargin = 2;
+                layout.addView(tvCntName,layoutParams);
+                layout.addView(tv1StarOne,layoutParams);
+                layout.addView(tvInstName,layoutParams);
+                layout.addView(tv2StarTwo,layoutParams);
+                layout.addView(tvTimeDateHeader,layoutParams);
+                layout.addView(tvTimeDate,layoutParams);
+                layout.addView(tvLabelOne,layoutParams);
+                layout.addView(tvLabelTwo,layoutParams);
+                layout.addView(tvLabelThree,layoutParams);
+                /***********************************************************************************************
+                *                                                                                              *
+                ************************************************************************************************/
+                //layout.addView(tv2, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+                alertDialogBuilder.setView(layout);
+                alertDialogBuilder.setTitle("Title");
+                // alertDialogBuilder.setMessage("Input Student ID");
+                alertDialogBuilder.setCustomTitle(tv);
+
+                /*if (isError)
+                    alertDialogBuilder.setIcon(R.drawable.icon_warning);*/
+                // alertDialogBuilder.setMessage(message);
+                alertDialogBuilder.setCancelable(false);
+
+                // Setting Negative "Cancel" Button
+               /* alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.cancel();
+                    }
+                });*/
+
+                // Setting Positive "OK" Button
+                alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        /*if (isError)
+                            finish();
+                        else {
+                            Intent intent = new Intent(ChangeDeviceActivity.this,
+                                    MyPageActivity.class); startActivity(intent);
+                        }*/
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                try {
+                    alertDialog.show();
+                } catch (Exception e) {
+                    // WindowManager$BadTokenException will be caught and the app would
+                    // not display the 'Force Close' message
+                    e.printStackTrace();
+                }
+
+                return true;
+            }
+
         return super.onOptionsItemSelected(item);
     }
-
+    public void openDialog() {
+        final Dialog dialog = new Dialog(this); // Context, this, etc.
+        dialog.setContentView(R.layout.dialog_demo);
+        dialog.setTitle(R.string.dialog_title);
+        dialog.show();
+    }
 
     private boolean isEmpty(DataModel dataModel) {
         if(dataModel.getRecordName()==""){

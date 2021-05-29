@@ -15,15 +15,16 @@
         android:layout_gravity="center_horizontal" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_width="321dp"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="Digiline Systems QMS Utility"
         android:textAlignment="center"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFFFFF"
-        android:textSize="35dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:layout_marginTop="15dp"
-        android:id="@+id/textView3"
-        android:layout_gravity="center_horizontal" />
+        android:textSize="35dp" />
 </LinearLayout>
