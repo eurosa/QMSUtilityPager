@@ -1,6 +1,7 @@
 package com.qms.utility;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -104,6 +105,16 @@ public class General extends Fragment {
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
 
+        textFontChange(instEditText);
+        textFontChange(bankIdEditText);
+        textFontChange(timeDateEditText);
+        textFontChange(cTimeEditText);
+        textFontChange(counterNameEditText);
+        textFontChange(totalCounterEditText);
+        textFontChange(copyNoEditText);
+        textFontChange(tokenSlip9EditText);
+        textFontChange(tokenSlipAEditText);
+        textFontChange(tokenSlipBEditText);
 
 
         instEditText.addTextChangedListener(new TextWatcher() {
@@ -496,7 +507,11 @@ public class General extends Fragment {
     }
 
 
+   public void textFontChange(EditText editText){
 
+       Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/josefin-sans/JosefinSans-BoldItalic.ttf");
+       editText.setTypeface(type);
+   }
 
    /* public  void getGeneralData(){
         dataModel.setInstName(instEditText.getText().toString());

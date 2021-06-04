@@ -12,5 +12,7 @@
     <color name="textLabel">#000000</color>
     <color name="tLabel">#689a92</color>
     <color name="editTextColor">#000000</color>
+    <color name="button_light_green">#90EE90</color>
+    <color name="button_light_green_selected">#98FB98</color>
 
 </resources>

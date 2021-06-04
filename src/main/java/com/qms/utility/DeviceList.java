@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.PorterDuff;
 import android.hardware.Camera;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -31,6 +32,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.TextureView;
@@ -537,6 +539,63 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         dataModel.setSelectionPosition(0);
         dataModel.setLastSelectedItem(("New Record"));
         dataModel.setRecordName(" ");
+
+
+        scanDevices.setOnTouchListener(new View.OnTouchListener() {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    Button view = (Button ) v;
+                    view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                    ScanDevicesList();
+                    v.invalidate();
+                    break;
+                }
+                case MotionEvent.ACTION_UP:
+
+                    // Your action here on button click
+
+                case MotionEvent.ACTION_CANCEL: {
+                    Button view = (Button) v;
+                    view.getBackground().clearColorFilter();
+                    view.invalidate();
+                    break;
+                }
+            }
+            return true;
+        }
+    });
+
+
+        btnPaired.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        Button view = (Button ) v;
+                        view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                        pairedDevicesList();
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP:
+
+                        // Your action here on button click
+
+                    case MotionEvent.ACTION_CANCEL: {
+                        Button view = (Button) v;
+                        view.getBackground().clearColorFilter();
+                        view.invalidate();
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
+
     }
 
 
