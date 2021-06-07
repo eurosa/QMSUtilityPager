@@ -846,8 +846,32 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
         if (id == R.id.action_reset) {
 
-            sendData("$RESET" +""+ ";");
-            Toast.makeText(getApplicationContext(), "Data has been successfully reset", Toast.LENGTH_SHORT).show();
+             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("Do you want to reset?");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                sendData("$RESET" +""+ ";");
+                                Toast.makeText(getApplicationContext(), "Reset success!", Toast.LENGTH_SHORT).show();
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+
 //==============================End of Folder Delete using Alert Dialog=================================================================================
           /*  AlertDialog.Builder adb = new AlertDialog.Builder(this);
            // adb.setView(Integer.parseInt("Delete Folder"));
