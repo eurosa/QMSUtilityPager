@@ -36,6 +36,7 @@ public class General extends Fragment {
 
     DataModel dataModel;
     private View rootView;
+    private boolean center_align_check = true;;
 
     //**************** General Fragment End **************************************************
     public General(Context c, DataModel model) {
@@ -115,7 +116,11 @@ public class General extends Fragment {
         textFontChange(tokenSlip9EditText);
         textFontChange(tokenSlipAEditText);
         textFontChange(tokenSlipBEditText);
-
+        btnBankId.setEnabled(false);
+        sendTimeDate.setEnabled(false);
+        sendCopyNo.setEnabled(false);
+        sendCTime.setEnabled(false);
+        sendTotalCounter.setEnabled(false);
 
         instEditText.addTextChangedListener(new TextWatcher() {
 
@@ -153,6 +158,27 @@ public class General extends Fragment {
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 dataModel.setBankId(bankIdEditText.getText().toString());
+
+                if (bankIdEditText.getText().length() != 0)
+                {
+                    if (bankIdEditText.getText().length() == 2)
+                    {
+                        //   MessageBox.Show("The maximum amount in text box cant be more than 2");
+
+                        btnBankId.setEnabled(true);
+
+                    }
+                    else
+                    {
+
+                        btnBankId.setEnabled(false);
+                    }
+                }
+                else
+                {
+                    btnBankId.setEnabled(false);
+                }
+
                 // if(s.length() != 0)
                 //   instEditText.setText("");
 
@@ -179,6 +205,26 @@ public class General extends Fragment {
                 // if(s.length() != 0)
                 //   instEditText.setText("");
 
+                if (timeDateEditText.getText().length() != 0)
+                {
+                    if (timeDateEditText.getText().length() == 12)
+                    {
+                        //   MessageBox.Show("The maximum amount in text box cant be more than 2");
+
+                        sendTimeDate.setEnabled(true);
+
+                    }
+                    else
+                    {
+
+                        sendTimeDate.setEnabled(false);
+                    }
+                }
+                else
+                {
+                    sendTimeDate.setEnabled(false);
+                }
+
             }
 
         });
@@ -199,6 +245,26 @@ public class General extends Fragment {
                 dataModel.setcTime(cTimeEditText.getText().toString());
                 // if(s.length() != 0)
                 //   instEditText.setText("");
+
+                if (cTimeEditText.getText().length() != 0)
+                {
+                    if (cTimeEditText.getText().length() == 4)
+                    {
+                        //   MessageBox.Show("The maximum amount in text box cant be more than 2");
+
+                        sendCTime.setEnabled(true);
+
+                    }
+                    else
+                    {
+
+                        sendCTime.setEnabled(false);
+                    }
+                }
+                else
+                {
+                    sendCTime.setEnabled(false);
+                }
 
             }
 
@@ -243,6 +309,26 @@ public class General extends Fragment {
                 // if(s.length() != 0)
                 //   instEditText.setText("");
 
+                if (totalCounterEditText.getText().length() != 0)
+                {
+                    if (totalCounterEditText.getText().length() == 4)
+                    {
+                        //   MessageBox.Show("The maximum amount in text box cant be more than 2");
+
+                        sendTotalCounter.setEnabled(true);
+
+                    }
+                    else
+                    {
+
+                        sendTotalCounter.setEnabled(false);
+                    }
+                }
+                else
+                {
+                    sendTotalCounter.setEnabled(false);
+                }
+
             }
 
         });
@@ -264,6 +350,26 @@ public class General extends Fragment {
                 dataModel.setCopyNo(copyNoEditText.getText().toString());
                 // if(s.length() != 0)
                 //   instEditText.setText("");
+
+                if (copyNoEditText.getText().length() != 0)
+                {
+                    if (copyNoEditText.getText().length() == 1)
+                    {
+                        //   MessageBox.Show("The maximum amount in text box cant be more than 2");
+
+                        sendCopyNo.setEnabled(true);
+
+                    }
+                    else
+                    {
+
+                        sendCopyNo.setEnabled(false);
+                    }
+                }
+                else
+                {
+                    sendCopyNo.setEnabled(false);
+                }
 
             }
 
@@ -351,8 +457,8 @@ public class General extends Fragment {
         btnBankId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String bankID  = fixedLengthString(bankIdEditText.getText().toString(), 28);
-                String bankIdEditTextData = "$BnkL"+bankID+";";
+                String bankID  = fixedLengthString(bankIdEditText.getText().toString(), 2);
+                String bankIdEditTextData = "$BANK"+bankID+";";
                 ((DeviceList)getActivity()).sendData(bankIdEditTextData);
                 //Toast.makeText(getContext(), "Bank id has been successfully sent", Toast.LENGTH_SHORT).show();
             }
@@ -360,9 +466,11 @@ public class General extends Fragment {
         sendTimeDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String timeDate  = fixedLengthString(timeDateEditText.getText().toString(), 28);
+                center_align_check = false;
+                String timeDate  = fixedLengthString(timeDateEditText.getText().toString(), 12);
                 String timeDateEditTextData = "$TIME"+timeDate.toString()+";";
                 ((DeviceList)getActivity()).sendData(timeDateEditTextData);
+                center_align_check = true;
                 //Toast.makeText(getContext(), "Time and Date has been successfully sent", Toast.LENGTH_SHORT).show();
             }
         });
@@ -378,8 +486,8 @@ public class General extends Fragment {
         totalCounterEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String totalCounter  = fixedLengthString(totalCounterEditText.getText().toString(), 28);
-                String totalCounterEditTextData = "$CNTR"+totalCounter+";";
+                String totalCounter  = fixedLengthString(totalCounterEditText.getText().toString(), 4);
+                String totalCounterEditTextData = "$CONTR"+totalCounter+";";
                 ((DeviceList)getActivity()).sendData(totalCounterEditTextData);
                 //Toast.makeText(getContext(), "Total Counter has been successfully sent", Toast.LENGTH_SHORT).show();
             }
@@ -387,8 +495,8 @@ public class General extends Fragment {
         sendCopyNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String copyNo  = fixedLengthString(copyNoEditText.getText().toString(), 28);
-                String copyNoEditTextData = "$LaC3"+copyNo+";";
+                String copyNo  = fixedLengthString(copyNoEditText.getText().toString(), 1);
+                String copyNoEditTextData = "$COPY"+copyNo+";";
                 ((DeviceList)getActivity()).sendData(copyNoEditTextData);
                 //Toast.makeText(getContext(), "sendCopyNo", Toast.LENGTH_SHORT).show();
             }
@@ -396,7 +504,7 @@ public class General extends Fragment {
         sendCTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cTime  = fixedLengthString(cTimeEditText.getText().toString(), 28);
+                String cTime  = fixedLengthString(cTimeEditText.getText().toString(), 4);
                 String cTimeEditTextData = "$CLTM"+cTime+";";
                 ((DeviceList)getActivity()).sendData(cTimeEditTextData);
                 //Toast.makeText(getContext(), "Time has been successfully sent", Toast.LENGTH_SHORT).show();
@@ -444,12 +552,30 @@ public class General extends Fragment {
     }
 
 
-    private String fixedLengthString(String textData , int lenght)
+    private String fixedLengthString(String textData , int length)
     {
-        // String stringData = textData.rightPad(lenght, ' ').Substring(0, lenght);
+        String stringData = null;
+        // String stringData = textData.rightPad(lenght, ' ').Substring(0, length);
         // String stringData = leftpad(textData,28);
-        String stringData = rightpad(textData,28);
+        if (center_align_check) {
+             stringData = rightpad(centerString(length, textData.trim()), length);
+        }else{
+            stringData = rightpad(textData.trim(), length);
+
+        }
         return stringData;
+    }
+
+    public static String centerString (int width, String s) {
+        return String.format("%-" + width  + "s", String.format("%" + (s.length() + (width - s.length()) / 2) + "s", s));
+    }
+
+    public static String center(String text, int len){
+        String out = String.format("%"+len+"s%s%"+len+"s", "",text,"");
+        float mid = (out.length()/2);
+        float start = mid - (len/2);
+        float end = start + len;
+        return out.substring((int)start, (int)end);
     }
 
 
@@ -509,7 +635,7 @@ public class General extends Fragment {
 
    public void textFontChange(EditText editText){
 
-       Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/josefin-sans/JosefinSans-BoldItalic.ttf");
+       Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/josefin-sans/JosefinSans-Bold.ttf");
        editText.setTypeface(type);
    }
 

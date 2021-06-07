@@ -1,5 +1,6 @@
 package com.qms.utility;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -80,7 +81,22 @@ public class CounterLabel extends Fragment {
         cntLabelFifteenEditText=rootView.findViewById(R.id.cntLabelFifteenEditText);
         cntLabelSixteenEditText=rootView.findViewById(R.id.cntLabelSixteenEditText);
 
-
+        textFontChange(cntLabelOneEditText);
+        textFontChange(cntLabelTwoEditText);
+        textFontChange(cntLabelThreeEditText);
+        textFontChange(cntLabelFourEditText);
+        textFontChange(cntLabelFiveEditText);
+        textFontChange(cntLabelSixEditText);
+        textFontChange(cntLabelSevenEditText);
+        textFontChange(cntLabelEightEditText);
+        textFontChange(cntLabelNineEditText);
+        textFontChange(cntLabelTenEditText);
+        textFontChange(cntLabelElevenEditText);
+        textFontChange(cntLabelTweleveEditText);
+        textFontChange(cntLabelThirteenEditText);
+        textFontChange(cntLabelFourteenEditText);
+        textFontChange(cntLabelFifteenEditText);
+        textFontChange(cntLabelSixteenEditText);
 
         cntLabelOneEditText.addTextChangedListener(new TextWatcher() {
 
@@ -575,13 +591,23 @@ public class CounterLabel extends Fragment {
         return rootView;
     }
 
+    public void textFontChange(EditText editText){
+
+        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/josefin-sans/JosefinSans-Bold.ttf");
+        editText.setTypeface(type);
+    }
 
     private String fixedLengthString(String textData , int lenght)
     {
         // String stringData = textData.rightPad(lenght, ' ').Substring(0, lenght);
         // String stringData = leftpad(textData,28);
-        String stringData = rightpad(textData,28);
+
+        String stringData = rightpad(centerString(lenght,textData.trim()),lenght);
         return stringData;
+    }
+
+    public static String centerString (int width, String s) {
+        return String.format("%-" + width  + "s", String.format("%" + (s.length() + (width - s.length()) / 2) + "s", s));
     }
 
 
