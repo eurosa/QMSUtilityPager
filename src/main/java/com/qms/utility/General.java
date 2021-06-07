@@ -477,7 +477,7 @@ public class General extends Fragment {
         counterTimeDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String counterName  = fixedLengthString(counterNameEditText.getText().toString(), 28);
+                String counterName  = fixedLengthString(counterNameEditText.getText().toString(), 7);
                 String counterNameEditTextData = "$CTID"+counterName+";";
                 ((DeviceList)getActivity()).sendData(counterNameEditTextData);
                 //Toast.makeText(getContext(), "Counter Time and Date has been successfully sent", Toast.LENGTH_SHORT).show();

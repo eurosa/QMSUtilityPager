@@ -17,6 +17,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -936,11 +937,11 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                 layout.setPadding(2, 2, 2, 2);
 
                 TextView tv = new TextView(this);
-                tv.setText("Token No. 07");
+                tv.setText("Token 07");
                 tv.setPadding(10, 10, 10, 10);
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextSize(33);
-
+                tv.setTypeface(null, Typeface.BOLD);
                 /*TextView tv2 = new TextView(this);
                 tv2.setText("Token No 07");
                 tv2.setPadding(40, 40, 40, 40);
@@ -950,43 +951,57 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
                 TextView tv1StarOne = new TextView(this);
                 tv1StarOne.setGravity(Gravity.CENTER);
-                tv1StarOne.setText("********************************");
-
+                tv1StarOne.setText("************************************************");
+                tv1StarOne.setTypeface(null, Typeface.BOLD);
 
                 TextView tv2StarTwo = new TextView(this);
                 tv2StarTwo.setGravity(Gravity.CENTER);
-                tv2StarTwo.setText("********************************");
+                tv2StarTwo.setText("************************************************");
+                tv2StarTwo.setTypeface(null, Typeface.BOLD);
 
                 TextView tvCntName = new TextView(this);
                 tvCntName.setGravity(Gravity.CENTER);
-                tvCntName.setText("Counter No.:"+dataModel.getCntLabelOne());
+                tvCntName.setText(dataModel.getCounterName()+" No.:");
+                tvCntName.setTextSize(12);
+                tvCntName.setTypeface(null, Typeface.BOLD);
 
                 TextView tvInstName = new TextView(this);
                 tvInstName.setGravity(Gravity.CENTER);
                 tvInstName.setText(dataModel.getInstName());
+                tvInstName.setTextSize(12);
+                tvInstName.setTypeface(null, Typeface.BOLD);
 
                 TextView tvTimeDateHeader = new TextView(this);
                 tvTimeDateHeader.setGravity(Gravity.CENTER);
                 tvTimeDateHeader.setText("TIME"+"                      "+"DATE");
+                tvTimeDateHeader.setTextSize(12);
+                tvTimeDateHeader.setTypeface(null, Typeface.BOLD);
 
                 TextView tvTimeDate = new TextView(this);
                 tvTimeDate.setGravity(Gravity.CENTER);
                 String currentDate = new SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(new Date());
                 String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
                 tvTimeDate.setText(currentTime+"               "+currentDate);
+                tvTimeDate.setTextSize(12);
+                tvTimeDate.setTypeface(null, Typeface.BOLD);
 
                 TextView tvLabelOne = new TextView(this);
                 tvLabelOne.setGravity(Gravity.CENTER);
                 tvLabelOne.setText(dataModel.getTokenSlip9());
+                tvLabelOne.setTextSize(12);
+                tvLabelOne.setTypeface(null, Typeface.BOLD);
 
                 TextView tvLabelTwo = new TextView(this);
                 tvLabelTwo.setGravity(Gravity.CENTER);
                 tvLabelTwo.setText(dataModel.getTokenSlipA());
+                tvLabelTwo.setTextSize(12);
+                tvLabelTwo.setTypeface(null, Typeface.BOLD);
 
                 TextView tvLabelThree = new TextView(this);
                 tvLabelThree.setGravity(Gravity.CENTER);
                 tvLabelThree.setText(dataModel.getTokenSlipB());
-
+                tvLabelThree.setTextSize(12);
+                tvLabelThree.setTypeface(null, Typeface.BOLD);
 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 layoutParams.bottomMargin = 2;
