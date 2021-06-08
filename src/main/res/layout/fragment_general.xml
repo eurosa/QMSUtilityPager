@@ -24,10 +24,10 @@
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.056"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.023"></TextView>
+                app:layout_constraintVertical_bias="0.027"></TextView>
 
             <EditText
                 android:id="@+id/instEditText"
@@ -72,10 +72,10 @@
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.057"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.124">
+                app:layout_constraintVertical_bias="0.129">
 
             </TextView>
 
@@ -121,7 +121,7 @@
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.032"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.234">
@@ -169,10 +169,10 @@
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.328">
+                app:layout_constraintVertical_bias="0.337">
 
             </TextView>
 
@@ -218,10 +218,10 @@
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.031"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.429">
+                app:layout_constraintVertical_bias="0.446">
 
             </TextView>
 
@@ -267,10 +267,10 @@
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.003"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.546"></TextView>
+                app:layout_constraintVertical_bias="0.555"></TextView>
 
             <EditText
                 android:id="@+id/copyNoEditText"
@@ -314,10 +314,10 @@
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.032"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.659">
+                app:layout_constraintVertical_bias="0.664">
 
             </TextView>
 
@@ -362,10 +362,10 @@
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.025"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.775">
+                app:layout_constraintVertical_bias="0.753">
 
             </TextView>
 
@@ -411,10 +411,10 @@
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.867">
+                app:layout_constraintVertical_bias="0.852">
 
             </TextView>
 
@@ -459,10 +459,10 @@
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias=".98">
+                app:layout_constraintVertical_bias=".950">
 
             </TextView>
 

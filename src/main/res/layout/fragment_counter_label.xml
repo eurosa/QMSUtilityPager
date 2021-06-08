@@ -17,27 +17,27 @@
 
             <TextView
                 android:id="@+id/cntLabelOneView"
-                android:layout_width="120dp"
-                android:layout_height="39dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
                 android:text="Counter Label 1"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.024"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.00"></TextView>
 
             <EditText
                 android:id="@+id/cntLabelOneEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.592"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
 
                 app:layout_constraintRight_toRightOf="parent"
@@ -64,13 +64,13 @@
 
             <TextView
                 android:id="@+id/cntLabelTwoView"
-                android:layout_width="128dp"
-                android:layout_height="33dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
                 android:text="Counter Label 2"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.066">
@@ -79,14 +79,14 @@
 
             <EditText
                 android:id="@+id/cntLabelTwoEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.592"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
 
                 app:layout_constraintRight_toRightOf="parent"
@@ -113,14 +113,14 @@
 
             <TextView
                 android:id="@+id/cntLabelThreeView"
-                android:layout_width="131dp"
-                android:layout_height="32dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Counter Label 3"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.132">
@@ -129,14 +129,14 @@
 
             <EditText
                 android:id="@+id/cntLabelThreeEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.611"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -164,14 +164,14 @@
 
             <TextView
                 android:id="@+id/cntLabelFourView"
-                android:layout_width="131dp"
-                android:layout_height="32dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Counter Label 4"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.198">
@@ -180,14 +180,14 @@
 
             <EditText
                 android:id="@+id/cntLabelFourEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.603"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -213,14 +213,14 @@
 
             <TextView
                 android:id="@+id/cntLabelFiveView"
-                android:layout_width="127dp"
-                android:layout_height="54dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Counter Label 5"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.056"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.264">
@@ -229,14 +229,14 @@
 
             <EditText
                 android:id="@+id/cntLabelFiveEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.611"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -262,14 +262,14 @@
 
             <TextView
                 android:id="@+id/cntLabelSixView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Counter Label 6"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.33">
@@ -278,14 +278,14 @@
 
             <EditText
                 android:id="@+id/cntLabelSixEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.603"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -311,14 +311,14 @@
 
             <TextView
                 android:id="@+id/cntLabelSevenView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Counter Label 7"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.396">
@@ -327,14 +327,14 @@
 
             <EditText
                 android:id="@+id/cntLabelSevenEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -360,14 +360,14 @@
 
             <TextView
                 android:id="@+id/cntLabelEightView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Counter Label 8"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.025"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.462">
@@ -376,14 +376,14 @@
 
             <EditText
                 android:id="@+id/cntLabelEightEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -409,14 +409,14 @@
 
             <TextView
                 android:id="@+id/cntLabelNineView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Counter Label 9"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.528">
@@ -426,14 +426,14 @@
 
             <EditText
                 android:id="@+id/cntLabelNineEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -459,14 +459,14 @@
 
             <TextView
                 android:id="@+id/cntLabelTenView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Counter Label 10"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.594">
@@ -475,14 +475,14 @@
 
             <EditText
                 android:id="@+id/cntLabelTenEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -508,14 +508,14 @@
 
             <TextView
                 android:id="@+id/cntLabelElevenView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Counter Label 11"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.66">
@@ -524,14 +524,14 @@
 
             <EditText
                 android:id="@+id/cntLabelElevenEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -557,14 +557,14 @@
 
             <TextView
                 android:id="@+id/cntLabelTweleveView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Counter Label 12"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.726">
@@ -574,14 +574,14 @@
 
             <EditText
                 android:id="@+id/cntLabelTweleveEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.611"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -607,14 +607,14 @@
 
             <TextView
                 android:id="@+id/cntLabelThirteenView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Counter Label 13"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.068"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.792">
@@ -623,14 +623,14 @@
 
             <EditText
                 android:id="@+id/cntLabelThirteenEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.611"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -656,13 +656,13 @@
 
             <TextView
                 android:id="@+id/cntLabelFourteenView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
                 android:text="Counter Label 14"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.858">
@@ -671,14 +671,14 @@
 
             <EditText
                 android:id="@+id/cntLabelFourteenEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -705,13 +705,13 @@
 
             <TextView
                 android:id="@+id/cntLabelFifteenView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
                 android:text="Counter Label 15"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.039"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.924">
@@ -720,14 +720,14 @@
 
             <EditText
                 android:id="@+id/cntLabelFifteenEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -753,14 +753,14 @@
 
             <TextView
                 android:id="@+id/cntLabelSixteenView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Counter Label 16"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.054"
+                app:layout_constraintHorizontal_bias="0.030"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias=".99">
@@ -769,14 +769,14 @@
 
             <EditText
                 android:id="@+id/cntLabelSixteenEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
