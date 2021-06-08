@@ -18,8 +18,8 @@
 
             <TextView
                 android:id="@+id/instNameView"
-                android:layout_width="126dp"
-                android:layout_height="42dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
                 android:text="Institute Name"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -31,19 +31,19 @@
 
             <EditText
                 android:id="@+id/instEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.616"
+                app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.023"></EditText>
+                app:layout_constraintVertical_bias="0.02"></EditText>
 
             <Button
                 android:id="@+id/btnInstitute"
@@ -60,13 +60,13 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.013"
+                app:layout_constraintVertical_bias="0.02"
                 app:layout_constraintVertical_chainStyle="spread" />
 
             <TextView
                 android:id="@+id/bankIdView"
-                android:layout_width="121dp"
-                android:layout_height="56dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Bank Id"
                 android:textColor="@color/textLabel"
@@ -81,19 +81,19 @@
 
             <EditText
                 android:id="@+id/bankIdEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="2"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.609"
+                app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.119"></EditText>
+                app:layout_constraintVertical_bias="0.129"></EditText>
 
             <Button
                 android:id="@+id/btnBankId"
@@ -109,13 +109,13 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.114"
+                app:layout_constraintVertical_bias="0.129"
                 app:layout_constraintVertical_chainStyle="spread" />
 
             <TextView
                 android:id="@+id/timeDateView"
-                android:layout_width="131dp"
-                android:layout_height="32dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Time and Date"
                 android:textColor="@color/textLabel"
@@ -130,19 +130,19 @@
 
             <EditText
                 android:id="@+id/timeDateEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="12"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.22"></EditText>
+                app:layout_constraintVertical_bias="0.238"></EditText>
 
             <Button
                 android:id="@+id/sendTimeDate"
@@ -158,13 +158,13 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.208"
+                app:layout_constraintVertical_bias="0.238"
                 app:layout_constraintVertical_chainStyle="spread" />
 
             <TextView
                 android:id="@+id/counterNameView"
-                android:layout_width="131dp"
-                android:layout_height="32dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
                 android:text="Name of Counter"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -178,19 +178,19 @@
 
             <EditText
                 android:id="@+id/counterNameEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="7"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.61"
+                app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.324"></EditText>
+                app:layout_constraintVertical_bias="0.347"></EditText>
 
 
             <Button
@@ -206,13 +206,13 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.32"
+                app:layout_constraintVertical_bias="0.347"
                 app:layout_constraintVertical_chainStyle="spread" />
 
             <TextView
                 android:id="@+id/totalCounterView"
-                android:layout_width="127dp"
-                android:layout_height="51dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Total No. of Counter"
                 android:textColor="@color/textLabel"
@@ -227,19 +227,19 @@
 
             <EditText
                 android:id="@+id/totalCounterEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="4"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.619"
+                app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.435"></EditText>
+                app:layout_constraintVertical_bias="0.456"></EditText>
 
             <Button
                 android:id="@+id/sendTotalCounter"
@@ -255,13 +255,13 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.428"
+                app:layout_constraintVertical_bias="0.456"
                 app:layout_constraintVertical_chainStyle="spread" />
 
             <TextView
                 android:id="@+id/copyCounterView"
-                android:layout_width="143dp"
-                android:layout_height="53dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Copies to be printed"
                 android:textColor="@color/textLabel"
@@ -274,19 +274,19 @@
 
             <EditText
                 android:id="@+id/copyNoEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="1"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.611"
+                app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.545"></EditText>
+                app:layout_constraintVertical_bias="0.565"></EditText>
 
             <Button
                 android:id="@+id/sendCopyNo"
@@ -302,13 +302,13 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.544"
+                app:layout_constraintVertical_bias="0.565"
                 app:layout_constraintVertical_chainStyle="spread" />
 
             <TextView
                 android:id="@+id/cTimeView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Closing time for TP"
                 android:textColor="@color/textLabel"
@@ -323,25 +323,24 @@
 
             <EditText
                 android:id="@+id/cTimeEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="4"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.617"
+                app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.662"></EditText>
+                app:layout_constraintVertical_bias="0.674"></EditText>
 
             <Button
                 android:id="@+id/sendCTime"
                 android:layout_width="90dp"
                 android:layout_height="69dp"
-
                 android:text="Send"
                 android:background="@drawable/mybutton"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -351,13 +350,13 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.655"
+                app:layout_constraintVertical_bias="0.674"
                 app:layout_constraintVertical_chainStyle="spread" />
 
             <TextView
                 android:id="@+id/tokenSlip9View"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Line 1"
                 android:textColor="@color/textLabel"
@@ -372,19 +371,19 @@
 
             <EditText
                 android:id="@+id/tokenSlip9EditText"
-                android:layout_width="147dp"
-                android:layout_height="60dp"
+                android:layout_width="213dp"
+                android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.618"
+                app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.774"></EditText>
+                app:layout_constraintVertical_bias="0.783"></EditText>
 
             <Button
                 android:id="@+id/sendTokenSlip9"
@@ -400,13 +399,13 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.776"
+                app:layout_constraintVertical_bias="0.783"
                 app:layout_constraintVertical_chainStyle="spread" />
 
             <TextView
                 android:id="@+id/tokenSlipAView"
-                android:layout_width="128dp"
-                android:layout_height="51dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
 
                 android:text="Line 2"
                 android:textColor="@color/textLabel"
@@ -415,25 +414,25 @@
                 app:layout_constraintHorizontal_bias="0.045"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.877">
+                app:layout_constraintVertical_bias="0.867">
 
             </TextView>
 
             <EditText
                 android:id="@+id/tokenSlipAEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
                 android:maxLength="28"
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.619"
+                app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.881"></EditText>
+                app:layout_constraintVertical_bias="0.892"></EditText>
 
             <Button
                 android:id="@+id/sendTokenSlipA"
@@ -454,9 +453,8 @@
 
             <TextView
                 android:id="@+id/tokenSlipBView"
-                android:layout_width="135dp"
-                android:layout_height="49dp"
-
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
                 android:text="Line 3"
                 android:textColor="@color/textLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -464,13 +462,13 @@
                 app:layout_constraintHorizontal_bias="0.039"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0">
+                app:layout_constraintVertical_bias=".98">
 
             </TextView>
 
             <EditText
                 android:id="@+id/tokenSlipBEditText"
-                android:layout_width="151dp"
+                android:layout_width="213dp"
                 android:layout_height="61dp"
                 android:layout_marginTop="500dp"
                 android:background="@drawable/rounded_edittext"
@@ -478,12 +476,12 @@
                 android:textColor="@color/editTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.62"
+                app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.959"></EditText>
+                app:layout_constraintVertical_bias="0.989"></EditText>
 
             <Button
                 android:id="@+id/sendTokenSlipB"
@@ -499,7 +497,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_bias="0.989"
                 app:layout_constraintVertical_chainStyle="spread" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
