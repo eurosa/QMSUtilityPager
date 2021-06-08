@@ -983,6 +983,13 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
                 tv2StarTwo.setText("************************************************");
                 tv2StarTwo.setTypeface(null, Typeface.BOLD);
 
+                TextView tvCntLabelName = new TextView(this);
+                tvCntLabelName.setGravity(Gravity.CENTER);
+                tvCntLabelName.setText(dataModel.getCntLabelOne());
+                tvCntLabelName.setTextSize(12);
+                tvCntLabelName.setTypeface(null, Typeface.BOLD);
+
+
                 TextView tvCntName = new TextView(this);
                 tvCntName.setGravity(Gravity.CENTER);
                 tvCntName.setText(dataModel.getCounterName()+" No.:");
@@ -1029,6 +1036,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 layoutParams.bottomMargin = 2;
+                layout.addView(tvCntLabelName,layoutParams);
                 layout.addView(tvCntName,layoutParams);
                 layout.addView(tv1StarOne,layoutParams);
                 layout.addView(tvInstName,layoutParams);
