@@ -487,7 +487,7 @@ public class General extends Fragment {
             @Override
             public void onClick(View view) {
                 String totalCounter  = fixedLengthString(totalCounterEditText.getText().toString(), 4);
-                String totalCounterEditTextData = "$CONTR"+totalCounter+";";
+                String totalCounterEditTextData = "$CNTR"+totalCounter+";";
                 ((DeviceList)getActivity()).sendData(totalCounterEditTextData);
                 //Toast.makeText(getContext(), "Total Counter has been successfully sent", Toast.LENGTH_SHORT).show();
             }
