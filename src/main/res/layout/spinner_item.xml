@@ -7,6 +7,6 @@
     android:textSize="20sp"
     android:gravity="left"
     android:ellipsize="marquee"
-    android:textColor="#FF0000"
+    android:textColor="@color/darkColor"
     android:padding="5dip"
     />

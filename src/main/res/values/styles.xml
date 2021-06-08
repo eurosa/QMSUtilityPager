@@ -24,7 +24,7 @@
     <style name="spinnerColor" parent="Widget.AppCompat.Light.DropDownItem.Spinner">
         <item name="android:paddingStart">0dp</item>
         <item name="android:paddingEnd">0dp</item>
-        <item name="android:textColor">@color/redColor</item>
+        <item name="android:textColor">@color/darkColor</item>
         <item name="android:textSize">12sp</item>
     </style>
 
