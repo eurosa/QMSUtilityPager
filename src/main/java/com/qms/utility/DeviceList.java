@@ -94,7 +94,7 @@ import static android.content.ContentValues.TAG;
 public class DeviceList extends AppCompatActivity implements  View.OnClickListener,FragmentToActivity {
     private static final String MY_PREFS_NAME = "MyTxtFile";;
     //  private CameraKitView cameraKitView;
-    //==============================To Connect Bluetooth Device=============================
+    //============================== To Connect Bluetooth Device =========================================
     private ProgressDialog progress;
     private boolean isBtConnected = false;
     BluetoothSocket btSocket = null;
@@ -105,7 +105,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
     TextView textView;
     boolean listViewFlag=true;
 
-    //-------------------------------Start ofClock in TextView---------------------------------------------
+    //-------------------------------Start ofClock in TextView--------------------------------------------
     BroadcastReceiver _broadcastReceiver;
     private final SimpleDateFormat _sdfWatchTime = new SimpleDateFormat("HH:mm:ss");
     private TextView _tvTime;
@@ -195,7 +195,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
     private ArrayList<String> labels;
 
 
-    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //screenshot
     @Override
     protected void onCreate(Bundle savedInstanceState)
