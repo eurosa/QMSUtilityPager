@@ -18,6 +18,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -62,6 +63,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.exifinterface.media.ExifInterface;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -202,14 +204,24 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
         setContentView(R.layout.activity_device_list);
         //----------------------------Grant storage permission--------------------------------------------------
 
-        //----------------------------------------------------------------------------------------------
-        //=========================Adding Toolbar in android layout======================================
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        //------------------------------------------------------------------------------------------------------
+        //=========================Adding Toolbar in android layout=============================================
+        // ******************** Changing the color of three dot or overflow button *****************************
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+        Drawable drawable = myToolbar.getOverflowIcon();
+        if(drawable != null) {
+            drawable = DrawableCompat.wrap(drawable);
+            DrawableCompat.setTint(drawable.mutate(), getResources().getColor(R.color.whiteColor));
+            myToolbar.setOverflowIcon(drawable);
+        }
+        // ******************** Changing the color of three dot or overflow button *****************************
+
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //=========================Toolbar End============================================================
-        //+++++++++++++++++++ TabLayout and ViewPager ++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //=========================Toolbar End==================================================================
+        //+++++++++++++++++++ TabLayout and ViewPager ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
