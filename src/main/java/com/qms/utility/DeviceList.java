@@ -123,7 +123,7 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
     private boolean waitForStoragePermission = false;
     DatabaseHandler dbHandler = new DatabaseHandler(this);
     DataModel dataModel = new DataModel();
-     //-----------------------------------Camera-----------------------------------------------
+     //-----------------------------------Camera----------------------------------------------------------
 
     //**************** General Fragment ******************************************************
     /*private EditText instEditText, timeDateEditText, bankIdEditText, counterNameEditText,
