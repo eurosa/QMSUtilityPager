@@ -92,7 +92,7 @@ import static android.content.ContentValues.TAG;
 
 
 public class DeviceList extends AppCompatActivity implements  View.OnClickListener,FragmentToActivity {
-    private static final String MY_PREFS_NAME = "MyTxtFile";;
+    private static final String MY_PREFS_NAME = "MyTxtFile";
     //  private CameraKitView cameraKitView;
     //============================== To Connect Bluetooth Device =========================================
     private ProgressDialog progress;
