@@ -172,8 +172,9 @@
             android:id="@+id/button"
             android:layout_width="51dp"
             android:layout_height="42dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="150dp"
+            android:layout_toLeftOf="@+id/scanDevice"
             android:background="@drawable/ic_pair_bluetooth"
 
           />

@@ -861,6 +861,8 @@ public class DeviceList extends AppCompatActivity implements  View.OnClickListen
              AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
                 builder1.setMessage("Do you want to reset?");
                 builder1.setCancelable(true);
+                builder1.setTitle("Reset Alert Dialog");
+                builder1.setIcon(R.drawable.ic_warning);
 
                 builder1.setPositiveButton(
                         "Ok",
