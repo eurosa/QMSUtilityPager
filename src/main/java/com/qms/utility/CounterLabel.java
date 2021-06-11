@@ -594,7 +594,7 @@ public class CounterLabel extends Fragment {
     public void textFontChange(EditText editText){
 
         Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/josefin-sans/JosefinSans-Bold.ttf");
-        editText.setTypeface(type);
+       // editText.setTypeface(type);
     }
 
     private String fixedLengthString(String textData , int lenght)

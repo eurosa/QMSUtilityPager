@@ -636,7 +636,7 @@ public class General extends Fragment {
    public void textFontChange(EditText editText){
 
        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/josefin-sans/JosefinSans-Bold.ttf");
-       editText.setTypeface(type);
+      // editText.setTypeface(type);
    }
 
    /* public  void getGeneralData(){
