@@ -99,7 +99,7 @@ public class ScanActivity extends AppCompatActivity implements ListInteractionLi
 
         // Changes the theme back from the splashscreen. It's very important that this is called
         // BEFORE onCreate.
-        SystemClock.sleep(getResources().getInteger(R.integer.splashscreen_duration));
+        //SystemClock.sleep(getResources().getInteger(R.integer.splashscreen_duration));
         //setTheme(R.style.AppTheme_NoActionBar);
 
         super.onCreate(savedInstanceState);
@@ -159,25 +159,35 @@ public class ScanActivity extends AppCompatActivity implements ListInteractionLi
             @Override
             public void onClick(View view) {
 
-                // If the bluetooth is not enabled, turns it on.
-                if (!bluetooth.isBluetoothEnabled()) {
-                    Snackbar.make(view, R.string.enabling_bluetooth, Snackbar.LENGTH_SHORT).show();
-                    bluetooth.turnOnBluetoothAndScheduleDiscovery();
-                } else {
-                    //Prevents the user from spamming the button and thus glitching the UI.
-                    if (!bluetooth.isDiscovering()) {
-                        // Starts the discovery.
-                        Snackbar.make(view, R.string.device_discovery_started, Snackbar.LENGTH_SHORT).show();
-                        bluetooth.startDiscovery();
-                    } else {
-                        Snackbar.make(view, R.string.device_discovery_stopped, Snackbar.LENGTH_SHORT).show();
-                        bluetooth.cancelDiscovery();
-                    }
-                }
+                searchDeviceList();
+
             }
         });
+
+        searchDeviceList();
     }
 
+    public void searchDeviceList(){
+
+        // If the bluetooth is not enabled, turns it on.
+        if (!bluetooth.isBluetoothEnabled()) {
+            // Snackbar.make(getCurrentFocus(), R.string.enabling_bluetooth, Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),R.string.enabling_bluetooth,Toast.LENGTH_SHORT).show();
+            bluetooth.turnOnBluetoothAndScheduleDiscovery();
+        } else {
+            //Prevents the user from spamming the button and thus glitching the UI.
+            if (!bluetooth.isDiscovering()) {
+                // Starts the discovery.
+                Toast.makeText(getApplicationContext(),R.string.device_discovery_started,Toast.LENGTH_SHORT).show();
+                //Snackbar.make(getCurrentFocus(), R.string.device_discovery_started, Snackbar.LENGTH_SHORT).show();
+                bluetooth.startDiscovery();
+            } else {
+                Toast.makeText(getApplicationContext(),R.string.device_discovery_stopped,Toast.LENGTH_SHORT).show();
+                //Snackbar.make(getCurrentFocus(), R.string.device_discovery_stopped, Snackbar.LENGTH_SHORT).show();
+                bluetooth.cancelDiscovery();
+            }
+        }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -191,7 +201,7 @@ public class ScanActivity extends AppCompatActivity implements ListInteractionLi
     public void requestLocationPermission() {
         String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION};
         if(EasyPermissions.hasPermissions(this, perms)) {
-            Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
         }
         else {
             EasyPermissions.requestPermissions(this, "Please grant the location permission", REQUEST_LOCATION_PERMISSION, perms);
